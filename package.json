@@ -1,13 +1,17 @@
 {
   "name": "fci-argy",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Lista de Fondos Comunes de Inversión en Argentina",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["fci", "fondos", "inversion", "argentina"],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCI Argentina - Lista de Fondos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>💰 Fondos Comunes de Inversión</h1>
+      <p>Explora y filtra la lista completa de fondos disponibles en Argentina</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Filters Section -->
+    <div class="filters-section">
+      <h2>⚡ FILTROS AVANZADOS</h2>
+      <div class="filters">
+        <div class="filter-group">
+          <label for="estado">📊 ESTADO</label>
+          <select id="estado">
+            <option value="">━━ TODOS ━━</option>
+            <option value="1">✅ ACTIVO</option>
+            <option value="0">❌ INACTIVO</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="horizonte">⏱️ HORIZONTE</label>
+          <select id="horizonte">
+            <option value="">━━ TODOS ━━</option>
+            <option value="Corto Plazo">🚀 CORTO PLAZO</option>
+            <option value="Mediano Plazo">⏳ MEDIANO PLAZO</option>
+            <option value="Largo Plazo">🎯 LARGO PLAZO</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="tipoRenta">💎 TIPO DE RENTA</label>
+          <select id="tipoRenta">
+            <option value="">━━ TODOS ━━</option>
+            <option value="4">📈 RENTA FIJA</option>
+            <option value="5">📊 RENTA VARIABLE</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="sort">🔀 ORDENAR POR</label>
+          <select id="sort">
+            <option value="nombre">A-Z NOMBRE</option>
+            <option value="inicio">📅 FECHA INICIO</option>
+            <option value="updatedAt">🔄 ACTUALIZACIÓN</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+      <input type="text" id="search" placeholder="🔍 Busca el fondo que deseas...">
+    </div>
+
+    <div class="results">
+      <div class="results-header">
+        <p id="count">Cargando fondos...</p>
+      </div>
+      <div id="funds-list" class="funds-list"></div>
+      <div class="pagination">
+        <button id="prev-btn" class="pagination-btn">⬅️ ANTERIOR</button>
+        <div id="page-info" class="page-info">Página 1</div>
+        <button id="next-btn" class="pagination-btn">SIGUIENTE ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para detalles del fondo -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
