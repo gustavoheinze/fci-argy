@@ -1,0 +1,171 @@
+{
+  "id": "1420",
+  "claseId": "4147",
+  "rendimientos": [
+    {
+      "periodo": "day",
+      "rendimiento": "0.00%",
+      "fecha": "09/01/2026"
+    },
+    {
+      "periodo": "month",
+      "rendimiento": "0.00%",
+      "fecha": "30/12/2025"
+    },
+    {
+      "periodo": "oneYear",
+      "rendimiento": "0.00%",
+      "fecha": "10/01/2025"
+    },
+    {
+      "periodo": "threeYears",
+      "rendimiento": "0.00%",
+      "fecha": "12/01/2023"
+    },
+    {
+      "periodo": "fiveYears",
+      "rendimiento": "0.00%",
+      "fecha": "12/01/2021"
+    },
+    {
+      "periodo": "year",
+      "rendimiento": "0.00%",
+      "fecha": "30/12/2025"
+    },
+    {
+      "periodo": "yearM1",
+      "rendimiento": "0.00%",
+      "fecha": "30/12/2024"
+    },
+    {
+      "periodo": "yearM2",
+      "rendimiento": "0.00%",
+      "fecha": "29/12/2023"
+    },
+    {
+      "periodo": "yearM3",
+      "rendimiento": "0.00%",
+      "fecha": "30/12/2022"
+    },
+    {
+      "periodo": "yearM4",
+      "rendimiento": "0.00%",
+      "fecha": "30/12/2021"
+    },
+    {
+      "periodo": "monthYear",
+      "rendimiento": "0.00%",
+      "fecha": "30/12/2024"
+    }
+  ],
+  "composicion": [
+    {
+      "activo": "Cedear Petroleo Brasilero",
+      "porcentaje": "3.07%"
+    },
+    {
+      "activo": "Cedear Petroleo Brasilero",
+      "porcentaje": "0.92%"
+    },
+    {
+      "activo": "Grupo Fciero Galicia - B",
+      "porcentaje": "3.76%"
+    },
+    {
+      "activo": "YPF - D",
+      "porcentaje": "10.36%"
+    },
+    {
+      "activo": "FCI Gainvest Pesos",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "Bono Boncer TZX26",
+      "porcentaje": "8.25%"
+    },
+    {
+      "activo": "Pampa Energia",
+      "porcentaje": "6.30%"
+    },
+    {
+      "activo": "FCI SBS Ahorro Pesos Cl B",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "FCI Toronto T Ahorro B",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "US Treasury Bill 011026",
+      "porcentaje": "24.98%"
+    },
+    {
+      "activo": "FCI IEB Ahorro - Clase E",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "Bono Boncer TZXD7",
+      "porcentaje": "13.79%"
+    },
+    {
+      "activo": "Bono Boncer TZX28",
+      "porcentaje": "8.76%"
+    },
+    {
+      "activo": "Bono del Tesoro Nacional TZV26",
+      "porcentaje": "1.83%"
+    },
+    {
+      "activo": "Bono Dual TTM26",
+      "porcentaje": "2.53%"
+    },
+    {
+      "activo": "Letra Nacional USD Cero Cupon 160126",
+      "porcentaje": "12.27%"
+    },
+    {
+      "activo": "FCI Adcap Ahorro Pesos - Clase C",
+      "porcentaje": "0.02%"
+    },
+    {
+      "activo": "FCI MEGAQM Pesos - Clase B",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "FCI Schroder Liquidez - Clase B",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "FCI ST Zero - Clase B",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "Cedear Vale R Doce ON N1",
+      "porcentaje": "0.87%"
+    },
+    {
+      "activo": "Cedear Vale R Doce ON N1",
+      "porcentaje": "1.80%"
+    },
+    {
+      "activo": "Cedear Vale R Doce ON N1",
+      "porcentaje": "0.43%"
+    },
+    {
+      "activo": "FCI Balanz Capital Money Market Clase C",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "Cta Cte $ Rem Bco Comafi",
+      "porcentaje": "0.00%"
+    },
+    {
+      "activo": "Cta Cte U$S Bco Comafi",
+      "porcentaje": "0.01%"
+    },
+    {
+      "activo": "Cta Cte U$S Deutsche B NY",
+      "porcentaje": "0.04%"
+    }
+  ]
+}

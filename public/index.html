@@ -1,86 +1,197 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FCI Argentina - Lista de Fondos</title>
+  <title>FCI TERMINAL | Real-time Investment Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header>
-    <div class="header-content">
-      <h1>💰 Fondos Comunes de Inversión</h1>
-      <p>Explora y filtra la lista completa de fondos disponibles en Argentina</p>
-    </div>
-  </header>
+  <div class="glow-bg"></div>
 
-  <div class="container">
-    <!-- Filters Section -->
-    <div class="filters-section">
-      <h2>⚡ FILTROS AVANZADOS</h2>
-      <div class="filters">
-        <div class="filter-group">
-          <label for="estado">📊 ESTADO</label>
-          <select id="estado">
-            <option value="">━━ TODOS ━━</option>
-            <option value="1">✅ ACTIVO</option>
-            <option value="0">❌ INACTIVO</option>
-          </select>
+  <div class="app-wrapper" id="app-wrapper">
+    <main class="main-content">
+      <header>
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <div>
+            <h1>FCI Terminal</h1>
+            <p>SYSTEM.INV_EXPLORER v2.5 // ARG_MARKETS</p>
+          </div>
+          <div class="nav-tabs">
+            <button id="tab-terminal" class="nav-tab active" onclick="switchView('terminal')">TERMINAL_VIEW</button>
+            <button id="tab-management" class="nav-tab" onclick="switchView('management')">MGMT_PANEL</button>
+          </div>
         </div>
-        <div class="filter-group">
-          <label for="horizonte">⏱️ HORIZONTE</label>
-          <select id="horizonte">
-            <option value="">━━ TODOS ━━</option>
-            <option value="Corto Plazo">🚀 CORTO PLAZO</option>
-            <option value="Mediano Plazo">⏳ MEDIANO PLAZO</option>
-            <option value="Largo Plazo">🎯 LARGO PLAZO</option>
-          </select>
+      </header>
+
+      <!-- MAIN TERMINAL VIEW -->
+      <div id="view-terminal">
+        <!-- Advanced Search -->
+        <div class="search-section">
+          <span class="search-icon">🔎</span>
+          <input type="text" id="search" placeholder="Buscar por nombre, gestora o código CNV...">
         </div>
-        <div class="filter-group">
-          <label for="tipoRenta">💎 TIPO DE RENTA</label>
-          <select id="tipoRenta">
-            <option value="">━━ TODOS ━━</option>
-            <option value="4">📈 RENTA FIJA</option>
-            <option value="5">📊 RENTA VARIABLE</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <label for="sort">🔀 ORDENAR POR</label>
-          <select id="sort">
-            <option value="nombre">A-Z NOMBRE</option>
-            <option value="inicio">📅 FECHA INICIO</option>
-            <option value="updatedAt">🔄 ACTUALIZACIÓN</option>
-          </select>
+
+        <!-- Logic Filters -->
+        <div class="filters-bar">
+          <div class="filter-chip">
+            <span>STAT:</span>
+            <select id="estado">
+              <option value="">TODOS</option>
+              <option value="1">ACTIVO</option>
+              <option value="0">INACTIVO</option>
+            </select>
+          </div>
+          <div class="filter-chip">
+            <span>CURR:</span>
+            <select id="moneda">
+              <option value="">TODOS</option>
+              <option value="1">ARS</option>
+              <option value="2">USD</option>
+              <option value="3">EUR</option>
+            </select>
+          </div>
+          <div class="filter-chip">
+            <span>TIME:</span>
+            <select id="horizonte">
+              <option value="">TODOS</option>
+              <option value="Corto Plazo">SHORT</option>
+              <option value="Mediano Plazo">MID</option>
+              <option value="Largo Plazo">LONG</option>
+            </select>
+          </div>
+          <div class="filter-chip">
+            <span>TYPE:</span>
+            <select id="tipoRenta">
+              <option value="">TODOS</option>
+              <option value="4">MONEY MKT</option>
+              <option value="3">FIXED INC</option>
+              <option value="2">EQUITY</option>
+              <option value="5">MIXED</option>
+            </select>
+          </div>
+          <div class="filter-chip">
+            <span>RISK:</span>
+            <select id="riesgo">
+              <option value="">TODOS</option>
+              <option value="bajo">LOW</option>
+              <option value="medio">MID</option>
+              <option value="alto">HIGH</option>
+            </select>
+          </div>
+          <div class="filter-chip fav-chip" id="fav-filter-btn" onclick="toggleFavsOnly()">
+            <span>FAVS:</span>
+            <span class="fav-icon">❤</span>
+          </div>
+
+          <!-- Modern Interactive Grid -->
+          <div class="grid-header">
+            <div class="sortable-header" data-sort="id">UID <span class="sort-indicator"></span></div>
+            <div class="sortable-header" data-sort="nombre">INSTRUMENT_NAME <span class="sort-indicator"></span></div>
+            <div class="sortable-header" data-sort="tipo">ASSET_CLASS <span class="sort-indicator"></span></div>
+            <div class="sortable-header" data-sort="fid">FID <span class="sort-indicator"></span></div>
+            <div class="sortable-header" data-sort="riesgo">RISK_LVL <span class="sort-indicator"></span></div>
+            <div class="sortable-header" data-sort="moneda">CURR <span class="sort-indicator"></span></div>
+            <div class="sortable-header" data-sort="minimo">MIN_ALLOC <span class="sort-indicator"></span></div>
+            <div class="sortable-header" data-sort="status">STATUS <span class="sort-indicator"></span></div>
+          </div>
+
+          <div id="funds-list">
+            <!-- Rows injected via app.js -->
+          </div>
+
+          <div class="pagination-footer">
+            <div id="count">0 INSTRUMENTS FOUND</div>
+            <div class="pagination-controls">
+              <button id="prev-btn" class="nav-btn">PREV_PAGE</button>
+              <span id="page-info">PAGE 01 / 01</span>
+              <button id="next-btn" class="nav-btn">NEXT_PAGE</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Search Bar -->
-    <div class="search-section">
-      <input type="text" id="search" placeholder="🔍 Busca el fondo que deseas...">
-    </div>
+      <!-- NEW MANAGEMENT VIEW -->
+      <div id="view-management" class="hidden">
+        <div class="mgmt-grid">
+          <div class="kpi-row">
+            <div class="stat-card glass glow-emerald">
+              <span class="label">AVG_MARKET_LIQUIDITY</span>
+              <span class="value" id="mgmt-liquidity">0%</span>
+            </div>
+            <div class="stat-card glass glow-gold">
+              <span class="label">DOMINANT_ASSET</span>
+              <span class="value" id="mgmt-top-asset">---</span>
+            </div>
+            <div class="stat-card glass">
+              <span class="label">ANALYSED_FUNDS</span>
+              <span class="value" id="mgmt-mgr-count">0</span>
+            </div>
+          </div>
 
-    <div class="results">
-      <div class="results-header">
-        <p id="count">Cargando fondos...</p>
+          <div class="main-mgmt-content">
+            <div class="mgmt-panel glass">
+              <h3 class="panel-title">TOP_ASSETS_RANKING</h3>
+              <div class="tabs-mini">
+                <button onclick="changeAssetRanking('freq')" class="active" id="btn-rank-freq">BY_FREQUENCY</button>
+                <button onclick="changeAssetRanking('weight')" id="btn-rank-weight">BY_WEIGHT</button>
+              </div>
+              <div id="asset-ranking-list" class="ranking-list"></div>
+            </div>
+            <div class="mgmt-panel glass">
+              <h3 class="panel-title">MANAGER_BENCHMARK</h3>
+              <div id="manager-list" class="mgr-list"></div>
+            </div>
+          </div>
+
+          <!-- Investment Opportunities Section -->
+          <div class="mgmt-panel glass full-width"
+            style="background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.2);">
+            <h3 class="panel-title" style="color: var(--primary);">🎯 TOP_10_INVESTMENT_OPPORTUNITIES</h3>
+            <div class="disclaimer-box">
+              <span class="disclaimer-icon">⚠️</span>
+              <p class="disclaimer-text">
+                <strong>DISCLAIMER:</strong> Esta lista NO es una recomendación de compra.
+                Refleja únicamente los activos con mayor concentración de capital agregado entre todos los fondos del
+                país.
+                Es un indicador de "consenso de mercado" entre gestores profesionales.
+              </p>
+            </div>
+            <div id="investment-opportunities" class="opportunities-grid"></div>
+          </div>
+
+          <div class="mgmt-panel glass full-width">
+            <h3 class="panel-title">ASSET_REVERSE_LOOKUP_ENGINE</h3>
+            <div class="explorer-search">
+              <input type="text" id="asset-search" placeholder="SEARCH_ALL_ASSETS_IN_COUNTRY..."
+                oninput="handleAssetSearch()">
+            </div>
+            <div id="asset-explorer-results" class="explorer-grid"></div>
+          </div>
+        </div>
       </div>
-      <div id="funds-list" class="funds-list"></div>
-      <div class="pagination">
-        <button id="prev-btn" class="pagination-btn">⬅️ ANTERIOR</button>
-        <div id="page-info" class="page-info">Página 1</div>
-        <button id="next-btn" class="pagination-btn">SIGUIENTE ➡️</button>
-      </div>
-    </div>
-  </div>
+    </main>
 
-  <!-- Modal para detalles del fondo -->
-  <div id="modal" class="modal hidden">
-    <div class="modal-content">
-      <button class="modal-close">&times;</button>
-      <div id="modal-body"></div>
-    </div>
+    <!-- Innovative Side Panel -->
+    <aside id="side-panel">
+      <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+      <div class="sidebar-header" id="sidebar-header">
+        <!-- Dyn Header -->
+      </div>
+      <div class="sidebar-body" id="sidebar-body">
+        <!-- Dyn Content -->
+      </div>
+    </aside>
   </div>
 
   <script src="app.js"></script>
 </body>
+
 </html>

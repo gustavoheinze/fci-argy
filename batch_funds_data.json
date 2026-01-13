@@ -1,0 +1,2440 @@
+[
+  {
+    "id": "304",
+    "claseId": "308",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "0.19%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "0.94%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "32.87%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "386.83%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "932.46%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "0.94%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "34.05%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "120.92%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "397.55%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "670.40%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "34.05%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.74%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.74%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Cordoba",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.50%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "0.74%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.75%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.49%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Cordoba",
+        "porcentaje": "0.74%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Provincia",
+        "porcentaje": "0.74%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "1.48%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "2.22%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.11%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.11%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.11%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "2.19%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Cordoba",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Santander Ri",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.47%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Cordoba",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Santander Ri",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Valores",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.46%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "1.46%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "1.46%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Hipotecario",
+        "porcentaje": "1.45%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Valores",
+        "porcentaje": "1.09%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Caucion Colocadora $ MAE",
+        "porcentaje": "7.26%"
+      },
+      {
+        "activo": "Caucion Colocadora $ BYMA",
+        "porcentaje": "13.10%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Credicoop",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Rem ICBC",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Supervi",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Hipotec",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Prov Co",
+        "porcentaje": "0.29%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Comafi",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Macro Ban",
+        "porcentaje": "0.36%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Galicia",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Prov BA",
+        "porcentaje": "0.36%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Industrial",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Credico",
+        "porcentaje": "30.79%"
+      }
+    ]
+  },
+  {
+    "id": "1241",
+    "claseId": "3445",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "0.26%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "2.12%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "40.59%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "899.81%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "0.00%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "2.12%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "45.90%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "160.53%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "922.91%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "1613.46%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "45.90%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Bono Boncer TX26",
+        "porcentaje": "3.09%"
+      },
+      {
+        "activo": "Bono Boncer TZX26",
+        "porcentaje": "14.28%"
+      },
+      {
+        "activo": "Bono Boncer TZXD6",
+        "porcentaje": "21.17%"
+      },
+      {
+        "activo": "Bono Boncer TZXO6",
+        "porcentaje": "19.63%"
+      },
+      {
+        "activo": "Bono Boncer 2027 TZXM7",
+        "porcentaje": "25.16%"
+      },
+      {
+        "activo": "Bono Boncer TZXD7",
+        "porcentaje": "10.33%"
+      },
+      {
+        "activo": "Caucion Colocadora $ BYMA",
+        "porcentaje": "6.32%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Credicoop",
+        "porcentaje": "0.03%"
+      }
+    ]
+  },
+  {
+    "id": "759",
+    "claseId": "1682",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "0.23%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "1.37%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "38.32%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "618.24%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "1613.63%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "1.37%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "40.75%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "136.86%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "634.62%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "1120.48%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "40.75%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "ON Carsa Serie 9 Clase B",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Bono Boncer TZXM6",
+        "porcentaje": "7.85%"
+      },
+      {
+        "activo": "Letra Prov Bs As PBY26",
+        "porcentaje": "0.85%"
+      },
+      {
+        "activo": "Lecap T30E6",
+        "porcentaje": "9.50%"
+      },
+      {
+        "activo": "Lecap S27F6",
+        "porcentaje": "28.13%"
+      },
+      {
+        "activo": "Bono del Tesoro Nacional T13F6",
+        "porcentaje": "28.04%"
+      },
+      {
+        "activo": "Lecap S17A6",
+        "porcentaje": "4.45%"
+      },
+      {
+        "activo": "Bono Prov de Buenos Aires PBM27",
+        "porcentaje": "1.68%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Cordoba",
+        "porcentaje": "8.18%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Cordoba",
+        "porcentaje": "9.00%"
+      },
+      {
+        "activo": "Caucion Colocadora $ BYMA",
+        "porcentaje": "2.27%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Credicoop",
+        "porcentaje": "0.05%"
+      }
+    ]
+  },
+  {
+    "id": "760",
+    "claseId": "1683",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "-0.16%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "0.61%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "31.91%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "738.50%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "1991.62%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "0.61%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "33.33%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "110.54%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "759.70%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "1300.77%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "33.33%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Letra Nacional USD Cero Cupon 160126",
+        "porcentaje": "27.38%"
+      },
+      {
+        "activo": "Bono del Tesoro Nacional TZV26",
+        "porcentaje": "15.71%"
+      },
+      {
+        "activo": "Lecap S27F6",
+        "porcentaje": "6.80%"
+      },
+      {
+        "activo": "Letra Tesoro Nac D30A6",
+        "porcentaje": "27.77%"
+      },
+      {
+        "activo": "Lecap S17A6",
+        "porcentaje": "16.17%"
+      },
+      {
+        "activo": "Bono del Tesoro Nacional D30E6",
+        "porcentaje": "2.56%"
+      },
+      {
+        "activo": "Caucion Colocadora $ BYMA",
+        "porcentaje": "3.53%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Credicoop",
+        "porcentaje": "0.07%"
+      }
+    ]
+  },
+  {
+    "id": "1240",
+    "claseId": "3444",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "-0.03%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "1.64%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "24.90%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "852.59%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "0.00%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "1.64%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "30.47%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "153.26%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "893.08%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "1592.52%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "30.47%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Banco Macro Bansud - B",
+        "porcentaje": "4.47%"
+      },
+      {
+        "activo": "Bono Disc ARS Ley AR DICP",
+        "porcentaje": "3.55%"
+      },
+      {
+        "activo": "Pampa Energia",
+        "porcentaje": "5.72%"
+      },
+      {
+        "activo": "Grupo Fciero Galicia - B",
+        "porcentaje": "4.28%"
+      },
+      {
+        "activo": "YPF - D",
+        "porcentaje": "5.40%"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD30",
+        "porcentaje": "6.00%"
+      },
+      {
+        "activo": "Bono Boncer TZXD6",
+        "porcentaje": "18.26%"
+      },
+      {
+        "activo": "Bono Boncer TZXO6",
+        "porcentaje": "20.25%"
+      },
+      {
+        "activo": "Bono Dual TTM26",
+        "porcentaje": "18.01%"
+      },
+      {
+        "activo": "Bono del Tesoro Nacional T13F6",
+        "porcentaje": "6.65%"
+      },
+      {
+        "activo": "Lecap S17A6",
+        "porcentaje": "3.60%"
+      },
+      {
+        "activo": "Letra Tamar TEM M31G6",
+        "porcentaje": "2.11%"
+      },
+      {
+        "activo": "Caucion Colocadora $ BYMA",
+        "porcentaje": "1.62%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Credicoop",
+        "porcentaje": "0.07%"
+      }
+    ]
+  },
+  {
+    "id": "275",
+    "claseId": "275",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "-0.37%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "0.47%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "2.35%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "1039.25%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "4508.89%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "0.47%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "12.71%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "196.29%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "1199.02%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "2882.11%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "12.71%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Banco Macro Bansud - B",
+        "porcentaje": "8.54%"
+      },
+      {
+        "activo": "Comercial del Plata",
+        "porcentaje": "0.83%"
+      },
+      {
+        "activo": "Cresud",
+        "porcentaje": "1.23%"
+      },
+      {
+        "activo": "Central Puerto",
+        "porcentaje": "4.86%"
+      },
+      {
+        "activo": "Pampa Energia",
+        "porcentaje": "13.77%"
+      },
+      {
+        "activo": "Edenor",
+        "porcentaje": "1.06%"
+      },
+      {
+        "activo": "Grupo Fciero Galicia - B",
+        "porcentaje": "18.20%"
+      },
+      {
+        "activo": "Transp Gas del Sur - B",
+        "porcentaje": "4.51%"
+      },
+      {
+        "activo": "YPF - D",
+        "porcentaje": "16.79%"
+      },
+      {
+        "activo": "Mirgor",
+        "porcentaje": "0.35%"
+      },
+      {
+        "activo": "Telecom Argentina - B",
+        "porcentaje": "1.58%"
+      },
+      {
+        "activo": "Ternium - A",
+        "porcentaje": "3.28%"
+      },
+      {
+        "activo": "Transener - B",
+        "porcentaje": "2.27%"
+      },
+      {
+        "activo": "BBVA Argentina",
+        "porcentaje": "5.24%"
+      },
+      {
+        "activo": "Aluar",
+        "porcentaje": "2.54%"
+      },
+      {
+        "activo": "Transp Gas del Norte C",
+        "porcentaje": "1.18%"
+      },
+      {
+        "activo": "Grupo Supervielle CB",
+        "porcentaje": "2.50%"
+      },
+      {
+        "activo": "BYMA",
+        "porcentaje": "3.59%"
+      },
+      {
+        "activo": "Grupo Finc. Valores",
+        "porcentaje": "0.98%"
+      },
+      {
+        "activo": "Holcim Argentina",
+        "porcentaje": "0.34%"
+      },
+      {
+        "activo": "Loma Negra",
+        "porcentaje": "3.13%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.25%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.30%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.14%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.48%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.31%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.33%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.32%"
+      },
+      {
+        "activo": "Cedear Vista Oil Gas",
+        "porcentaje": "0.29%"
+      },
+      {
+        "activo": "Caucion Colocadora $ BYMA",
+        "porcentaje": "0.77%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Credicoop",
+        "porcentaje": "0.03%"
+      }
+    ]
+  },
+  {
+    "id": "102",
+    "claseId": "102",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "0.10%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "1.00%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "43.34%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "507.17%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "1206.77%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "1.00%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "45.18%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "166.14%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "520.12%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "867.68%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "45.18%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "ON President Petroleum S3",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "ON San Diego Semillas C1",
+        "porcentaje": "0.41%"
+      },
+      {
+        "activo": "ON Grz Georgalos S2 C2",
+        "porcentaje": "4.68%"
+      },
+      {
+        "activo": "ON Alianza Semillas S2 AZ22P",
+        "porcentaje": "0.19%"
+      },
+      {
+        "activo": "ON Philagro S1 C2",
+        "porcentaje": "1.08%"
+      },
+      {
+        "activo": "ON Aspro S1 C2",
+        "porcentaje": "0.79%"
+      },
+      {
+        "activo": "ON Remonda S1 C2",
+        "porcentaje": "0.60%"
+      },
+      {
+        "activo": "ON Silo Chico S1",
+        "porcentaje": "0.99%"
+      },
+      {
+        "activo": "ON Inversora Industrial C3 S2",
+        "porcentaje": "0.61%"
+      },
+      {
+        "activo": "ON Los Haroldos S1 C3",
+        "porcentaje": "0.90%"
+      },
+      {
+        "activo": "ON Special G y Petroagro C3",
+        "porcentaje": "1.33%"
+      },
+      {
+        "activo": "ON PyME Sion Serie 12 UVA",
+        "porcentaje": "0.39%"
+      },
+      {
+        "activo": "ON Pyme Chaye S1 CA",
+        "porcentaje": "0.21%"
+      },
+      {
+        "activo": "ON PyME Sion Serie 13 UVA",
+        "porcentaje": "2.37%"
+      },
+      {
+        "activo": "ON Pyme Gar Recard S1",
+        "porcentaje": "0.08%"
+      },
+      {
+        "activo": "ON PYME Gar Demagro 1 Clase B",
+        "porcentaje": "0.06%"
+      },
+      {
+        "activo": "ON Daruma Pyme S1",
+        "porcentaje": "0.05%"
+      },
+      {
+        "activo": "ON Liliana S2",
+        "porcentaje": "0.03%"
+      },
+      {
+        "activo": "ON Pyme TSB Serie 1",
+        "porcentaje": "0.20%"
+      },
+      {
+        "activo": "ON Meridiano Norte S2",
+        "porcentaje": "0.09%"
+      },
+      {
+        "activo": "ON Promedon S2 C1",
+        "porcentaje": "0.29%"
+      },
+      {
+        "activo": "ON Agronorte S2 CA",
+        "porcentaje": "0.26%"
+      },
+      {
+        "activo": "ON Ratto Hnos S1 C2",
+        "porcentaje": "0.44%"
+      },
+      {
+        "activo": "ON Pyme Los Valientes S1",
+        "porcentaje": "0.19%"
+      },
+      {
+        "activo": "ON Argensun C2",
+        "porcentaje": "1.18%"
+      },
+      {
+        "activo": "ON ALZ Nutrientes S2 C2",
+        "porcentaje": "0.89%"
+      },
+      {
+        "activo": "ON PyMe Gar. Golmund S1",
+        "porcentaje": "0.28%"
+      },
+      {
+        "activo": "ON Aspro S2 C2",
+        "porcentaje": "0.10%"
+      },
+      {
+        "activo": "ON San Miguel Serie 10 CA",
+        "porcentaje": "1.20%"
+      },
+      {
+        "activo": "ON Pyme Gar Klonal S1",
+        "porcentaje": "0.17%"
+      },
+      {
+        "activo": "ON Pyme Gar Medical S1",
+        "porcentaje": "0.48%"
+      },
+      {
+        "activo": "ON Pyme Cedisur S1",
+        "porcentaje": "0.21%"
+      },
+      {
+        "activo": "ON Pyme Eskabe S2",
+        "porcentaje": "0.94%"
+      },
+      {
+        "activo": "ON Pyme Garro Fabril S2 CA",
+        "porcentaje": "0.09%"
+      },
+      {
+        "activo": "ON PyME Gar. Prodeman S3 C1",
+        "porcentaje": "1.27%"
+      },
+      {
+        "activo": "ON Crucianelli S2 C1",
+        "porcentaje": "1.42%"
+      },
+      {
+        "activo": "ON Pyme Gar.Jauregui Clase 1",
+        "porcentaje": "0.72%"
+      },
+      {
+        "activo": "ON PyMe Gar N. Gastaldi S2 C2",
+        "porcentaje": "1.70%"
+      },
+      {
+        "activo": "ON Pyme TSB Serie 2",
+        "porcentaje": "0.53%"
+      },
+      {
+        "activo": "ON Pyme Gar Recard S2",
+        "porcentaje": "0.35%"
+      },
+      {
+        "activo": "ON Pyme Rolcar S1",
+        "porcentaje": "0.72%"
+      },
+      {
+        "activo": "ON Paramerica S2 C1",
+        "porcentaje": "1.21%"
+      },
+      {
+        "activo": "ON Com&Log S2 CA",
+        "porcentaje": "0.63%"
+      },
+      {
+        "activo": "ON Pyme Garantizada Peduzzi S1 C1",
+        "porcentaje": "0.72%"
+      },
+      {
+        "activo": "ON Pyme Gar Latitud 45 S2 C3",
+        "porcentaje": "1.42%"
+      },
+      {
+        "activo": "ON PyME Gar. Agro de Souza S2 C2",
+        "porcentaje": "0.43%"
+      },
+      {
+        "activo": "ON Pymes Collins S1",
+        "porcentaje": "0.67%"
+      },
+      {
+        "activo": "ON Ricardo Almar C2",
+        "porcentaje": "0.42%"
+      },
+      {
+        "activo": "ON Maximia S1",
+        "porcentaje": "0.40%"
+      },
+      {
+        "activo": "VCP Unicred S2",
+        "porcentaje": "0.14%"
+      },
+      {
+        "activo": "ON Metallo S1 C2",
+        "porcentaje": "1.36%"
+      },
+      {
+        "activo": "ON Liliana S3",
+        "porcentaje": "2.27%"
+      },
+      {
+        "activo": "ON Pyme Gar Proseind S2 CB",
+        "porcentaje": "0.33%"
+      },
+      {
+        "activo": "ON C&C Medical's S1",
+        "porcentaje": "1.31%"
+      },
+      {
+        "activo": "ON Agronorte S3 CA",
+        "porcentaje": "0.48%"
+      },
+      {
+        "activo": "ON 3D Latinoamerica S1",
+        "porcentaje": "0.27%"
+      },
+      {
+        "activo": "ON P. Aconcagua Energia C19",
+        "porcentaje": "0.82%"
+      },
+      {
+        "activo": "ON P. Aconcagua Energia C21",
+        "porcentaje": "0.42%"
+      },
+      {
+        "activo": "ON P. Aconcagua Energia C18",
+        "porcentaje": "0.41%"
+      },
+      {
+        "activo": "ON P. Aconcagua Energia C20",
+        "porcentaje": "0.25%"
+      },
+      {
+        "activo": "ON J.Olivero 290927",
+        "porcentaje": "0.46%"
+      },
+      {
+        "activo": "ON PyMe Gar Recard S1 300927",
+        "porcentaje": "0.73%"
+      },
+      {
+        "activo": "ON AFS Group S1",
+        "porcentaje": "1.08%"
+      },
+      {
+        "activo": "ON Arbitra C1",
+        "porcentaje": "1.28%"
+      },
+      {
+        "activo": "ON Materia Hermanos S1 271219",
+        "porcentaje": "1.06%"
+      },
+      {
+        "activo": "FF Metalcred 11A",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "FF Metalcred 14A",
+        "porcentaje": "0.07%"
+      },
+      {
+        "activo": "FF Sion Conecta Infraestructura Privada S1",
+        "porcentaje": "1.29%"
+      },
+      {
+        "activo": "FF Metalcred 15A",
+        "porcentaje": "0.35%"
+      },
+      {
+        "activo": "FF Metalcred 17A",
+        "porcentaje": "1.20%"
+      },
+      {
+        "activo": "FF Comafi Leasing 17 Cl A",
+        "porcentaje": "4.08%"
+      },
+      {
+        "activo": "FF Inverlease FSA S1 CA",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "FF Secubono S241 Clase A",
+        "porcentaje": "0.17%"
+      },
+      {
+        "activo": "FF Secubono S242 Clase A",
+        "porcentaje": "0.70%"
+      },
+      {
+        "activo": "FF GDM S1",
+        "porcentaje": "2.55%"
+      },
+      {
+        "activo": "FF Venturino S3 A",
+        "porcentaje": "3.23%"
+      },
+      {
+        "activo": "FCI Fima Premium Clase B",
+        "porcentaje": "3.20%"
+      },
+      {
+        "activo": "Bono Dual TTM26",
+        "porcentaje": "2.99%"
+      },
+      {
+        "activo": "Bono del Tesoro Nacional T13F6",
+        "porcentaje": "3.73%"
+      },
+      {
+        "activo": "Bono Boncer TZXM6",
+        "porcentaje": "3.03%"
+      },
+      {
+        "activo": "Lecer X29Y6",
+        "porcentaje": "3.10%"
+      },
+      {
+        "activo": "Lecap S17A6",
+        "porcentaje": "1.95%"
+      },
+      {
+        "activo": "ON Valentin Bianchi S1",
+        "porcentaje": "0.51%"
+      },
+      {
+        "activo": "ON Bio Ramallo S1",
+        "porcentaje": "0.20%"
+      },
+      {
+        "activo": "ON Pelayo Agronomia S3 C2",
+        "porcentaje": "0.60%"
+      },
+      {
+        "activo": "ON Promedon S1 C2",
+        "porcentaje": "1.15%"
+      },
+      {
+        "activo": "ON Agrop las Marias S1",
+        "porcentaje": "0.66%"
+      },
+      {
+        "activo": "ON Agroempresa Colon S1 C2",
+        "porcentaje": "0.13%"
+      },
+      {
+        "activo": "ON Red Surcos S11",
+        "porcentaje": "0.38%"
+      },
+      {
+        "activo": "ON Riboldi S1 C2",
+        "porcentaje": "0.60%"
+      },
+      {
+        "activo": "ON Nuevas Tierras S1",
+        "porcentaje": "0.35%"
+      },
+      {
+        "activo": "ON Pyme Trace Group C1 S2",
+        "porcentaje": "0.12%"
+      },
+      {
+        "activo": "ON Pyme Andesmar S1",
+        "porcentaje": "0.45%"
+      },
+      {
+        "activo": "ON Pyme Gar Gruas San Blas S2 C1",
+        "porcentaje": "0.15%"
+      },
+      {
+        "activo": "ON Pyme Agro de Souza S1 C1",
+        "porcentaje": "0.14%"
+      },
+      {
+        "activo": "ON Xeitosino Clase 2",
+        "porcentaje": "0.40%"
+      },
+      {
+        "activo": "ON Petrosurco S2 C2",
+        "porcentaje": "0.23%"
+      },
+      {
+        "activo": "ON PyMe Zuamar S2",
+        "porcentaje": "0.59%"
+      },
+      {
+        "activo": "ON Pyme RDA Renting S4 C1",
+        "porcentaje": "0.08%"
+      },
+      {
+        "activo": "ON Pyme Hidrotec S2 Clase 1",
+        "porcentaje": "0.59%"
+      },
+      {
+        "activo": "ON Agrotecnología Sala S2 CA",
+        "porcentaje": "0.25%"
+      },
+      {
+        "activo": "ON Prats S2",
+        "porcentaje": "1.94%"
+      },
+      {
+        "activo": "ON Ruta 3 Automotores C3",
+        "porcentaje": "0.32%"
+      },
+      {
+        "activo": "ON Vitalcan S1 CB",
+        "porcentaje": "0.62%"
+      },
+      {
+        "activo": "ON Pyme Spazios Inmuebles S1 C1",
+        "porcentaje": "1.28%"
+      },
+      {
+        "activo": "ON Pyme Spazios Inmuebles S1 C2",
+        "porcentaje": "1.08%"
+      },
+      {
+        "activo": "ON Gar PyMe Segufer S1",
+        "porcentaje": "0.85%"
+      },
+      {
+        "activo": "ON Sumatoria C8",
+        "porcentaje": "0.85%"
+      },
+      {
+        "activo": "ON Hogar y Tecnologia S2 191227",
+        "porcentaje": "1.27%"
+      },
+      {
+        "activo": "ON ALZ Nutrientes S1 BI",
+        "porcentaje": "0.61%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Prov BA",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *MOV100200059",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *MOV241200027",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *MOV120100044",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *MOV030200049",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE190100030",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *FDE200100029",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *FDE311200015",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *FDE311200016",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *MOV291200082",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FOB301200019",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *MOV261200061",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *MOV281200061",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *FDE200300026",
+        "porcentaje": "0.39%"
+      },
+      {
+        "activo": "Cheque E *FDE300100023",
+        "porcentaje": "0.06%"
+      },
+      {
+        "activo": "Cheque E *AFD170300021",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *AFD231200026",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE050100024",
+        "porcentaje": "0.06%"
+      },
+      {
+        "activo": "Cheque E *FDE291200032",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE301200035",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE231200021",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE241200012",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE271200019",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE281200008",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE311200018",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *FDE090100014",
+        "porcentaje": "0.03%"
+      },
+      {
+        "activo": "Cheque E *FDE150100042",
+        "porcentaje": "0.03%"
+      },
+      {
+        "activo": "Cheque E *MOV271200056",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *NOV311200061",
+        "porcentaje": "0.17%"
+      },
+      {
+        "activo": "Cheque E *FDE200100031",
+        "porcentaje": "0.14%"
+      },
+      {
+        "activo": "Cheque E *FDE130100019",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE140100015",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE150100043",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE160100033",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE200100032",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *BIS120100095",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *BIS140100055",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *BIS150200104",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *BIS060300074",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS210200085",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS240200089",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS280200160",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS160200077",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS060100082",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS060200075",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS140100056",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *BIS240100125",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS250100108",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS261200150",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS290100125",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *BIS291200247",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cheque E *FDE160200032",
+        "porcentaje": "0.03%"
+      },
+      {
+        "activo": "Cheque E *FDE190100036",
+        "porcentaje": "0.03%"
+      },
+      {
+        "activo": "Cheque E *AVU291200030",
+        "porcentaje": "0.71%"
+      },
+      {
+        "activo": "Cheque E *NOV150100070",
+        "porcentaje": "0.10%"
+      },
+      {
+        "activo": "Cheque E *NOV150100071",
+        "porcentaje": "0.10%"
+      },
+      {
+        "activo": "Cheque E *NOV150100072",
+        "porcentaje": "0.10%"
+      },
+      {
+        "activo": "Cheque E *NOV060300026",
+        "porcentaje": "0.08%"
+      },
+      {
+        "activo": "Cheque E *MOV130100052",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *MOV160100050",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *MOV150100084",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *MOV140100063",
+        "porcentaje": "0.04%"
+      },
+      {
+        "activo": "Cheque E *AFD060300016",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *AFD130200026",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *AFD200200038",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *AFD270200041",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *AVU040300028",
+        "porcentaje": "0.26%"
+      },
+      {
+        "activo": "Cheque E *AVU250200035",
+        "porcentaje": "0.26%"
+      },
+      {
+        "activo": "Cheque E *ARP251200111",
+        "porcentaje": "0.03%"
+      },
+      {
+        "activo": "Cheque E *ARP310100419",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP310100424",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP261200245",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP251200110",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP261200244",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP271200242",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP251200113",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP261200243",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP271200241",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP261200246",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP300100311",
+        "porcentaje": "0.11%"
+      },
+      {
+        "activo": "Cheque E *ARP280100271",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP310100420",
+        "porcentaje": "0.03%"
+      },
+      {
+        "activo": "Cheque E *ARP310100423",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *ARP261200242",
+        "porcentaje": "0.10%"
+      },
+      {
+        "activo": "Cheque E *ARP020100162",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *ARP270100218",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *ARP251200112",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *ARP251200109",
+        "porcentaje": "0.07%"
+      },
+      {
+        "activo": "Cheque E *ARP020100163",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *ARP310100422",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *ARP310100421",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *NOV150100073",
+        "porcentaje": "0.10%"
+      },
+      {
+        "activo": "Cheque E *NOV150100074",
+        "porcentaje": "0.10%"
+      },
+      {
+        "activo": "Cheque E *FDE261200035",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE020100019",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE090100015",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE100100026",
+        "porcentaje": "0.21%"
+      },
+      {
+        "activo": "Cheque E *FDE231200022",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *FDE240100026",
+        "porcentaje": "0.02%"
+      },
+      {
+        "activo": "Cheque E *FDE030300024",
+        "porcentaje": "0.16%"
+      },
+      {
+        "activo": "Cheque E *NOV110200045",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *NOV110200044",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *NOV160200028",
+        "porcentaje": "0.01%"
+      },
+      {
+        "activo": "Cheque E *NOV160200027",
+        "porcentaje": "0.01%"
+      }
+    ]
+  },
+  {
+    "id": "211",
+    "claseId": "211",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "0.23%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "1.09%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "35.38%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "398.32%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "960.03%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "1.09%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "36.58%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "125.83%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "409.28%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "692.12%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "36.58%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "1.89%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Patagonia",
+        "porcentaje": "1.03%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco BBVA",
+        "porcentaje": "2.06%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Credicoop",
+        "porcentaje": "1.03%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Credicoop",
+        "porcentaje": "1.03%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Comafi",
+        "porcentaje": "1.03%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.54%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.54%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.03%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "1.54%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Credicoop",
+        "porcentaje": "1.03%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Credicoop",
+        "porcentaje": "1.03%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Santander Ri",
+        "porcentaje": "1.54%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Santander Ri",
+        "porcentaje": "0.62%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.60%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.54%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "1.60%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.72%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Supervielle",
+        "porcentaje": "0.51%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.60%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.23%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.02%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Rioja",
+        "porcentaje": "0.71%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Credicoop",
+        "porcentaje": "1.02%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.02%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "1.56%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco BBVA",
+        "porcentaje": "0.91%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.14%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Patagonia",
+        "porcentaje": "1.11%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco BBVA",
+        "porcentaje": "1.11%"
+      },
+      {
+        "activo": "Pzo Fi $ Nvo Bco Santa Fe",
+        "porcentaje": "0.55%"
+      },
+      {
+        "activo": "Pzo Fi $ Nvo Bco Chaco",
+        "porcentaje": "0.55%"
+      },
+      {
+        "activo": "Pzo Fi $ Nvo Bco Santa Fe",
+        "porcentaje": "0.55%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Hipotecario",
+        "porcentaje": "1.09%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Macro Bansud",
+        "porcentaje": "2.02%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Santander Ri",
+        "porcentaje": "1.52%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Santander Ri",
+        "porcentaje": "1.01%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "1.01%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "0.76%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Patagonia",
+        "porcentaje": "2.01%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Patagonia",
+        "porcentaje": "2.01%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "0.50%"
+      },
+      {
+        "activo": "Pzo Fi $ ICBC",
+        "porcentaje": "0.50%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco BBVA",
+        "porcentaje": "1.51%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco BBVA",
+        "porcentaje": "1.51%"
+      },
+      {
+        "activo": "Plazo Fi $ Bco Municipal de Rosario",
+        "porcentaje": "0.50%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Credicoop",
+        "porcentaje": "1.51%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.51%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "1.01%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Credicoop",
+        "porcentaje": "1.51%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Nacion",
+        "porcentaje": "1.51%"
+      },
+      {
+        "activo": "Pzo Fi $ Bco Galicia",
+        "porcentaje": "1.01%"
+      },
+      {
+        "activo": "Caucion Colocadora $ MAE",
+        "porcentaje": "4.02%"
+      },
+      {
+        "activo": "Caucion Colocadora $ BYMA",
+        "porcentaje": "23.94%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Prov BA",
+        "porcentaje": "8.45%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Supervi",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Industrial",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Galicia",
+        "porcentaje": "0.50%"
+      },
+      {
+        "activo": "Cta Cte $ Rem ICBC",
+        "porcentaje": "0.50%"
+      },
+      {
+        "activo": "Cta Cte $ Bco de Valores",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Bacs",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Bco Wilobank",
+        "porcentaje": "0.00%"
+      },
+      {
+        "activo": "Cta Cte $ Rem Nuevo Banco de la Rioja",
+        "porcentaje": "0.60%"
+      }
+    ]
+  },
+  {
+    "id": "1540",
+    "claseId": "4638",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "-0.32%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "0.58%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "29.43%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "0.00%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "0.00%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "0.58%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "33.30%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "0.00%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "0.00%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "0.00%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "33.30%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Bono del Tesoro Nacional T13F6",
+        "porcentaje": "21.36%"
+      },
+      {
+        "activo": "Lecap T30E6",
+        "porcentaje": "2.47%"
+      },
+      {
+        "activo": "Lecap S27F6",
+        "porcentaje": "14.79%"
+      },
+      {
+        "activo": "Letra Tesoro Nac S30O6",
+        "porcentaje": "4.86%"
+      },
+      {
+        "activo": "Letra Tesoro Nac T30A7",
+        "porcentaje": "2.93%"
+      },
+      {
+        "activo": "Lecap S30A6",
+        "porcentaje": "18.84%"
+      },
+      {
+        "activo": "Lecap S29Y6",
+        "porcentaje": "21.24%"
+      },
+      {
+        "activo": "Lecap S17A6",
+        "porcentaje": "11.44%"
+      },
+      {
+        "activo": "FCI Fima Premium Clase B",
+        "porcentaje": "2.06%"
+      },
+      {
+        "activo": "Cta Cte $ Bco Prov BA",
+        "porcentaje": "0.01%"
+      }
+    ]
+  },
+  {
+    "id": "773",
+    "claseId": "1738",
+    "rendimientos": [
+      {
+        "periodo": "day",
+        "rendimiento": "-0.30%",
+        "fecha": "09/01/2026"
+      },
+      {
+        "periodo": "month",
+        "rendimiento": "-0.10%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "oneYear",
+        "rendimiento": "1.71%",
+        "fecha": "10/01/2025"
+      },
+      {
+        "periodo": "threeYears",
+        "rendimiento": "59.39%",
+        "fecha": "12/01/2023"
+      },
+      {
+        "periodo": "fiveYears",
+        "rendimiento": "65.75%",
+        "fecha": "12/01/2021"
+      },
+      {
+        "periodo": "year",
+        "rendimiento": "-0.10%",
+        "fecha": "30/12/2025"
+      },
+      {
+        "periodo": "yearM1",
+        "rendimiento": "3.23%",
+        "fecha": "30/12/2024"
+      },
+      {
+        "periodo": "yearM2",
+        "rendimiento": "45.65%",
+        "fecha": "29/12/2023"
+      },
+      {
+        "periodo": "yearM3",
+        "rendimiento": "64.83%",
+        "fecha": "30/12/2022"
+      },
+      {
+        "periodo": "yearM4",
+        "rendimiento": "67.22%",
+        "fecha": "30/12/2021"
+      },
+      {
+        "periodo": "monthYear",
+        "rendimiento": "3.23%",
+        "fecha": "30/12/2024"
+      }
+    ],
+    "composicion": [
+      {
+        "activo": "Bonos Rep Argentina 2030",
+        "porcentaje": "2.55%"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD30",
+        "porcentaje": "3.35%"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD35",
+        "porcentaje": "6.21%"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD38",
+        "porcentaje": "6.28%"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD41",
+        "porcentaje": "6.79%"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD29",
+        "porcentaje": "3.37%"
+      },
+      {
+        "activo": "Bono Bopreal 2027 Serie 1 Clase C BPOC7",
+        "porcentaje": "7.49%"
+      },
+      {
+        "activo": "Bono Bopreal 2027 Serie 1 Clase D BPOD7",
+        "porcentaje": "5.00%"
+      },
+      {
+        "activo": "Bono Bopreal 2028 Serie 4 Clase B BPOB8",
+        "porcentaje": "2.23%"
+      },
+      {
+        "activo": "Bono Prov Neuquen 2025",
+        "porcentaje": "6.61%"
+      },
+      {
+        "activo": "Bono Prov Mendoza 2029",
+        "porcentaje": "6.34%"
+      },
+      {
+        "activo": "Bono Prov Cordoba 2029 CO27D",
+        "porcentaje": "3.56%"
+      },
+      {
+        "activo": "Bono Prov Cordoba 2032",
+        "porcentaje": "7.58%"
+      },
+      {
+        "activo": "ON TGLT Clase 16",
+        "porcentaje": "0.26%"
+      },
+      {
+        "activo": "ON Plaza Logistica C15",
+        "porcentaje": "1.72%"
+      },
+      {
+        "activo": "ON Pampa Energia C21",
+        "porcentaje": "3.70%"
+      },
+      {
+        "activo": "ON YPF Clase 31",
+        "porcentaje": "3.73%"
+      },
+      {
+        "activo": "ON Ledesma Clase 15",
+        "porcentaje": "0.69%"
+      },
+      {
+        "activo": "ON Pluspetrol Clase 3",
+        "porcentaje": "1.45%"
+      },
+      {
+        "activo": "ON YPF Clase 37",
+        "porcentaje": "1.40%"
+      },
+      {
+        "activo": "ON Pecom C2",
+        "porcentaje": "1.74%"
+      },
+      {
+        "activo": "ON Mega C1",
+        "porcentaje": "1.45%"
+      },
+      {
+        "activo": "ON Pluspetrol 8.5% 2032 (REGS)",
+        "porcentaje": "2.89%"
+      },
+      {
+        "activo": "ON Mercado Pago C2",
+        "porcentaje": "1.39%"
+      },
+      {
+        "activo": "ON Arcor C2 7,6%",
+        "porcentaje": "1.75%"
+      },
+      {
+        "activo": "ON Vista Energy 30",
+        "porcentaje": "1.39%"
+      },
+      {
+        "activo": "ON Tecpetrol C11",
+        "porcentaje": "1.39%"
+      },
+      {
+        "activo": "ON Pan American C42",
+        "porcentaje": "1.74%"
+      },
+      {
+        "activo": "ON Otamerica S5",
+        "porcentaje": "1.75%"
+      },
+      {
+        "activo": "ON Genneia Clase 49",
+        "porcentaje": "3.48%"
+      },
+      {
+        "activo": "FF Vicentin Export S8 A",
+        "porcentaje": "0.24%"
+      },
+      {
+        "activo": "Cta Cte U$S Bco Prov BA",
+        "porcentaje": "0.52%"
+      }
+    ]
+  }
+]

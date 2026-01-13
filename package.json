@@ -5,13 +5,19 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "node server.js",
+    "upload-fondos": "node scripts/uploadFondos.js",
+    "upload-fondos-clean": "node scripts/uploadFondos.js --clear",
+    "examples": "node scripts/examples.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["fci", "fondos", "inversion", "argentina"],
+  "keywords": ["fci", "fondos", "inversion", "argentina", "redis", "upstash"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "@upstash/redis": "^1.34.0",
+    "dotenv": "^16.0.0"
   }
 }
