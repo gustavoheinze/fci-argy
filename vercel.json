@@ -1,7 +1,6 @@
 {
   "buildCommand": "echo 'No build required'",
   "devCommand": "npm start",
-  "framework": "nodejs",
   "headers": [
     {
       "source": "/(.*\\.(css|js))",
