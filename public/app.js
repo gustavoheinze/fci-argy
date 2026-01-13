@@ -404,6 +404,22 @@ function renderManagement() {
   renderInvestmentOpportunities();
 }
 
+function showDominantAssetDetails() {
+  if (!mgmtData || !mgmtData.topAssetsByWeight[0]) return;
+
+  const dominantAsset = mgmtData.topAssetsByWeight[0];
+  const assetName = dominantAsset.name;
+
+  // Scroll to asset explorer and populate it
+  document.getElementById('asset-search').value = assetName;
+  handleAssetSearch();
+
+  // Smooth scroll to the results
+  setTimeout(() => {
+    document.getElementById('asset-explorer-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
 function renderInvestmentOpportunities() {
   if (!mgmtData) return;
 
@@ -485,12 +501,23 @@ function renderAssetExplorer(matches) {
   const grid = document.getElementById('asset-explorer-results');
   grid.innerHTML = matches.map(asset => `
     <div class="explorer-section glass" style="grid-column: 1/-1; margin-bottom: 1rem; padding: 1.5rem;">
-      <h4 class="panel-title" style="margin-bottom: 1rem; color: var(--accent); border-color: var(--accent)">HOLDER_FUNDS FOR: ${asset.name}</h4>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
+        <h4 class="panel-title" style="margin: 0; color: var(--accent); border-color: var(--accent)">📊 ${asset.name}</h4>
+        <div style="display: flex; gap: 2rem; font-family: var(--font-mono); font-size: 0.75rem;">
+          <span style="color: var(--primary);">PESO TOTAL: <strong>${asset.totalWeight.toFixed(2)}%</strong></span>
+          <span style="color: var(--text-dim);">FRECUENCIA: <strong>${asset.frequency} fondos</strong></span>
+        </div>
+      </div>
+      <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.75rem; line-height: 1.5;">
+        <strong style="color: var(--accent);">EXPLICACIÓN:</strong> Este activo aparece en <strong>${asset.frequency}</strong> fondos diferentes. 
+        El "peso total" (${asset.totalWeight.toFixed(2)}%) es la suma de todos los porcentajes que representa en cada fondo.
+      </div>
       <div class="mgr-list">
-        ${asset.funds.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct)).map(f => `
-          <div class="rank-item">
+        ${asset.funds.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct)).map((f, idx) => `
+          <div class="rank-item" style="background: ${idx === 0 ? 'rgba(16, 185, 129, 0.05)' : 'rgba(255, 255, 255, 0.02)'}; border-color: ${idx === 0 ? 'rgba(16, 185, 129, 0.3)' : 'transparent'};">
+            <span class="rank-index">#${String(idx + 1).padStart(2, '0')}</span>
             <span class="rank-name">${f.nombre}</span>
-            <span class="rank-val">${f.pct}</span>
+            <span class="rank-val" style="color: ${idx === 0 ? 'var(--primary)' : 'var(--text-main)'}; font-weight: ${idx === 0 ? '800' : '700'};">${f.pct}</span>
           </div>
         `).join('')}
       </div>

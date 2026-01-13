@@ -126,9 +126,12 @@
               <span class="label">AVG_MARKET_LIQUIDITY</span>
               <span class="value" id="mgmt-liquidity">0%</span>
             </div>
-            <div class="stat-card glass glow-gold">
+            <div class="stat-card glass glow-gold" style="position: relative; cursor: pointer;"
+              title="Activo individual con mayor peso total agregado entre todos los fondos del país. Click para ver todos los fondos que lo contienen."
+              onclick="showDominantAssetDetails()">
               <span class="label">DOMINANT_ASSET</span>
               <span class="value" id="mgmt-top-asset">---</span>
+              <div style="position: absolute; top: 1rem; right: 1rem; font-size: 0.7rem; opacity: 0.5;">🔍</div>
             </div>
             <div class="stat-card glass">
               <span class="label">ANALYSED_FUNDS</span>
