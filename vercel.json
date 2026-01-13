@@ -1,12 +1,17 @@
 {
   "buildCommand": "echo 'No build required'",
   "devCommand": "npm start",
-  "env": [
-    "UPSTASH_REDIS_REST_URL",
-    "UPSTASH_REDIS_REST_TOKEN"
-  ],
   "framework": "nodejs",
   "headers": [
+    {
+      "source": "/(.*\\.(css|js))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
     {
       "source": "/api/(.*)",
       "headers": [
