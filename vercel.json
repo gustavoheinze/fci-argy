@@ -3,7 +3,7 @@
   "devCommand": "npm start",
   "headers": [
     {
-      "source": "/(.*\\.(css|js))",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
