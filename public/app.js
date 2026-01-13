@@ -30,6 +30,7 @@ let favorites = JSON.parse(localStorage.getItem('fci_favorites') || '[]');
 let showFavsOnly = false;
 
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   loadFunds();
   setupEventListeners();
 });
@@ -360,6 +361,8 @@ function closeSidebar() {
 // Management Dashboard State
 let mgmtData = null;
 let currentAssetRankMode = 'freq';
+let allAssets = [];
+let filteredAssets = [];
 
 function switchView(view) {
   const terminalView = document.getElementById('view-terminal');
@@ -399,9 +402,14 @@ function renderManagement() {
   document.getElementById('mgmt-top-asset').textContent = mgmtData.topAssetsByWeight[0]?.name || '---';
   document.getElementById('mgmt-mgr-count').textContent = mgmtData.summary.analyzedFunds;
 
+  // Populate all assets for browser
+  allAssets = mgmtData.topAssetsByFrequency; // All unique assets
+  filteredAssets = [...allAssets];
+
   renderAssetRanking(currentAssetRankMode);
   renderManagerBenchmark();
   renderInvestmentOpportunities();
+  renderAssetBrowser();
 }
 
 function showDominantAssetDetails() {
@@ -523,6 +531,91 @@ function renderAssetExplorer(matches) {
       </div>
     </div>
   `).join('');
+}
+
+// Asset Browser Functions
+function renderAssetBrowser() {
+  const grid = document.getElementById('asset-browser-grid');
+  const displayAssets = filteredAssets.slice(0, 50); // Show first 50 to avoid overwhelming UI
+
+  grid.innerHTML = displayAssets.map((asset, i) => `
+    <div class="opportunity-card" onclick="showAssetDetails('${asset.name.replace(/'/g, "\\'")}')">
+      <div class="opp-rank">#${i + 1}</div>
+      <div class="opp-name">${asset.name}</div>
+      <div class="opp-stats">
+        <div class="opp-weight">${asset.totalWeight.toFixed(2)}%</div>
+        <div class="opp-count">${asset.frequency} FONDOS</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Show count
+  const searchBox = document.getElementById('asset-browser-search');
+  if (filteredAssets.length < allAssets.length) {
+    searchBox.placeholder = `MOSTRANDO ${displayAssets.length} DE ${filteredAssets.length} ACTIVOS...`;
+  } else {
+    searchBox.placeholder = `${allAssets.length} ACTIVOS ÚNICOS - BUSCAR...`;
+  }
+}
+
+function filterAssetBrowser() {
+  const query = document.getElementById('asset-browser-search').value.toLowerCase();
+
+  if (query.length === 0) {
+    filteredAssets = [...allAssets];
+  } else {
+    filteredAssets = allAssets.filter(a => a.name.toLowerCase().includes(query));
+  }
+
+  renderAssetBrowser();
+}
+
+function showAssetDetails(assetName) {
+  // Scroll to asset explorer and populate it
+  document.getElementById('asset-search').value = assetName;
+  handleAssetSearch();
+
+  // Smooth scroll to the results
+  setTimeout(() => {
+    document.getElementById('asset-explorer-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Theme Switcher ☀️/🌙
+function initTheme() {
+  const savedTheme = localStorage.getItem('fci_theme') || 'terminal';
+  if (savedTheme === 'light') {
+    document.body.classList.add('theme-light');
+    updateThemeIcon('light');
+  } else {
+    updateThemeIcon('terminal');
+  }
+}
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('theme-light');
+  const theme = isLight ? 'light' : 'terminal';
+  localStorage.setItem('fci_theme', theme);
+  updateThemeIcon(theme);
+
+  // Smooth transition effect
+  document.body.style.transition = 'background-color 0.5s ease, color 0.3s ease';
+  setTimeout(() => {
+    document.body.style.transition = '';
+  }, 500);
+}
+
+function updateThemeIcon(theme) {
+  const icon = document.getElementById('theme-icon');
+  const btn = document.getElementById('theme-toggle');
+
+  if (theme === 'light') {
+    icon.textContent = '🌙'; // En modo claro, mostramos luna para ir a oscuro
+    btn.title = 'Cambiar a Modo Oscuro';
+  } else {
+    icon.textContent = '☀️'; // En modo oscuro, mostramos sol para ir a claro
+    btn.title = 'Cambiar a Modo Claro';
+  }
 }
 
 // Helpers

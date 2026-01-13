@@ -24,9 +24,14 @@
             <h1>FCI Terminal</h1>
             <p>SYSTEM.INV_EXPLORER v2.5 // ARG_MARKETS</p>
           </div>
-          <div class="nav-tabs">
-            <button id="tab-terminal" class="nav-tab active" onclick="switchView('terminal')">TERMINAL_VIEW</button>
-            <button id="tab-management" class="nav-tab" onclick="switchView('management')">MGMT_PANEL</button>
+          <div style="display: flex; gap: 1.5rem; align-items: center;">
+            <div class="nav-tabs">
+              <button id="tab-terminal" class="nav-tab active" onclick="switchView('terminal')">TERMINAL_VIEW</button>
+              <button id="tab-management" class="nav-tab" onclick="switchView('management')">MGMT_PANEL</button>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+              <span id="theme-icon">🎨</span>
+            </button>
           </div>
         </div>
       </header>
@@ -152,6 +157,26 @@
               <h3 class="panel-title">MANAGER_BENCHMARK</h3>
               <div id="manager-list" class="mgr-list"></div>
             </div>
+          </div>
+
+          <!-- Asset Browser Section -->
+          <div class="mgmt-panel glass full-width"
+            style="background: rgba(99, 102, 241, 0.03); border-color: rgba(99, 102, 241, 0.2);">
+            <h3 class="panel-title" style="color: var(--secondary);">🔍 ASSET_BROWSER</h3>
+            <div class="disclaimer-box"
+              style="background: rgba(99, 102, 241, 0.05); border-color: rgba(99, 102, 241, 0.2);">
+              <span class="disclaimer-icon">💡</span>
+              <p class="disclaimer-text">
+                <strong>EXPLORADOR DE ACTIVOS:</strong> Todos los activos únicos que aparecen en los fondos del país.
+                Click en cualquier activo para ver qué fondos lo contienen y su porcentaje de participación.
+              </p>
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <input type="text" id="asset-browser-search" placeholder="BUSCAR_ACTIVO..."
+                style="width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-ultra); padding: 0.75rem 1rem; border-radius: 8px; color: #fff; font-family: var(--font-mono); font-size: 0.85rem;"
+                oninput="filterAssetBrowser()">
+            </div>
+            <div id="asset-browser-grid" class="opportunities-grid"></div>
           </div>
 
           <!-- Investment Opportunities Section -->
