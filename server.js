@@ -3,7 +3,7 @@ const path = require('path');
 // Load environment variables. .env.local for local dev, system env for Vercel.
 if (fs.existsSync('.env.local')) {
   require('dotenv').config({ path: '.env.local' });
-} else {
+} else if (fs.existsSync('.env')) {
   require('dotenv').config();
 }
 const express = require('express');
