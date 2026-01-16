@@ -244,21 +244,21 @@ function renderFunds() {
     const isSubscribed = subscribedFunds.includes(fund.id);
     row.className = 'grid-row';
     row.innerHTML = `
-      <div class="mono-cell" style="display: flex; align-items: center; gap: 0.5rem;">
+      <div class="mono-cell" data-label="ACCIONES" style="display: flex; align-items: center; gap: 0.5rem;">
         <span class="sub-briefcase ${isSubscribed ? 'active' : ''}" onclick="event.stopPropagation(); toggleSubscribed('${fund.id}')" title="Marcar como fondo suscripto (tengo dinero invertido)">💼</span>
         <span class="vs-btn ${comparisonList.some(c => c.id === fund.id) ? 'active' : ''}" onclick="event.stopPropagation(); toggleComparison('${fund.id}', '${fund.nombre.replace(/'/g, "\\'")}')">VS</span>
         #${fund.id}
       </div>
       <div class="name-cell">${fund.nombre}</div>
       <div class="type-cell">${getTipoRenta(trId)}</div>
-      <div class="mono-cell" style="opacity: 0.6">#${fund.fondoId}</div>
+      <div class="mono-cell" data-label="CNV" style="opacity: 0.6">#${fund.fondoId}</div>
       <div class="risk-cell risk-${risk.id}">
         <span class="risk-dot"></span>
         ${risk.label.toUpperCase()}
       </div>
-      <div class="mono-cell">${getMonedaShort(fund.monedaId || fund.fondoPrincipal.monedaId)}</div>
-      <div class="mono-cell">$${Number(fund.inversionMinima).toLocaleString('es-AR')}</div>
-      <div class="mono-cell">${fund.fondoPrincipal.estado === '1' ? '🟢 ONLINE' : '🔴 OFFLINE'}</div>
+      <div class="mono-cell" data-label="MONEDA">${getMonedaShort(fund.monedaId || fund.fondoPrincipal.monedaId)}</div>
+      <div class="mono-cell" data-label="MÍNIMO">$${Number(fund.inversionMinima).toLocaleString('es-AR')}</div>
+      <div class="mono-cell" data-label="ESTADO">${fund.fondoPrincipal.estado === '1' ? '🟢 ONLINE' : '🔴 OFFLINE'}</div>
     `;
     row.onclick = () => showSidebar(fund);
     list.appendChild(row);
