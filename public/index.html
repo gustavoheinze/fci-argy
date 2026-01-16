@@ -58,8 +58,14 @@
           <input type="text" id="search" placeholder="Buscar por nombre, gestora o código CNV...">
         </div>
 
+        <!-- Mobile Filter Toggle -->
+        <button id="mobile-filter-toggle" class="nav-tab active"
+          style="width: 100%; margin-bottom: 1rem; display: none; font-weight: 800; border: 1px solid var(--primary);">
+          🔍 FILTROS Y BÚSQUEDA
+        </button>
+
         <!-- Logic Filters -->
-        <div class="filters-container">
+        <div class="filters-container mobile-collapsed" id="main-filters">
 
           <div class="filter-row">
             <span class="filter-label">MONEDA:</span>

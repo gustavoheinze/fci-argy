@@ -131,6 +131,17 @@ function setupEventListeners() {
     });
   });
 
+  // Mobile Filter Toggle Setup
+  const filterToggle = document.getElementById('mobile-filter-toggle');
+  const filtersContainer = document.getElementById('main-filters');
+  if (filterToggle && filtersContainer) {
+    filterToggle.addEventListener('click', () => {
+      filtersContainer.classList.toggle('mobile-collapsed');
+      filtersContainer.classList.toggle('mobile-expanded');
+      filterToggle.textContent = filtersContainer.classList.contains('mobile-expanded') ? '🔼 OCULTAR FILTROS' : '🔍 MOSTRAR FILTROS';
+    });
+  }
+
   document.getElementById('search').addEventListener('input', applyFilters);
 
   document.querySelectorAll('.sortable-header').forEach(header => {
@@ -243,6 +254,9 @@ function renderFunds() {
     const row = document.createElement('div');
     const isSubscribed = subscribedFunds.includes(fund.id);
     row.className = 'grid-row';
+    const minStr = new Intl.NumberFormat('es-AR', { style: 'currency', currency: fund.moneda, maximumFractionDigits: 0 }).format(fund.minimo);
+    row.setAttribute('data-compact-info', `${fund.moneda} • Min: ${minStr}`);
+
     row.innerHTML = `
       <div class="mono-cell" data-label="ACCIONES" style="display: flex; align-items: center; gap: 0.5rem;">
         <span class="sub-briefcase ${isSubscribed ? 'active' : ''}" onclick="event.stopPropagation(); toggleSubscribed('${fund.id}')" title="Marcar como fondo suscripto (tengo dinero invertido)">💼</span>
