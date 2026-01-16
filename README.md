@@ -1,107 +1,73 @@
-# FCI Argentina - Fondos Comunes de Inversión
+# FCI Argentina - Fintech Terminal & Analytics
 
-Aplicación innovadora estilo **Fintech Terminal** para explorar, filtrar y consultar fondos comunes de inversión argentinos con diseño inmersivo y almacenamiento en Redis.
+Aplicación avanzada estilo **Fintech Terminal** para la exploración, análisis y gestión de Fondos Comunes de Inversión (FCI) en Argentina. Diseñada con una estética inmersiva, datos enriquecidos y una arquitectura híbrida de alto rendimiento.
 
-## Características
+## 🚀 Características Principales
 
-- 🌌 **The Terminal Design**: Estética inmersiva con fondo aurora dinámico, hyper-glassmorphism y una interfaz de alto rendimiento.
-- 🔍 **Búsqueda y Filtros**: Filtrar por riesgo (Bajo/Medio/Alto), tipo de renta, moneda, horizonte y estado.
-- 📊 **3,902 Fondos**: Visualización de clase_fondos completa con grilla interactiva y panel lateral de detalles.
-- 🔗 **Fuente de Datos**: Sincronizado con los datos oficiales de la [CAFCI](https://www.cafci.org.ar/consulta-de-fondos.html).
-- 💾 **Redis Upstash**: Caché distribuido para alto rendimiento.
-- 🚀 **Production Ready**: Optimizado para despliegues rápidos en Vercel.
+- 💹 **Fintech Terminal UI**: Estética profesional "dark-mode" con efectos aurora, hyper-glassmorphism e interfaz ultra-responsiva.
+- 📊 **Advanced Analytics**: Gráfico interactivo de Riesgo vs. Retorno (Scatter Plot) con Chart.js para visualizar el perfil de los fondos.
+- 📈 **Panel de Gerencia**: 
+  - **Ranking Global de Activos**: Identificación de los activos más pesados en la industria (ponderado por peso).
+  - **Mapa de Liquidez**: Visualización del sentimiento del mercado basado en el efectivo disponible.
+  - **Benchmarking de Gestoras**: Comparativa de rendimiento y estilos de inversión entre administradoras.
+- 🔍 **Enriquecimiento de Datos**: Información detallada extraída de CAFCI, incluyendo composición de cartera (Assets), honorarios y perfiles de riesgo.
+- 📱 **100% Mobile Friendly**: Experiencia optimizada para cualquier dispositivo.
 
-## Tecnologías
+## 🏗️ Arquitectura de Datos
+
+El proyecto utiliza una estrategia de base de datos híbrida para maximizar la velocidad y la capacidad de análisis:
+
+1. **SQLite (Local)**: Utilizada para el proceso de **Enriquecimiento (Scraping)** y gestión de datos complejos. 
+   - *Nota*: El archivo `database.sqlite` está excluido del repositorio de GitHub debido a su tamaño (>100MB).
+2. **Upstash Redis (Cloud/Producción)**: Base de datos de alta velocidad utilizada para servir la API en producción (Vercel), garantizando tiempos de respuesta mínimos.
+
+## 🛠️ Tecnologías
 
 - **Backend**: Node.js + Express
-- **Frontend**: HTML5 + CSS3 + JavaScript Vanilla
-- **Base de Datos**: Upstash Redis (REST API)
-- **Hosting**: Vercel (ready to deploy)
+- **Frontend**: HTML5 vanilla, CSS moderno (Glassmorphism), JavaScript interactivo.
+- **Gráficos**: Chart.js
+- **Bases de Datos**: SQLite (better-sqlite3) & Upstash Redis.
+- **Despliegue**: Vercel Ready.
 
-## Instalación Rápida
+## ⚙️ Instalación y Configuración
 
-### 1. Preparar proyecto
-
+### 1. Requisitos Previos
 ```bash
 npm install
 ```
 
-### 2. Configurar variables de entorno
-
-Si usa Vercel:
-```bash
-vercel env pull
+### 2. Variables de Entorno
+Crea un archivo `.env.local` o usa `vercel env pull`:
+```env
+UPSTASH_REDIS_REST_URL=https://...
+UPSTASH_REDIS_REST_TOKEN=...
 ```
 
-Si es local manual, cree `.env.local`:
-```
-UPSTASH_REDIS_REST_URL=https://your-instance.upstash.io
-UPSTASH_REDIS_REST_TOKEN=your-token-here
-```
+### 3. Workflow de Datos
+Si deseas recrear la base de datos o actualizar los fondos:
 
-Obtenga credenciales en: https://console.upstash.com/redis
+- **Enriquecer desde CAFCI**:
+  ```bash
+  node scripts/enrich_sqlite_cafci_v3.js
+  ```
+- **Sincronizar a Redis**:
+  ```bash
+  npm run upload-fondos-clean
+  ```
 
-### 3. Cargar datos (primera vez)
+## 📜 Scripts Disponibles
 
-```bash
-npm run upload-fondos-clean
-```
+- `npm start`: Inicia el servidor de producción/desarrollo.
+- `npm run dev`: Alias de start para entorno local.
+- `npm run upload-fondos-clean`: Limpia la caché de Redis y carga los datos desde el archivo enriquecido.
+- `npm run examples`: Ejecuta ejemplos de interacción con la API de Redis.
 
-Salida esperada: `✅ Success: 3902 | Error: 0 | Duration: 42s`
+## 📂 Estructura del Proyecto
 
-### 4. Ejecutar servidor
+- `/public`: Interfaz de usuario, estilos y lógica del cliente (`app.js`, `AnalyticsTab.jsx`).
+- `/scripts`: Scripts de scraping, enriquecimiento y sincronización.
+- `/lib`: Clientes de base de datos (Redis/SQLite).
+- `/api`: Endpoints de la API optimizados para serverless.
 
-```bash
-npm start
-```
-
-Abre http://localhost:3000
-
-## Scripts disponibles
-
-```bash
-npm start                      # Inicia servidor (puerto 3000)
-npm run upload-fondos          # Carga datos sin limpiar Redis
-npm run upload-fondos-clean    # Limpia Redis y carga datos
-npm run examples               # Ejecuta 6 ejemplos de API Redis
-```
-
-## Funciones de API
-
-Disponibles en `lib/redis.js`:
-
-- `getRedis()` - Instancia singleton
-- `saveFondo(id, data)` - Guardar fondo
-- `getFondo(id)` - Obtener un fondo
-- `getFondos(ids)` - Obtener múltiples fondos
-- `getAllFondos()` - Todos los fondos
-- `searchFondosByName(query)` - Buscar por nombre
-- `getFondosByEstado(estado)` - Filtrar por estado
-- `getFondosByTipoRenta(tipoRentaId)` - Filtrar por tipo renta
-- `clearAllFondos()` - Limpiar todo
-- `getStats()` - Estadísticas
-
-## Estructura
-
-```
-├── server.js              # Express server
-├── fci.json              # Datos (978 fondos → 3,902 clase_fondos)
-├── lib/redis.js          # Cliente Redis singleton
-├── scripts/
-│   ├── uploadFondos.js   # Importar datos en batches de 100
-│   └── examples.js       # 6 ejemplos de uso
-└── public/               # Frontend (HTML, CSS, JS)
-```
-
-## Solución de problemas
-
-| Problema | Solución |
-|----------|----------|
-| "@upstash/redis not found" | `npm install @upstash/redis` |
-| "ENV variables undefined" | `vercel env pull` o editar `.env.local` |
-| "No data in Redis" | `npm run upload-fondos-clean` |
-| "Lentitud en primer acceso" | Normal: caché se calienta (2-3s), rápido después |
-
-## Licencia
-
-ISC
+---
+**Desarrollado para el mercado financiero argentino.**
