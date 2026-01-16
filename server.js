@@ -12,7 +12,10 @@ app.use(express.static('public'));
 // API endpoint to get funds data
 app.get('/api/funds', async (req, res) => {
   try {
+    console.log('📊 [API] Fetching funds...');
     const funds = await getFondos();
+    console.log(`✅ [API] Got ${funds ? funds.length : 0} funds`);
+
     const mapped = funds.map(f => ({
       id: f.id,
       nombre: f.nombre,
@@ -22,10 +25,13 @@ app.get('/api/funds', async (req, res) => {
       tipoRentaId: f.fondoPrincipal ? f.fondoPrincipal.tipoRentaId : null,
       fondoPrincipal: f.fondoPrincipal // Include for filters
     }));
+    console.log(`✅ [API] Mapped ${mapped.length} funds, sending response`);
     res.json(mapped);
   } catch (error) {
-    console.error('API_ERROR:', error);
-    res.status(500).json({ error: 'Error processing funds request' });
+    console.error('❌ [API_ERROR] Full error:', error);
+    console.error('❌ [API_ERROR] Message:', error.message);
+    console.error('❌ [API_ERROR] Stack:', error.stack);
+    res.status(500).json({ error: 'Error processing funds request', details: error.message });
   }
 });
 

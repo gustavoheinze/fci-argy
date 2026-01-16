@@ -1,24 +1,19 @@
 {
-  "buildCommand": "echo 'Static site - no build required'",
-  "devCommand": "npm start",
-  "headers": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server.js"
     },
     {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=60, s-maxage=120"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
