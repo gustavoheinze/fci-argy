@@ -12,6 +12,15 @@ const assetCategories = {
   'OTROS': { label: 'Otros', color: '#64748b', icon: '❓' }
 };
 
+function getSpinnerHTML(text = 'CARGANDO...') {
+  return `
+    <div class="section-loader">
+      <div class="loader"></div>
+      <div class="loader-text">${text}</div>
+    </div>
+  `;
+}
+
 function classifyAsset(name) {
   const n = String(name || '').toUpperCase();
   if (n.includes('PZO FI') || n.includes('CTA CTE') || n.includes('CAJA DE AHORRO') || n.includes('CAUCION') || n.includes('EFECTIVO') || n.includes('AHO')) return 'LIQUIDEZ';
@@ -77,6 +86,9 @@ async function checkSystemStatus() {
 
 async function loadFunds() {
   const loader = document.getElementById('global-loader');
+  const mainList = document.getElementById('funds-list');
+  if (mainList) mainList.innerHTML = getSpinnerHTML('CARGANDO TERMINAL...');
+
   try {
     const response = await fetch('/api/funds');
     const data = await response.json();
@@ -779,6 +791,9 @@ async function renderRiskReturnChart() {
     scatterChart.destroy();
   }
 
+  const container = document.getElementById('scatter-chart-container');
+  if (container) container.innerHTML = `<canvas id="scatterChart"></canvas>` + getSpinnerHTML('PROCESANDO RIESGO/RETORNO...');
+
   try {
     const response = await fetch('/api/scatter-plot-data');
     const data = await response.json();
@@ -877,6 +892,22 @@ async function renderRiskReturnChart() {
 }
 
 async function loadAnalytics() {
+  // Show loaders in mgmt panels
+  const rankingList = document.getElementById('asset-ranking-list');
+  const managerList = document.getElementById('manager-list');
+  const leadersList = document.getElementById('market-leaders-list');
+  const recommendationGrid = document.getElementById('recommendation-grid');
+
+  if (rankingList) rankingList.innerHTML = getSpinnerHTML('CALCULANDO INDEX...');
+  if (managerList) managerList.innerHTML = getSpinnerHTML('BENCHMARKING...');
+  if (leadersList) leadersList.innerHTML = getSpinnerHTML('BUSCANDO LÍDERES...');
+  if (recommendationGrid) recommendationGrid.innerHTML = getSpinnerHTML('GENERANDO SELECCIÓN...');
+
+  const assetRecGrid = document.getElementById('asset-recommendation-grid');
+  const assetBrowserGrid = document.getElementById('asset-browser-grid');
+  if (assetRecGrid) assetRecGrid.innerHTML = getSpinnerHTML('ANALIZANDO SMART MONEY...');
+  if (assetBrowserGrid) assetBrowserGrid.innerHTML = getSpinnerHTML('EXTRAYENDO ACTIVOS...');
+
   try {
     const res = await fetch('/api/analytics');
     mgmtData = await res.json();
@@ -1243,6 +1274,8 @@ function handleAssetSearch() {
   const source = allAssets.length > 0 ? allAssets : mgmtData.topAssetsByFrequency;
   const matches = source.filter(a => a.name.toLowerCase().includes(query));
 
+  if (assetResults) assetResults.innerHTML = getSpinnerHTML('BUSCANDO EN EL MERCADO...');
+
   renderAssetExplorer(matches);
 }
 
@@ -1254,6 +1287,11 @@ function exploreAsset(name) {
 
 function renderAssetExplorer(matches) {
   const grid = document.getElementById('asset-explorer-results');
+  if (!grid) return;
+  if (matches.length === 0) {
+    grid.innerHTML = '<div style="opacity: 0.5; text-align: center; padding: 2rem;">NO SE ENCONTRARON ACTIVOS</div>';
+    return;
+  }
   grid.innerHTML = matches.map(asset => `
     <div class="explorer-section glass" style="grid-column: 1/-1; margin-bottom: 1rem; padding: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
@@ -1338,6 +1376,11 @@ function processAllFundsAssets() {
 function renderAssetBrowser() {
   const grid = document.getElementById('asset-browser-grid');
   if (!grid) return;
+
+  if (allAssets.length === 0) {
+    grid.innerHTML = getSpinnerHTML('EXTRAYENDO ACTIVOS...');
+    return;
+  }
 
   // Ensure filters exist
   let filterBar = document.getElementById('asset-browser-filters');
@@ -1730,6 +1773,8 @@ async function renderWallet() {
   const list = document.getElementById('wallet-funds-list');
   if (!list) return;
 
+  list.innerHTML = getSpinnerHTML('PREPARANDO CARTERA...');
+
   if (walletFunds.length === 0) {
     list.innerHTML = `
       <div style="opacity: 0.5; text-align: center; padding: 2rem; border: 1px dashed var(--border-ultra); border-radius: 8px;">
@@ -1790,7 +1835,7 @@ function updateWalletTotals() {
 async function calculateWalletXRay() {
   const container = document.getElementById('wallet-xray-chart');
   if (!container) return;
-  container.innerHTML = `<div class="loader-mini" style="margin: 2rem auto;"></div>`;
+  container.innerHTML = getSpinnerHTML('ESCANEO X-RAY...');
 
   if (walletFunds.length === 0) {
     container.innerHTML = `<div style="padding: 1rem; text-align: center; opacity: 0.7; font-size: 0.8rem;">Agregá fondos para ver tu exposición real.</div>`;
