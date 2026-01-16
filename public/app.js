@@ -6,10 +6,10 @@ const riskLevels = {
 };
 
 const assetCategories = {
-  'LIQUIDEZ': { label: 'LIQUIDEZ_CASH', color: '#10b981', icon: '💧' },
-  'RENTA_FIJA': { label: 'RENTA_FIJA_FIXED', color: '#3b82f6', icon: '🏛️' },
-  'RENTA_VARIABLE': { label: 'RENTA_VARIABLE_STOCK', color: '#8b5cf6', icon: '📈' },
-  'OTROS': { label: 'OTROS_OTHER', color: '#64748b', icon: '❓' }
+  'LIQUIDEZ': { label: 'Liquidez', color: '#10b981', icon: '💧' },
+  'RENTA_FIJA': { label: 'Renta Fija', color: '#3b82f6', icon: '🏛️' },
+  'RENTA_VARIABLE': { label: 'Renta Variable', color: '#8b5cf6', icon: '📈' },
+  'OTROS': { label: 'Otros', color: '#64748b', icon: '❓' }
 };
 
 function classifyAsset(name) {
@@ -58,13 +58,13 @@ async function checkSystemStatus() {
 
     if (statusEl) {
       if (status.progressPct >= 100) {
-        statusEl.innerHTML = `● SYSTEM_READY [${status.enrichedFunds}/${status.totalFunds}]`;
+        statusEl.innerHTML = `● SISTEMA LISTO [${status.enrichedFunds}/${status.totalFunds}]`;
         statusEl.style.color = 'var(--primary)';
       } else {
         statusEl.innerHTML = `
           <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
             <span class="loader-mini" style="width: 10px; height: 10px; border-width: 1px;"></span>
-            SYNCING: ${status.enrichedFunds}/${status.totalFunds} (${status.progressPct.toFixed(1)}%)
+            SINCRONIZANDO: ${status.enrichedFunds}/${status.totalFunds} (${status.progressPct.toFixed(1)}%)
           </span>
         `;
         statusEl.style.color = 'var(--accent)';
@@ -76,6 +76,7 @@ async function checkSystemStatus() {
 }
 
 async function loadFunds() {
+  const loader = document.getElementById('global-loader');
   try {
     const response = await fetch('/api/funds');
     const data = await response.json();
@@ -88,18 +89,37 @@ async function loadFunds() {
       throw new Error('API_RESPONSE_NOT_ARRAY');
     }
   } catch (error) {
-    console.error('SYSTEM_ERROR:', error);
-    document.getElementById('count').textContent = 'ERR: FETCH_FAILED';
+    console.error('ERROR DEL SISTEMA:', error);
+    document.getElementById('count').textContent = 'ERR: FALLO_CARGA';
     allFunds = [];
     applyFilters();
+  } finally {
+    // Hide loader with a slight delay for smoothness
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 800);
+    }
   }
 }
 
 function setupEventListeners() {
-  const inputs = ['search', 'estado', 'moneda', 'horizonte', 'tipoRenta', 'riesgo'];
-  inputs.forEach(id => {
-    document.getElementById(id).addEventListener('input', applyFilters);
+  // Filter Pills Logic
+  document.querySelectorAll('.filter-pill[data-value]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // Find parent group
+      const group = e.target.closest('.filter-group');
+      if (!group) return;
+      // Remove active from siblings
+      group.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      // Activate clicked
+      e.target.classList.add('active');
+      // Apply filters
+      applyFilters();
+    });
   });
+
+  document.getElementById('search').addEventListener('input', applyFilters);
 
   document.querySelectorAll('.sortable-header').forEach(header => {
     header.addEventListener('click', () => {
@@ -116,11 +136,17 @@ function setupEventListeners() {
 
 function applyFilters() {
   const search = document.getElementById('search').value.toLowerCase();
-  const estado = document.getElementById('estado').value;
-  const moneda = document.getElementById('moneda').value;
-  const horizonte = document.getElementById('horizonte').value;
-  const tipoRenta = document.getElementById('tipoRenta').value;
-  const riesgo = document.getElementById('riesgo').value;
+
+  // Helper to get active value from a group
+  const getFilterVal = (id) => {
+    const active = document.querySelector(`#filter-${id} .filter-pill.active`);
+    return active ? active.dataset.value : '';
+  };
+
+  const moneda = getFilterVal('moneda');
+  const horizonte = getFilterVal('horizonte');
+  const tipoRenta = getFilterVal('tipoRenta');
+  const riesgo = getFilterVal('riesgo');
 
   filteredFunds = allFunds.filter(fund => {
     const f = fund.fondoPrincipal || {};
@@ -131,7 +157,6 @@ function applyFilters() {
 
     return (
       (search === '' || fund.nombre.toLowerCase().includes(search) || (f.nombre && f.nombre.toLowerCase().includes(search))) &&
-      (estado === '' || f.estado === estado) &&
       (moneda === '' || (fund.monedaId || f.monedaId) === moneda) &&
       (horizonte === '' || f.horizonteViejo === horizonte) &&
       (tipoRenta === '' || String(trId) === String(tipoRenta)) &&
@@ -239,7 +264,13 @@ function toggleSubscribed(id) {
 function toggleSubscribedFilter() {
   showSubscribedOnly = !showSubscribedOnly;
   const btn = document.getElementById('fav-filter-btn');
-  if (btn) btn.classList.toggle('active', showSubscribedOnly);
+  if (btn) {
+    if (showSubscribedOnly) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  }
   applyFilters();
 }
 
@@ -251,7 +282,7 @@ function toggleComparison(id, name) {
     comparisonList.splice(index, 1);
   } else {
     if (comparisonList.length >= 3) {
-      alert('MAX_LIMIT_REACHED: Solo podés comparar hasta 3 fondos a la vez.');
+      alert('LÍMITE ALCANZADO: Solo podés comparar hasta 3 fondos a la vez.');
       return;
     }
     comparisonList.push({ id, name });
@@ -274,7 +305,7 @@ function updateComparisonDrawer() {
   drawer.classList.add('visible');
   drawer.innerHTML = `
     <div style="display: flex; align-items: center; gap: 1rem;">
-      <span style="font-weight: 700; color: var(--accent);">FCI WARS:</span>
+      <span style="font-weight: 700; color: var(--accent);">COMPARADOR:</span>
       ${comparisonList.map(c => `
         <div class="comp-chip" onclick="toggleComparison('${c.id}', '')">
           ${c.name.substring(0, 15)}... <span style="margin-left:5px; opacity:0.5;">✕</span>
@@ -308,7 +339,7 @@ async function openComparisonModal() {
   modal.innerHTML = `
     <div class="glass" style="max-width: 90vw; width: 1000px; height: 80vh; margin: 5vh auto; padding: 2rem; border: 1px solid var(--border-active); display: flex; flex-direction: column; position: relative;">
       <button onclick="document.getElementById('comp-modal').remove()" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">✕</button>
-      <h2 class="section-title">⚔️ FCI WARS: HEAD_TO_HEAD</h2>
+      <h2 class="section-title">⚔️ COMPARADOR: CARA A CARA</h2>
       
       <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
         <div class="loader"></div>
@@ -323,7 +354,7 @@ async function openComparisonModal() {
     // Render Columns
     modal.querySelector('.glass').innerHTML = `
       <button onclick="document.getElementById('comp-modal').remove()" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">✕</button>
-      <h2 class="section-title" style="margin-bottom: 2rem;">⚔️ FCI WARS: HEAD_TO_HEAD</h2>
+      <h2 class="section-title" style="margin-bottom: 2rem;">⚔️ COMPARADOR: CARA A CARA</h2>
       
       <div class="comp-grid" style="display: grid; grid-template-columns: repeat(${details.length}, 1fr); gap: 1rem; overflow-y: auto; height: 100%;">
         ${details.map(fund => {
@@ -356,7 +387,7 @@ async function openComparisonModal() {
                </div>
 
                <div style="margin-top: 2rem;">
-                  <div class="lbl" style="margin-bottom: 0.5rem;">TOP 3 ASSETS</div>
+                  <div class="lbl" style="margin-bottom: 0.5rem;">TOP 3 ACTIVOS</div>
                   ${(fund.composicion || []).slice(0, 3).map(c => `
                     <div style="display: flex; justify-content: space-between; font-size: 0.75rem; border-bottom: 1px dashed var(--border-ultra); padding: 0.3rem 0;">
                       <span>${c.activo.substring(0, 12)}</span>
@@ -379,8 +410,8 @@ async function openComparisonModal() {
 
 function updateUI() {
   const totalPages = Math.ceil(filteredFunds.length / itemsPerPage) || 1;
-  document.getElementById('count').textContent = `${filteredFunds.length} INSTRUMENTS_LOADED`;
-  document.getElementById('page-info').textContent = `PAGE ${String(currentPage).padStart(2, '0')} / ${String(totalPages).padStart(2, '0')}`;
+  document.getElementById('count').textContent = `${filteredFunds.length} FONDOS ENCONTRADOS`;
+  document.getElementById('page-info').textContent = `PÁGINA ${String(currentPage).padStart(2, '0')} / ${String(totalPages).padStart(2, '0')}`;
   document.getElementById('prev-btn').disabled = currentPage === 1;
   document.getElementById('next-btn').disabled = currentPage === totalPages;
 
@@ -410,7 +441,7 @@ async function showSidebar(initialFund) {
   body.innerHTML = `
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; opacity: 0.5;">
       <div class="loader"></div>
-      <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem;">ACCESSING_SECURE_VAULT...</p>
+      <p style="margin-top: 1rem; font-family: var(--font-sans); font-size: 0.8rem;">ACCEDIENDO A BOVEDA SEGURA...</p>
     </div>
   `;
 
@@ -435,9 +466,9 @@ async function showSidebar(initialFund) {
       <h2 style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em;">${fund.nombre}</h2>
     </div>
     <div style="display: flex; gap: 1rem; align-items: center;">
-      <div class="risk-cell risk-${risk.id}" style="font-size: 0.7rem; background: rgba(255,255,255,0.03); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-ultra);">
+      <div class="risk-cell risk-${risk.id}" style="font-size: 0.7rem; background: rgba(0,0,0,0.03); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-ultra);">
         <span class="risk-dot"></span>
-        ${risk.label.toUpperCase()} RISK
+        RIESGO ${risk.label.toUpperCase()}
       </div>
       <div class="mono-cell" style="font-size: 0.7rem; opacity: 0.6;">[UID: ${fund.id}]</div>
     </div>
@@ -464,15 +495,15 @@ async function showSidebar(initialFund) {
 
   const aumHtml = `
     <div class="aum-card">
-      <div class="detail-label">VALORES_ADMINISTRADOS (AUM)</div>
+      <div class="detail-label">PATRIMONIO ADMINISTRADO (AUM)</div>
       <div class="aum-value">${formattedAum}</div>
-      <div style="font-size: 0.6rem; opacity: 0.4; margin-top: 0.5rem; font-family: var(--font-mono);">SYNC_DATE: ${fund.fechaDatos || 'N/A'}</div>
+      <div style="font-size: 0.6rem; opacity: 0.4; margin-top: 0.5rem; font-family: var(--font-sans);">ACTUALIZADO: ${fund.fechaDatos || 'N/A'}</div>
     </div>
   `;
 
   const objectiveHtml = `
     <div class="detail-section">
-      <span class="detail-label">ESTRATEGIA_Y_OBJETIVO</span>
+      <span class="detail-label">ESTRATEGIA Y OBJETIVO</span>
       <div class="objective-box" style="font-size: 0.95rem; line-height: 1.5; border-left: 2px solid var(--primary);">
         ${f.objetivo || 'Sin descripción disponible del gestor.'}
       </div>
@@ -481,7 +512,7 @@ async function showSidebar(initialFund) {
 
   const perfHtml = `
     <div class="detail-section">
-      <span class="detail-label">RENDIMIENTO_HISTORICO</span>
+      <span class="detail-label">RENDIMIENTO HISTÓRICO</span>
       <div class="performance-grid">
         ${(fund.rendimientos && fund.rendimientos.length > 0) ? fund.rendimientos.map(r => `
           <div class="perf-item" data-tooltip="${perfTooltips[r.periodo.toLowerCase()] || ''}">
@@ -489,7 +520,7 @@ async function showSidebar(initialFund) {
             <span class="perf-value ${parseFloat(r.rendimiento) >= 0 ? 'pos' : 'neg'}">${r.rendimiento}</span>
             ${r.tna ? `<span class="perf-tna">TNA: ${r.tna}%</span>` : ''}
           </div>
-        `).join('') : '<div style="grid-column: 1/-1; opacity: 0.5; font-size: 0.8rem; text-align: center; padding: 1rem; border: 1px dashed var(--border-ultra);">SIN_DATOS_DE_RENDIMIENTO</div>'}
+        `).join('') : '<div style="grid-column: 1/-1; opacity: 0.5; font-size: 0.8rem; text-align: center; padding: 1rem; border: 1px dashed var(--border-ultra);">SIN DATOS DE RENDIMIENTO</div>'}
       </div>
     </div>
   `;
@@ -498,7 +529,7 @@ async function showSidebar(initialFund) {
   const tmHtml = `
     <div class="detail-section" style="background: rgba(var(--primary-rgb), 0.05); border: 1px solid rgba(var(--primary-rgb), 0.2); padding: 1rem; border-radius: 8px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <span class="detail-label" style="margin: 0; color: var(--primary);">⏳ TIME_MACHINE_SIMULATOR</span>
+        <span class="detail-label" style="margin: 0; color: var(--primary);">⏳ MÁQUINA DEL TIEMPO</span>
         <span class="info-tooltip" data-tooltip="Simula cuánto valdría tu inversión hoy si hubieras invertido en el pasado.">ⓘ</span>
       </div>
       
@@ -594,13 +625,13 @@ async function showSidebar(initialFund) {
   const logisticsHtml = `
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
       <div class="detail-section" style="margin-bottom: 0;">
-        <span class="detail-label">SETTLEMENT (PAGOS)</span>
-        <div class="detail-value" style="color: var(--accent); font-family: var(--font-mono);">
+        <span class="detail-label">LIQUIDACIÓN (PAGOS)</span>
+        <div class="detail-value" style="color: var(--accent); font-family: var(--font-sans);">
           ${f.diasLiquidacion ? 'T+' + f.diasLiquidacion : 'S/D'} ${f.diasLiquidacion == '0' ? '(INMEDIATO)' : 'HS'}
         </div>
       </div>
       <div class="detail-section" style="margin-bottom: 0;">
-        <span class="detail-label">MIN_ALLOCATION</span>
+        <span class="detail-label">INVERSIÓN MÍNIMA</span>
         <div class="detail-value">${currencySymbol} ${Number(fund.inversionMinima || 0).toLocaleString('es-AR')}</div>
       </div>
     </div>
@@ -634,7 +665,7 @@ async function showSidebar(initialFund) {
     
     <div style="margin-top: 2rem; display: flex; justify-content: center;">
       <button onclick="downloadFundPDF(window.currentFundForPDF)" class="nav-btn" style="width: 100%; justify-content: center; padding: 1rem; border-radius: 12px; font-weight: 700;">
-        📥 DESCARGAR_REPORTE_PDF
+        📥 DESCARGAR REPORTE PDF
       </button>
     </div>
   `;
