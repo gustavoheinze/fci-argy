@@ -140,3 +140,24 @@ dist
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Local databases and data dumps
+*.json
+!package.json
+!package-lock.json
+!vercel.json
+!fly.toml
+!sync_status.json
+!public/*.json
+!api/*.json
+!.gemini/*.json
+
+# Logs and logs directory
+enrichment_*.log
+*.log
+
+# SQLite databases
+database.sqlite
+database.sqlite-shm
+database.sqlite-wal
+*.sqlite

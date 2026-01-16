@@ -1,0 +1,495 @@
+{
+  "master": {
+    "clasificacionVieja": "Renta Fija",
+    "regionVieja": "Argentina",
+    "horizonteViejo": "Corto Plazo",
+    "tipoEscision": "No aplicable",
+    "id": "1",
+    "createdAt": "2017-07-07T22:09:18.000Z",
+    "updatedAt": "2021-01-13T16:00:07.000Z",
+    "nombre": "Alianza de Capitales",
+    "codigoCNV": "52",
+    "objetivo": "El objetivo es superar el rendimiento de la tasa BADLAR",
+    "resolucionParticular": "<Faltante>",
+    "fechaResolucionParticular": "1990-01-01T00:00:00.000Z",
+    "fechaInscripcionRPC": "1990-01-01T00:00:00.000Z",
+    "estado": "1",
+    "etapaLiquidacion": null,
+    "tipoRentaId": "3",
+    "monedaId": "1",
+    "regionId": "1",
+    "durationId": "3",
+    "benchmarkId": "9",
+    "mmIndice": false,
+    "mmPuro": false,
+    "valuacion": "M",
+    "ci49": false,
+    "diasLiquidacion": "3",
+    "indice": false,
+    "horizonteId": "1",
+    "sociedadGerenteId": "11",
+    "sociedadDepositariaId": "65",
+    "inicio": "1992-06-22T00:00:00.000Z",
+    "tipoFondoId": "1",
+    "tipoDinero": "No Aplica",
+    "tipoRentaMixtaId": null,
+    "excentoTasa": false,
+    "d569": false,
+    "d569FondoId": null,
+    "calificado": false,
+    "fechaCierreBalances": "1900-12-30T04:16:48.000Z",
+    "depositaria": {
+      "id": "65",
+      "createdAt": "2017-07-07T21:59:22.000Z",
+      "updatedAt": "2021-06-29T15:03:43.000Z",
+      "calle": "Sarmiento",
+      "numero": 310,
+      "piso": "1   ",
+      "depto": "1   ",
+      "codigoPostal": "1041",
+      "localidad": "Buenos Aires",
+      "provincia": "Ciudad Autónoma de Buenos Aires",
+      "miembro": false,
+      "miembroDesde": null,
+      "causaBaja": null,
+      "razonSocial": "aaa",
+      "cuit": "30-57612427-5",
+      "presidente": "No Registra",
+      "justiciaFecha": null,
+      "justiciaLegal": null,
+      "nombre": "Banco de Valores S.A.",
+      "nombreCorto": "Banco de Valores S.A.",
+      "urlCNV": null,
+      "codigoCafciCalificadora": null,
+      "codigoCNV": null,
+      "paisId": "2",
+      "actividadId": "2",
+      "ivaEntidadId": "2",
+      "cierreEjercicioEntidadId": "2",
+      "fusionId": null
+    },
+    "gerente": {
+      "id": "11",
+      "createdAt": "2017-07-07T21:59:22.000Z",
+      "updatedAt": "2019-04-04T21:51:33.000Z",
+      "calle": "25 De Mayo",
+      "numero": 347,
+      "piso": "1er. Subsuelo",
+      "depto": "1704",
+      "codigoPostal": "C1002ABG",
+      "localidad": "Buenos Aires",
+      "provincia": "Ciudad Autónoma de Buenos Aires",
+      "miembro": true,
+      "miembroDesde": "2000-01-01T00:00:00.000Z",
+      "causaBaja": ". ",
+      "razonSocial": "Administradora de Titulos y Valores S.A.S.G.F.C.I",
+      "cuit": "30649280726",
+      "presidente": "Alejandro M. Chapto",
+      "justiciaFecha": "1988-04-29T00:00:00.000Z",
+      "justiciaLegal": "Pre. Vice. o 2 Dir.",
+      "nombre": "Administradora de Titulos Valores S.G.F.C.I.S.A.",
+      "nombreCorto": "Administradora  Tit. V.",
+      "urlCNV": "http://www.cnv.gov.ar/InfoFinan/fondos/InfoFondos.asp?Lang=0&CodiSoc=70045&DescriSoc=Administradora%20de%20Titulos%20y%20Valores%20S.A.&Letra=A",
+      "codigoCafciCalificadora": null,
+      "codigoCNV": "11",
+      "paisId": "2",
+      "actividadId": "13",
+      "ivaEntidadId": "2",
+      "cierreEjercicioEntidadId": "4",
+      "fusionId": null
+    },
+    "tipoRenta": {
+      "id": "3",
+      "createdAt": "1990-01-01T00:00:00.000Z",
+      "updatedAt": "1990-01-01T00:00:00.000Z",
+      "nombre": "Renta Fija",
+      "codigoCafci": "RF",
+      "orden": "B  ",
+      "parametroPorcentual": 5
+    },
+    "region": {
+      "id": "1",
+      "createdAt": "2017-07-07T22:09:10.000Z",
+      "updatedAt": "2017-07-07T22:09:10.000Z",
+      "nombre": "Argentina",
+      "codigoCafci": "ARG",
+      "orden": "B  "
+    },
+    "benchmark": {
+      "id": "9",
+      "createdAt": "2017-07-07T22:09:10.000Z",
+      "updatedAt": "2017-07-07T22:09:10.000Z",
+      "nombre": "Badlar",
+      "codigoCafci": "BADL",
+      "orden": "I  "
+    },
+    "horizonte": {
+      "id": "1",
+      "createdAt": "2017-07-07T22:09:10.000Z",
+      "updatedAt": "2017-07-07T22:09:10.000Z",
+      "nombre": "Corto Plazo",
+      "codigoCNV": "COR"
+    },
+    "duration": {
+      "id": "3",
+      "createdAt": "2017-07-07T22:09:10.000Z",
+      "updatedAt": "2017-07-07T22:09:10.000Z",
+      "nombre": "Menor o Igual a 1 Año",
+      "codigoCafci": "DmI1",
+      "orden": "B  "
+    },
+    "tipoFondo": {
+      "id": "1",
+      "createdAt": "2017-07-07T22:09:09.000Z",
+      "updatedAt": "2017-07-07T22:09:09.000Z",
+      "nombre": "Abierto"
+    },
+    "clase_fondos": [
+      {
+        "id": "1",
+        "createdAt": "2017-07-07T22:09:24.000Z",
+        "updatedAt": "2017-07-07T22:09:24.000Z",
+        "nombre": "Alianza de Capitales",
+        "inversionMinima": "1",
+        "honorarioIngreso": 0,
+        "honorarioRescate": 0,
+        "honorarioTransferencia": 0,
+        "honorarioAdministracionGerente": 2,
+        "honorarioAdministracionDepositaria": 0.4,
+        "gastoOrdinarioGestion": 0,
+        "honorarioExito": false,
+        "monedaId": "1",
+        "rg384": false,
+        "liquidez": true,
+        "suscripcion": true,
+        "reexpresa": false,
+        "nulo": false,
+        "tipoClaseId": "1",
+        "fondoId": "1",
+        "tickerBloomberg": "ALIACAP   ",
+        "tickerISIN": null,
+        "tickerFIGI": null,
+        "repatriacion": null,
+        "L27743": false,
+        "recibeSuscripcion": false
+      }
+    ]
+  },
+  "detail": {
+    "model": {
+      "id": "1",
+      "createdAt": "2017-07-07T22:09:24.000Z",
+      "updatedAt": "2017-07-07T22:09:24.000Z",
+      "nombre": "Alianza de Capitales",
+      "inversionMinima": "1",
+      "honorarioIngreso": 0,
+      "honorarioRescate": 0,
+      "honorarioTransferencia": 0,
+      "honorarioAdministracionGerente": 2,
+      "honorarioAdministracionDepositaria": 0.4,
+      "gastoOrdinarioGestion": 0,
+      "honorarioExito": false,
+      "monedaId": "1",
+      "rg384": false,
+      "liquidez": true,
+      "suscripcion": true,
+      "reexpresa": false,
+      "nulo": false,
+      "tipoClaseId": "1",
+      "fondoId": "1",
+      "tickerBloomberg": "ALIACAP   ",
+      "tickerISIN": null,
+      "tickerFIGI": null,
+      "repatriacion": null,
+      "L27743": false,
+      "recibeSuscripcion": false,
+      "fondo": {
+        "clasificacionVieja": "Renta Fija",
+        "regionVieja": "Argentina",
+        "horizonteViejo": "Corto Plazo",
+        "tipoEscision": "No aplicable",
+        "id": "1",
+        "createdAt": "2017-07-07T22:09:18.000Z",
+        "updatedAt": "2021-01-13T16:00:07.000Z",
+        "nombre": "Alianza de Capitales",
+        "codigoCNV": "52",
+        "objetivo": "El objetivo es superar el rendimiento de la tasa BADLAR",
+        "resolucionParticular": "<Faltante>",
+        "fechaResolucionParticular": "1990-01-01T00:00:00.000Z",
+        "fechaInscripcionRPC": "1990-01-01T00:00:00.000Z",
+        "estado": "1",
+        "etapaLiquidacion": null,
+        "tipoRentaId": "3",
+        "monedaId": "1",
+        "regionId": "1",
+        "durationId": "3",
+        "benchmarkId": "9",
+        "mmIndice": false,
+        "mmPuro": false,
+        "valuacion": "M",
+        "ci49": false,
+        "diasLiquidacion": "3",
+        "indice": false,
+        "horizonteId": "1",
+        "sociedadGerenteId": "11",
+        "sociedadDepositariaId": "65",
+        "inicio": "1992-06-22T00:00:00.000Z",
+        "tipoFondoId": "1",
+        "tipoDinero": "No Aplica",
+        "tipoRentaMixtaId": null,
+        "excentoTasa": false,
+        "d569": false,
+        "d569FondoId": null,
+        "calificado": false,
+        "fechaCierreBalances": "1900-12-30T04:16:48.000Z",
+        "horizonte": {
+          "id": "1",
+          "createdAt": "2017-07-07T22:09:10.000Z",
+          "updatedAt": "2017-07-07T22:09:10.000Z",
+          "nombre": "Corto Plazo",
+          "codigoCNV": "COR"
+        },
+        "tipoFondo": {
+          "id": "1",
+          "createdAt": "2017-07-07T22:09:09.000Z",
+          "updatedAt": "2017-07-07T22:09:09.000Z",
+          "nombre": "Abierto"
+        },
+        "moneda": {
+          "id": "1",
+          "createdAt": "2017-07-07T22:00:53.000Z",
+          "updatedAt": "2017-07-07T22:00:53.000Z",
+          "nombre": "Peso Argentina",
+          "codigoCafci": "ARS",
+          "idCNV": "1"
+        },
+        "duration": {
+          "id": "3",
+          "createdAt": "2017-07-07T22:09:10.000Z",
+          "updatedAt": "2017-07-07T22:09:10.000Z",
+          "nombre": "Menor o Igual a 1 Año",
+          "codigoCafci": "DmI1",
+          "orden": "B  "
+        },
+        "tipoRenta": {
+          "id": "3",
+          "createdAt": "1990-01-01T00:00:00.000Z",
+          "updatedAt": "1990-01-01T00:00:00.000Z",
+          "nombre": "Renta Fija",
+          "codigoCafci": "RF",
+          "orden": "B  ",
+          "parametroPorcentual": 5
+        },
+        "tipoRentaMixta": null,
+        "region": {
+          "id": "1",
+          "createdAt": "2017-07-07T22:09:10.000Z",
+          "updatedAt": "2017-07-07T22:09:10.000Z",
+          "nombre": "Argentina",
+          "codigoCafci": "ARG",
+          "orden": "B  "
+        },
+        "benchmark": {
+          "id": "9",
+          "createdAt": "2017-07-07T22:09:10.000Z",
+          "updatedAt": "2017-07-07T22:09:10.000Z",
+          "nombre": "Badlar",
+          "codigoCafci": "BADL",
+          "orden": "I  "
+        },
+        "depositaria": {
+          "id": "65",
+          "createdAt": "2017-07-07T21:59:22.000Z",
+          "updatedAt": "2021-06-29T15:03:43.000Z",
+          "calle": "Sarmiento",
+          "numero": 310,
+          "piso": "1   ",
+          "depto": "1   ",
+          "codigoPostal": "1041",
+          "localidad": "Buenos Aires",
+          "provincia": "Ciudad Autónoma de Buenos Aires",
+          "miembro": false,
+          "miembroDesde": null,
+          "causaBaja": null,
+          "razonSocial": "aaa",
+          "cuit": "30-57612427-5",
+          "presidente": "No Registra",
+          "justiciaFecha": null,
+          "justiciaLegal": null,
+          "nombre": "Banco de Valores S.A.",
+          "nombreCorto": "Banco de Valores S.A.",
+          "urlCNV": null,
+          "codigoCafciCalificadora": null,
+          "codigoCNV": null,
+          "paisId": "2",
+          "actividadId": "2",
+          "ivaEntidadId": "2",
+          "cierreEjercicioEntidadId": "2",
+          "fusionId": null
+        },
+        "gerente": {
+          "id": "11",
+          "createdAt": "2017-07-07T21:59:22.000Z",
+          "updatedAt": "2019-04-04T21:51:33.000Z",
+          "calle": "25 De Mayo",
+          "numero": 347,
+          "piso": "1er. Subsuelo",
+          "depto": "1704",
+          "codigoPostal": "C1002ABG",
+          "localidad": "Buenos Aires",
+          "provincia": "Ciudad Autónoma de Buenos Aires",
+          "miembro": true,
+          "miembroDesde": "2000-01-01T00:00:00.000Z",
+          "causaBaja": ". ",
+          "razonSocial": "Administradora de Titulos y Valores S.A.S.G.F.C.I",
+          "cuit": "30649280726",
+          "presidente": "Alejandro M. Chapto",
+          "justiciaFecha": "1988-04-29T00:00:00.000Z",
+          "justiciaLegal": "Pre. Vice. o 2 Dir.",
+          "nombre": "Administradora de Titulos Valores S.G.F.C.I.S.A.",
+          "nombreCorto": "Administradora  Tit. V.",
+          "urlCNV": "http://www.cnv.gov.ar/InfoFinan/fondos/InfoFondos.asp?Lang=0&CodiSoc=70045&DescriSoc=Administradora%20de%20Titulos%20y%20Valores%20S.A.&Letra=A",
+          "codigoCafciCalificadora": null,
+          "codigoCNV": "11",
+          "paisId": "2",
+          "actividadId": "13",
+          "ivaEntidadId": "2",
+          "cierreEjercicioEntidadId": "4",
+          "fusionId": null
+        }
+      }
+    },
+    "info": {
+      "diaria": {
+        "actual": {
+          "fecha": "13/01/2026",
+          "patrimonio": "589064111.83",
+          "vcpUnitario": "199.973287",
+          "vcp": "199973.2870",
+          "patrimonioNetoFondo": "589064111.83"
+        },
+        "referenceDay": "13/01/2026",
+        "rendimientos": {
+          "day": {
+            "fecha": "12/01/2026",
+            "rendimiento": "0.0646",
+            "tna": "23.5693"
+          },
+          "month": {
+            "fecha": "30/12/2025",
+            "rendimiento": "0.0014",
+            "tna": "0.0366"
+          },
+          "oneYear": {
+            "fecha": "13/01/2025",
+            "rendimiento": "34.5514",
+            "tna": "34.5514"
+          },
+          "threeYears": {
+            "fecha": "13/01/2023",
+            "rendimiento": "527.2916",
+            "tna": "175.6035"
+          },
+          "fiveYears": {
+            "fecha": "13/01/2021",
+            "rendimiento": "1337.6238",
+            "tna": "267.3783"
+          },
+          "year": {
+            "fecha": "30/12/2025",
+            "rendimiento": "0.0014",
+            "tna": "0.0366"
+          },
+          "yearM1": {
+            "fecha": "30/12/2024",
+            "rendimiento": "36.4103",
+            "tna": "35.0654"
+          },
+          "yearM2": {
+            "fecha": "29/12/2023",
+            "rendimiento": "168.6766",
+            "tna": ""
+          },
+          "yearM3": {
+            "fecha": "30/12/2022",
+            "rendimiento": "551.6766",
+            "tna": "181.4072"
+          },
+          "yearM4": {
+            "fecha": "30/12/2021",
+            "rendimiento": "922.4325",
+            "tna": "228.2630"
+          },
+          "monthYear": {
+            "fecha": "30/12/2024",
+            "rendimiento": "36.4103",
+            "tna": "35.0654"
+          }
+        }
+      },
+      "mensual": {
+        "honorariosComisiones": {
+          "minimoInversion": 1,
+          "honorariosAdministracionGerente": "3.0000",
+          "honorariosAdministracionDepositaria": "0.4000",
+          "honorariosExito": "N",
+          "gastosGestion": "0.0000",
+          "comisionIngreso": "0.0000",
+          "comisionRescate": "0.0000",
+          "comisionTransferencia": "0.0000"
+        },
+        "calificacion": {
+          "calificadora": "Evaluadora Latinoamericana S.A",
+          "nota": "AA-",
+          "fecha": "23/12/2008"
+        }
+      },
+      "semanal": {
+        "interfazId": "2560737",
+        "fechaDatos": "26/12/2025",
+        "carteras": [
+          {
+            "nombreActivo": "YPF - D",
+            "share": "14.540"
+          },
+          {
+            "nombreActivo": "Bonos Rep Argentina 2030",
+            "share": "28.941"
+          },
+          {
+            "nombreActivo": "Bono Boncer TZX26",
+            "share": "19.670"
+          },
+          {
+            "nombreActivo": "FF AMFAyS S46 Clase B",
+            "share": "1.624"
+          },
+          {
+            "nombreActivo": "FF AMFAyS S47 Clase B",
+            "share": "1.671"
+          },
+          {
+            "nombreActivo": "FF AMFAyS S48 Clase B",
+            "share": "0.726"
+          },
+          {
+            "nombreActivo": "Lecap S27F6",
+            "share": "23.488"
+          },
+          {
+            "nombreActivo": "Opcion YPFC61000DI",
+            "share": "-0.000"
+          },
+          {
+            "nombreActivo": "Caucion Colocadora $ Merval",
+            "share": "9.228"
+          },
+          {
+            "nombreActivo": "Cta Cte $ Citibank",
+            "share": "0.113"
+          }
+        ]
+      }
+    }
+  }
+}

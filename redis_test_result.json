@@ -1,0 +1,331 @@
+{
+  "type": "object",
+  "isArray": true,
+  "length": 3902,
+  "keys": "N/A",
+  "firstItem": {
+    "L27743": false,
+    "suscripcion": true,
+    "fechaDatos": "26/12/2025",
+    "monedaId": "1",
+    "recibeSuscripcion": false,
+    "tickerFIGI": null,
+    "tickerISIN": null,
+    "updatedAt": "2018-06-13T15:00:58.000Z",
+    "honorarioTransferencia": 0,
+    "composicion": [
+      {
+        "activo": "BBVA Argentina",
+        "porcentaje": "6.574"
+      },
+      {
+        "activo": "Banco Macro Bansud - B",
+        "porcentaje": "8.267"
+      },
+      {
+        "activo": "Central Puerto",
+        "porcentaje": "7.655"
+      },
+      {
+        "porcentaje": "1.964",
+        "activo": "Cresud"
+      },
+      {
+        "activo": "Edenor",
+        "porcentaje": "0.414"
+      },
+      {
+        "activo": "Agrometal",
+        "porcentaje": "0.037"
+      },
+      {
+        "activo": "Capex",
+        "porcentaje": "1.250"
+      },
+      {
+        "activo": "Dist Gas Cuyana - B",
+        "porcentaje": "0.010"
+      },
+      {
+        "activo": "BYMA",
+        "porcentaje": "6.143"
+      },
+      {
+        "activo": "Cablevision Holding CL. B",
+        "porcentaje": "0.177"
+      },
+      {
+        "activo": "Banco Rio - B",
+        "porcentaje": "0.001"
+      },
+      {
+        "activo": "Warrant Cresud",
+        "porcentaje": "0.160"
+      },
+      {
+        "activo": "Aluar",
+        "porcentaje": "0.787"
+      },
+      {
+        "activo": "Ecogas",
+        "porcentaje": "0.485"
+      },
+      {
+        "activo": "Cedear Globant",
+        "porcentaje": "0.523"
+      },
+      {
+        "activo": "Cedear Globant",
+        "porcentaje": "0.871"
+      },
+      {
+        "activo": "Cedear Globant",
+        "porcentaje": "0.218"
+      },
+      {
+        "activo": "Cedear Globant",
+        "porcentaje": "0.087"
+      },
+      {
+        "activo": "Cedear Globant",
+        "porcentaje": "0.436"
+      },
+      {
+        "activo": "Cedear Globant",
+        "porcentaje": "0.697"
+      },
+      {
+        "activo": "Cedear Globant",
+        "porcentaje": "0.436"
+      },
+      {
+        "activo": "Cedear Lithium Americas Corp.",
+        "porcentaje": "0.120"
+      },
+      {
+        "activo": "Cedear Lithium Americas Corp.",
+        "porcentaje": "0.364"
+      },
+      {
+        "activo": "Cedear Lithium Americas Corp.",
+        "porcentaje": "0.388"
+      },
+      {
+        "activo": "Cedear Lithium Americas Corp.",
+        "porcentaje": "0.143"
+      },
+      {
+        "porcentaje": "0.444",
+        "activo": "Cedear Lithium Americas Corp."
+      },
+      {
+        "activo": "Cedear Lithium Americas (Argentina) Corp",
+        "porcentaje": "0.880"
+      },
+      {
+        "activo": "Cedear Lithium Americas (Argentina) Corp",
+        "porcentaje": "0.660"
+      },
+      {
+        "activo": "Grupo Fciero Galicia - B",
+        "porcentaje": "13.996"
+      },
+      {
+        "activo": "Irsa",
+        "porcentaje": "0.376"
+      },
+      {
+        "activo": "Metrogas",
+        "porcentaje": "0.242"
+      },
+      {
+        "activo": "Pampa Energia",
+        "porcentaje": "10.655"
+      },
+      {
+        "activo": "Ternium - A",
+        "porcentaje": "3.418"
+      },
+      {
+        "activo": "Telecom Argentina - B",
+        "porcentaje": "1.261"
+      },
+      {
+        "activo": "Transener - B",
+        "porcentaje": "1.777"
+      },
+      {
+        "porcentaje": "3.490",
+        "activo": "Transp Gas del Sur - B"
+      },
+      {
+        "activo": "YPF - D",
+        "porcentaje": "11.382"
+      },
+      {
+        "activo": "Comercial del Plata",
+        "porcentaje": "0.726"
+      },
+      {
+        "activo": "San Miguel",
+        "porcentaje": "0.027"
+      },
+      {
+        "activo": "Grupo Supervielle CB",
+        "porcentaje": "2.693"
+      },
+      {
+        "activo": "Havanna Holding",
+        "porcentaje": "0.070"
+      },
+      {
+        "activo": "Transp Gas del Norte C",
+        "porcentaje": "0.799"
+      },
+      {
+        "activo": "Grupo Concesionario Del O",
+        "porcentaje": "0.081"
+      },
+      {
+        "activo": "Loma Negra",
+        "porcentaje": "5.032"
+      },
+      {
+        "activo": "FCI Pionero Pesos - Clase A",
+        "porcentaje": "2.280"
+      },
+      {
+        "activo": "FCI Premier Renta CP $ CC",
+        "porcentaje": "0.001"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD38",
+        "porcentaje": "0.502"
+      },
+      {
+        "activo": "Bonos Rep Argentina GD30",
+        "porcentaje": "0.036"
+      },
+      {
+        "activo": "Cta Cte $ Bco Galicia",
+        "porcentaje": "0.016"
+      },
+      {
+        "activo": "Cta Cte U$S Bco Galicia",
+        "porcentaje": "0.832"
+      },
+      {
+        "activo": "Cta Cte U$S Bank Amer NY",
+        "porcentaje": "0.119"
+      },
+      {
+        "porcentaje": "0.701",
+        "activo": "Fut Reg ARS"
+      },
+      {
+        "activo": "Fut Rofex RFX122025",
+        "porcentaje": "-0.701"
+      }
+    ],
+    "gastoOrdinarioGestion": 0,
+    "honorarioRescate": 0,
+    "patrimonio": "37549004068.62",
+    "tipoClaseId": "3",
+    "liquidez": true,
+    "tickerBloomberg": "FIMAPBA   ",
+    "id": "22",
+    "fondoPrincipal": {
+      "updatedAt": "2026-01-14T14:27:04.249Z",
+      "codigoCNV": "105",
+      "id": "22",
+      "nombre": "Fima PB Acciones",
+      "tipoRenta": {
+        "codigoCafci": "RV",
+        "createdAt": "1990-01-01T00:00:00.000Z",
+        "id": "2",
+        "nombre": "Renta Variable",
+        "orden": "A  ",
+        "parametroPorcentual": 5,
+        "updatedAt": "1990-01-01T00:00:00.000Z"
+      },
+      "depositaria": {
+        "codigoCNV": "21",
+        "createdAt": "2017-07-07T21:59:22.000Z",
+        "id": "81",
+        "ivaEntidadId": "1",
+        "provincia": "Ciudad Autónoma de Buenos Aires",
+        "fusionId": null,
+        "justiciaFecha": null,
+        "actividadId": "2",
+        "calle": "Perón",
+        "codigoPostal": "1038",
+        "cuit": "\u0000          ",
+        "localidad": "Buenos Aires",
+        "miembroDesde": null,
+        "nombre": "Banco de Galicia y Buenos Aires S.A.",
+        "nombreCorto": "Banco de Galicia y Buenos Aires S.A.",
+        "paisId": "2",
+        "presidente": "No Registra",
+        "razonSocial": "\u0000",
+        "updatedAt": "2020-06-24T21:12:02.000Z",
+        "urlCNV": null,
+        "causaBaja": " .",
+        "cierreEjercicioEntidadId": "1",
+        "codigoCafciCalificadora": null,
+        "depto": "1   ",
+        "justiciaLegal": null,
+        "miembro": false,
+        "numero": 407,
+        "piso": "PB  "
+      },
+      "diasLiquidacion": "1",
+      "estado": "1",
+      "gerente": {
+        "ivaEntidadId": "3",
+        "miembro": true,
+        "miembroDesde": "1964-04-03T00:00:00.000Z",
+        "nombre": "Galicia Asset Management S.A.U.",
+        "calle": "Pte. Perón",
+        "causaBaja": null,
+        "cierreEjercicioEntidadId": "9",
+        "justiciaLegal": null,
+        "localidad": "Buenos Aires",
+        "nombreCorto": "Galicia AM",
+        "numero": 430,
+        "paisId": "2",
+        "actividadId": "13",
+        "razonSocial": "Galicia Asset Management S.A.U.",
+        "updatedAt": "2025-11-26T21:54:02.000Z",
+        "urlCNV": "http://www.cnv.gov.ar/InfoFinan/fondos/InfoFondos.asp?Lang=0&CodiSoc=70058&DescriSoc=Galicia%20Adm.%20de%20Fondos%20S.A.&Letra=",
+        "codigoPostal": "C1038AAJ",
+        "createdAt": "2017-07-07T21:59:22.000Z",
+        "cuit": "30517342064",
+        "fusionId": null,
+        "justiciaFecha": null,
+        "piso": "22  ",
+        "presidente": "Ezequiel Rosales",
+        "provincia": "Ciudad Autónoma de Buenos Aires",
+        "codigoCNV": "944",
+        "codigoCafciCalificadora": null,
+        "depto": ".   ",
+        "id": "2"
+      },
+      "monedaId": "1",
+      "objetivo": "El objetivo del fondo es la apreciación del capital a largo plazo, invirtiendo en compañías integrantes del panel Merval."
+    },
+    "nulo": false,
+    "rendimientos": {},
+    "rg384": false,
+    "fondoId": "22",
+    "honorarioExito": false,
+    "honorarioIngreso": 0,
+    "nombre": "Fima PB Acciones - Clase A",
+    "createdAt": "2017-07-07T22:09:24.000Z",
+    "honorarioAdministracionDepositaria": 2,
+    "honorarioAdministracionGerente": 1,
+    "lastSync": "2026-01-14T14:27:04.249Z",
+    "repatriacion": null,
+    "inversionMinima": "100",
+    "reexpresa": false
+  }
+}

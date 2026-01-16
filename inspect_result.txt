@@ -1,0 +1,4 @@
+{
+  "nombreActivo": "Lecap T30E6",
+  "share": "8.175"
+}
