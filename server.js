@@ -1,6 +1,12 @@
-require('dotenv').config({ path: '.env.local' });
-const express = require('express');
+const fs = require('fs');
 const path = require('path');
+// Load environment variables. .env.local for local dev, system env for Vercel.
+if (fs.existsSync('.env.local')) {
+  require('dotenv').config({ path: '.env.local' });
+} else {
+  require('dotenv').config();
+}
+const express = require('express');
 const { getAllFondos, getFondos, getAllFondoIds, getFondo, deleteFondo, saveFondo } = require('./lib/sqlite');
 
 const app = express();
