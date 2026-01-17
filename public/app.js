@@ -254,8 +254,10 @@ function renderFunds() {
     const row = document.createElement('div');
     const isSubscribed = subscribedFunds.includes(fund.id);
     row.className = 'grid-row';
-    const minStr = new Intl.NumberFormat('es-AR', { style: 'currency', currency: fund.moneda, maximumFractionDigits: 0 }).format(fund.minimo);
-    row.setAttribute('data-compact-info', `${fund.moneda} • Min: ${minStr}`);
+    const currencyCode = getMonedaShort(fund.monedaId || (fund.fondoPrincipal ? fund.fondoPrincipal.monedaId : null));
+    const validCurrency = ['ARS', 'USD', 'EUR'].includes(currencyCode) ? currencyCode : 'ARS';
+    const minStr = new Intl.NumberFormat('es-AR', { style: 'currency', currency: validCurrency, maximumFractionDigits: 0 }).format(fund.inversionMinima || 0);
+    row.setAttribute('data-compact-info', `${validCurrency} • Min: ${minStr}`);
 
     row.innerHTML = `
       <div class="mono-cell" data-label="ACCIONES" style="display: flex; align-items: center; gap: 0.5rem;">
