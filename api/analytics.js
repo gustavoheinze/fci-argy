@@ -1,11 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const { getAllFondos } = require('../lib/sqlite');
 
 function classifyAsset(name) {
-    const n = name.toUpperCase();
-    if (n.includes('PZO FI') || n.includes('CTA CTE') || n.includes('AHO') || n.includes('CAU') || n.includes('EFEC')) return 'LIQUIDEZ';
-    if (n.includes('BONO') || n.includes('LETRA') || n.includes('ON ') || n.includes('TIT') || n.includes('TZ')) return 'RENTA_FIJA';
-    if (n.includes('ACC') || n.includes('CED') || n.includes('YPF') || n.includes('PAMPA')) return 'RENTA_VARIABLE';
+    const n = String(name || '').toUpperCase();
+    if (n.includes('PZO FI') || n.includes('CTA CTE') || n.includes('CAJA DE AHORRO') || n.includes('CAUCION') || n.includes('EFECTIVO') || n.includes('AHO')) return 'LIQUIDEZ';
+    if (n.includes('BONO') || n.includes('LETRA') || n.includes('LECAP') || n.includes('LEZER') || n.includes('ON ') || n.includes('TITULO') || n.includes('TZ') || n.includes('T2') || n.includes('T3')) return 'RENTA_FIJA';
+    if (n.includes('ACCION') || n.includes('CEDEAR') || n.includes('GRUPO') || n.includes('PAMPA') || n.includes('YPF') || n.includes('VALE') || n.includes('ALUAR')) return 'RENTA_VARIABLE';
     return 'OTROS';
 }
 
@@ -20,24 +19,9 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const enrichedPath = path.join(process.cwd(), 'fci_enriched.json');
-
-        if (!fs.existsSync(enrichedPath)) {
-            return res.status(404).json({ error: 'Enriched data not found' });
-        }
-
-        const data = fs.readFileSync(enrichedPath, 'utf8');
-        const jsonData = JSON.parse(data);
-        const funds = [];
-
-        // Flatten use the same logic as /api/funds to get the classes
-        jsonData.data.forEach(fondo => {
-            if (fondo.clase_fondos) {
-                fondo.clase_fondos.forEach(clase => {
-                    funds.push({ ...clase, fondoPrincipal: fondo });
-                });
-            }
-        });
+        console.log('📡 [API/analytics] Processing analytics from SQLiteCloud...');
+        const allFunds = await getAllFondos();
+        const funds = allFunds.filter(f => f.patrimonio > 0);
 
         const assetStats = {};
         const managerStats = {};
@@ -45,18 +29,25 @@ module.exports = async (req, res) => {
         let validFundsCount = 0;
 
         funds.forEach(f => {
-            if (!f.composicion || f.composicion.length === 0) return;
+            const comp = f.composicion || [];
+            if (comp.length === 0) return;
             validFundsCount++;
 
-            const mgr = f.fondoPrincipal.gerente ? f.fondoPrincipal.gerente.nombre : 'S/D';
+            const fPrinc = f.fondoPrincipal || {};
+            const mgr = (fPrinc.gerente && fPrinc.gerente.nombre) ? fPrinc.gerente.nombre : 'S/D';
             if (!managerStats[mgr]) {
                 managerStats[mgr] = { name: mgr, fundsCount: 0, liquiditySum: 0 };
             }
             managerStats[mgr].fundsCount++;
 
-            f.composicion.forEach(c => {
-                const name = c.activo.trim();
+            comp.forEach(c => {
+                if (!c.activo) return;
+                const name = String(c.activo).trim();
                 const pct = parseFloat(c.porcentaje) || 0;
+
+                // Safety filter: Ignore assets with absolute weight > 100% in global stats.
+                if (Math.abs(pct) > 100) return;
+
                 const cat = classifyAsset(name);
 
                 if (!assetStats[name]) {
@@ -64,7 +55,7 @@ module.exports = async (req, res) => {
                 }
                 assetStats[name].frequency++;
                 assetStats[name].totalWeight += pct;
-                assetStats[name].funds.push({ nombre: f.nombre, pct: c.porcentaje });
+                assetStats[name].funds.push({ nombre: f.nombre || 'S/D', pct: c.porcentaje });
 
                 marketMix[cat] += pct;
                 if (cat === 'LIQUIDEZ') managerStats[mgr].liquiditySum += pct;
@@ -83,7 +74,7 @@ module.exports = async (req, res) => {
         const managerRanking = Object.values(managerStats).map(m => ({
             name: m.name,
             funds: m.fundsCount,
-            avgLiquidity: m.liquiditySum / m.fundsCount
+            avgLiquidity: m.fundsCount > 0 ? m.liquiditySum / m.fundsCount : 0
         })).sort((a, b) => b.funds - a.funds).slice(0, 15);
 
         res.status(200).json({
@@ -98,7 +89,8 @@ module.exports = async (req, res) => {
             managerRanking: managerRanking
         });
     } catch (error) {
-        console.error('Error in /api/analytics:', error);
+        console.error('❌ [API/analytics ERROR]:', error);
         res.status(500).json({ error: 'Error processing analytics', details: error.message });
     }
 };
+
