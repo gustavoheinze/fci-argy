@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DB_PATH = 'database.sqlite';
-const DELAY_MS = 3000; // INCREASED TO 3000ms TO REDUCE RATE LIMITS
+const DELAY_MS = 3000;
 const HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     'Referer': 'https://www.cafci.org.ar/',
@@ -47,14 +47,15 @@ async function updateProgressFile(db) {
         const stats = db.prepare(`
             SELECT 
                 (SELECT COUNT(*) FROM funds) as total,
-                (SELECT COUNT(DISTINCT fund_id) FROM composition) as enriched
+                (SELECT COUNT(*) FROM funds WHERE full_json_ficha IS NOT NULL) as enriched
         `).get();
 
         const status = {
             totalFunds: stats.total,
             enrichedFunds: stats.enriched,
             progressPct: stats.total > 0 ? (stats.enriched / stats.total) * 100 : 0,
-            lastUpdate: new Date().toISOString()
+            lastUpdate: new Date().toISOString(),
+            mode: 'OPTIMIZED_SYNC'
         };
 
         const filePath = path.join(__dirname, '..', 'public', 'sync_status.json');
@@ -69,67 +70,67 @@ async function main() {
     const db = new Database(DB_PATH);
     db.pragma('journal_mode = WAL');
 
-    console.log('Preparing statements...');
-    let updateFund, insertComp, clearComps;
+    // Add tracking columns if they don't exist
     try {
-        updateFund = db.prepare(`
-            UPDATE funds SET
-                isin = COALESCE(@isin, isin),
-                bloomberg = COALESCE(@bloomberg, bloomberg),
-                figi = COALESCE(@figi, figi),
-                created_at = COALESCE(@created_at, created_at),
-                updated_at = COALESCE(@updated_at, updated_at),
-                min_investment = COALESCE(@min_investment, min_investment),
-                fee_entry = COALESCE(@fee_entry, fee_entry),
-                fee_exit = COALESCE(@fee_exit, fee_exit),
-                fee_transfer = COALESCE(@fee_transfer, fee_transfer),
-                fee_mgmt_gerente = COALESCE(@fee_mgmt_gerente, fee_mgmt_gerente),
-                fee_mgmt_depo = COALESCE(@fee_mgmt_depo, fee_mgmt_depo),
-                fee_expenses = COALESCE(@fee_expenses, fee_expenses),
-                fee_success_flag = COALESCE(@fee_success_flag, fee_success_flag),
-                aum = @aum,
-                vcp = @vcp,
-                return_day = @return_day,
-                return_month = @return_month,
-                return_1y = @return_1y,
-                return_3y = @return_3y,
-                return_5y = @return_5y,
-                return_year = @return_year,
-                return_ytd = @return_ytd,
-                return_y2 = @return_y2,
-                return_y3 = @return_y3,
-                return_y4 = @return_y4,
-                return_monthyear = @return_monthyear,
-                tna_day = @tna_day,
-                tna_month = @tna_month,
-                tna_ytd = @tna_ytd,
-                date_data = @date_data,
-                date_ref = @date_ref,
-                last_sync = @last_sync,
-                full_json_ficha = @full_json_ficha
-            WHERE id = @id
-        `);
+        db.exec("ALTER TABLE funds ADD COLUMN last_comp_sync TEXT;");
+    } catch (e) { }
 
-        insertComp = db.prepare(`
-            INSERT INTO composition (
-                fund_id, asset_name, percentage, type, region, cantidad, monto, vcp_unitario, especie_id, moneda_id, full_json
-            ) VALUES (
-                @fund_id, @asset_name, @percentage, @type, @region, @cantidad, @monto, @vcp_unitario, @especie_id, @moneda_id, @full_json
-            )
-        `);
+    console.log('Preparing statements...');
+    const updateFund = db.prepare(`
+        UPDATE funds SET
+            isin = COALESCE(@isin, isin),
+            bloomberg = COALESCE(@bloomberg, bloomberg),
+            figi = COALESCE(@figi, figi),
+            min_investment = COALESCE(@min_investment, min_investment),
+            aum = @aum,
+            vcp = @vcp,
+            return_day = @return_day,
+            return_month = @return_month,
+            return_1y = @return_1y,
+            return_year = @return_year,
+            return_ytd = @return_ytd,
+            tna_day = @tna_day,
+            tna_month = @tna_month,
+            date_data = @date_data,
+            date_ref = @date_ref,
+            last_sync = @last_sync,
+            last_comp_sync = COALESCE(@last_comp_sync, last_comp_sync),
+            full_json_ficha = @full_json_ficha
+        WHERE id = @id
+    `);
 
-        clearComps = db.prepare('DELETE FROM composition WHERE fund_id = ?');
-    } catch (e) {
-        console.error('Failed to prepare statements:', e.message);
-        process.exit(1);
-    }
+    const insertComp = db.prepare(`
+        INSERT INTO composition (
+            fund_id, asset_name, percentage, type, region, cantidad, monto, vcp_unitario, especie_id, moneda_id, full_json
+        ) VALUES (
+            @fund_id, @asset_name, @percentage, @type, @region, @cantidad, @monto, @vcp_unitario, @especie_id, @moneda_id, @full_json
+        )
+    `);
 
-    const targets = db.prepare('SELECT id, fund_id, name FROM funds WHERE full_json_ficha IS NULL').all();
-    console.log(`Starting enrichment for ${targets.length} funds...`);
+    const clearComps = db.prepare('DELETE FROM composition WHERE fund_id = ?');
+
+    // SMART SELECTION LOGIC
+    // 1. Never synced
+    // 2. Performance older than today
+    // 3. Composition older than 7 days
+    const today = new Date().toISOString().split('T')[0];
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+    const targets = db.prepare(`
+        SELECT id, fund_id, name, last_sync, last_comp_sync, full_json_ficha 
+        FROM funds 
+        WHERE last_sync IS NULL 
+           OR substr(last_sync, 1, 10) < ?
+           OR last_comp_sync < ?
+    `).all(today, sevenDaysAgo);
+
+    console.log(`Smart Sync: Found ${targets.length} funds needing update.`);
 
     for (let i = 0; i < targets.length; i++) {
         const t = targets[i];
-        console.log(`[${i + 1}/${targets.length}] ${t.name} (${t.id})...`);
+        const needsComposition = !t.last_comp_sync || t.last_comp_sync < sevenDaysAgo;
+
+        console.log(`[${i + 1}/${targets.length}] ${t.name} (Comp: ${needsComposition ? 'YES' : 'SKIP'})...`);
 
         try {
             const detailUrl = `https://api.pub.cafci.org.ar/fondo/${t.fund_id}/clase/${t.id}/ficha`;
@@ -141,8 +142,6 @@ async function main() {
                 const daily = info.diaria || {};
                 const actual = daily.actual || {};
                 const returns = daily.rendimientos || {};
-                const monthly = info.mensual || {};
-                const expenses = monthly.honorariosComisiones || {};
                 const weekly = info.semanal || {};
                 const model = d.model || {};
 
@@ -151,44 +150,26 @@ async function main() {
                     isin: toVal(model.tickerISIN),
                     bloomberg: toVal(model.tickerBloomberg),
                     figi: toVal(model.tickerFIGI),
-                    created_at: toVal(model.createdAt),
-                    updated_at: toVal(model.updatedAt),
-                    min_investment: toNum(expenses.minimoInversion || model.inversionMinima),
-                    fee_entry: toNum(expenses.comisionIngreso || model.honorarioIngreso),
-                    fee_exit: toNum(expenses.comisionRescate || model.honorarioRescate),
-                    fee_transfer: toNum(expenses.comisionTransferencia || model.honorarioTransferencia),
-                    fee_mgmt_gerente: toNum(expenses.honorariosAdministracionGerente || model.honorarioAdministracionGerente),
-                    fee_mgmt_depo: toNum(expenses.honorariosAdministracionDepositaria || model.honorarioAdministracionDepositaria),
-                    fee_expenses: toNum(expenses.gastosGestion || model.gastoOrdinarioGestion),
-                    fee_success_flag: toVal(expenses.honorariosExito || model.honorarioExito),
-
+                    min_investment: toNum(model.inversionMinima),
                     aum: toNum(actual.patrimonio),
                     vcp: toNum(actual.vcpUnitario),
                     return_day: toNum(returns.day ? returns.day.rendimiento : null),
                     return_month: toNum(returns.month ? returns.month.rendimiento : null),
                     return_1y: toNum(returns.oneYear ? returns.oneYear.rendimiento : null),
-                    return_3y: toNum(returns.threeYears ? returns.threeYears.rendimiento : null),
-                    return_5y: toNum(returns.fiveYears ? returns.fiveYears.rendimiento : null),
                     return_year: toNum(returns.year ? returns.year.rendimiento : null),
                     return_ytd: toNum(returns.yearM1 ? returns.yearM1.rendimiento : null),
-                    return_y2: toNum(returns.yearM2 ? returns.yearM2.rendimiento : null),
-                    return_y3: toNum(returns.yearM3 ? returns.yearM3.rendimiento : null),
-                    return_y4: toNum(returns.yearM4 ? returns.yearM4.rendimiento : null),
-                    return_monthyear: toNum(returns.monthYear ? returns.monthYear.rendimiento : null),
-
                     tna_day: toNum(returns.day ? returns.day.tna : null),
                     tna_month: toNum(returns.month ? returns.month.tna : null),
-                    tna_ytd: toNum(returns.yearM1 ? returns.yearM1.tna : null),
-
                     date_data: weekly.fechaDatos || null,
                     date_ref: daily.referenceDay || null,
                     last_sync: new Date().toISOString(),
+                    last_comp_sync: needsComposition ? new Date().toISOString() : null,
                     full_json_ficha: JSON.stringify(d)
                 };
 
                 db.transaction(() => {
                     updateFund.run(fundData);
-                    if (weekly.carteras && Array.isArray(weekly.carteras)) {
+                    if (needsComposition && weekly.carteras && Array.isArray(weekly.carteras)) {
                         clearComps.run(t.id);
                         for (const c of weekly.carteras) {
                             insertComp.run({
@@ -207,25 +188,20 @@ async function main() {
                         }
                     }
                 })();
-                console.log(`   [OK] ${weekly.carteras ? weekly.carteras.length : 0} assets.`);
-            } else {
-                console.log(`   [WARN] Missing or empty data.`);
-                db.prepare("UPDATE funds SET full_json_ficha = '{}', last_sync = ? WHERE id = ?").run(new Date().toISOString(), t.id);
+                console.log(`   [OK] Perf updated. ${needsComposition ? 'Composition updated.' : 'Composition skipped.'}`);
             }
         } catch (err) {
             console.error(`   [ERROR] ${err.message}`);
             if (err.message.includes('Rate limit')) {
-                console.log('   Cooling down for 30s...');
-                await new Promise(r => setTimeout(r, 30000));
+                await new Promise(r => setTimeout(r, 60000));
             }
         }
 
-        // Update file every 5 funds (conservative)
         if (i % 5 === 0) await updateProgressFile(db);
         await new Promise(r => setTimeout(r, DELAY_MS));
     }
     await updateProgressFile(db);
-    console.log('Enrichment complete!');
+    console.log('Smart Sync complete!');
 }
 
 main().catch(console.error);

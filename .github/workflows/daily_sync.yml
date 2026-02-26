@@ -1,0 +1,30 @@
+name: Daily Data Sync
+
+on:
+  schedule:
+    # Runs at 00:00 UTC (21:00 PM Argentina time) every day
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # Allows manual triggering from the Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install @sqlitecloud/drivers
+
+      - name: Run synchronization
+        env:
+          SQLITECLOUD_CONNECTION_STRING: ${{ secrets.SQLITECLOUD_CONNECTION_STRING }}
+        run: node scripts/sync_cloud_v1.js

@@ -2,7 +2,13 @@ const riskLevels = {
   '4': { id: 'bajo', label: 'Bajo', color: 'var(--primary)' },
   '3': { id: 'medio', label: 'Medio', color: 'var(--secondary)' },
   '2': { id: 'alto', label: 'Alto', color: 'var(--danger)' },
-  '5': { id: 'alto', label: 'Alto', color: 'var(--danger)' }
+  '5': { id: 'alto', label: 'Alto', color: 'var(--danger)' },
+  '6': { id: 'alto', label: 'Alto', color: 'var(--danger)' },
+  '7': { id: 'alto', label: 'Alto', color: 'var(--danger)' },
+  '8': { id: 'alto', label: 'Alto', color: 'var(--danger)' },
+  '9': { id: 'alto', label: 'Alto', color: 'var(--danger)' },
+  '10': { id: 'alto', label: 'Alto', color: 'var(--danger)' },
+  '11': { id: 'alto', label: 'Alto', color: 'var(--danger)' }
 };
 
 const assetCategories = {
@@ -19,6 +25,56 @@ function getSpinnerHTML(text = 'CARGANDO...') {
       <div class="loader-text">${text}</div>
     </div>
   `;
+}
+
+function renderSmartPortfolio() {
+  const container = document.getElementById('smart-portfolio-container');
+  if (!container || !mgmtData || !mgmtData.smartPortfolio) return;
+
+  const portfolio = mgmtData.smartPortfolio;
+
+  let html = `
+    <div class="composition-container" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-ultra);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+  `;
+
+  portfolio.forEach((item, index) => {
+    const categoria = classifyAsset(item.activo);
+    const catInfo = assetCategories[categoria] || { icon: '❓', color: '#94a3b8', label: 'OTROS' };
+    const isLiquidez = categoria === 'LIQUIDEZ';
+
+    html += `
+      <div class="comp-item" style="margin-bottom: 0.5rem; background: ${isLiquidez ? 'rgba(var(--primary-rgb), 0.1)' : 'transparent'}; padding: ${isLiquidez ? '0.75rem' : '0.2rem'}; border-radius: 8px;">
+        <div class="comp-info" style="margin-bottom: 0.3rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-ghost);">${(index + 1).toString().padStart(2, '0')}</span>
+          <span class="comp-name" style="font-weight: ${isLiquidez ? '800' : '600'}; font-size: 0.85rem; color: ${isLiquidez ? 'var(--primary)' : 'var(--text-main)'};">
+            ${item.activo}
+          </span>
+          <span class="comp-pct" style="font-weight: 800; color: ${isLiquidez ? 'var(--primary)' : 'var(--text-main)'};">
+            ${item.porcentaje.toFixed(2)}%
+          </span>
+        </div>
+        <div class="comp-bar-bg" style="height: 6px; background: rgba(255,255,255,0.05);">
+          <div class="comp-bar-fill" style="width: ${item.porcentaje.toFixed(2)}%; background: ${isLiquidez ? 'var(--primary)' : catInfo.color}; height: 100%; border-radius: 100px;"></div>
+        </div>
+        <div style="font-size: 0.6rem; opacity: 0.5; margin-top: 0.2rem; display: flex; align-items: center; gap: 0.3rem;">
+          <span>${catInfo.icon}</span>
+          <span style="text-transform: uppercase;">${catInfo.label}</span>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+      </div>
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-ultra); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-ghost);">TOTAL ASIGNADO</span>
+        <span style="font-size: 1.1rem; font-weight: 900; color: var(--primary);">100.00%</span>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
 }
 
 function classifyAsset(name) {
@@ -122,14 +178,54 @@ function setupEventListeners() {
       // Find parent group
       const group = e.target.closest('.filter-group');
       if (!group) return;
-      // Remove active from siblings
-      group.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-      // Activate clicked
-      e.target.classList.add('active');
-      // Apply filters
+      const val = e.target.dataset.value;
+
+      if (val === '') {
+        // "TODOS" clicked: clear others and set this active
+        group.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        e.target.classList.add('active');
+      } else {
+        // Specific option clicked
+        // 1. Remove active from "TODOS"
+        const todosBtn = group.querySelector('.filter-pill[data-value=""]');
+        if (todosBtn) todosBtn.classList.remove('active');
+
+        // 2. Toggle this one
+        e.target.classList.toggle('active');
+
+        // 3. If nothing remains active, reactivate "TODOS"
+        const remainingActive = group.querySelectorAll('.filter-pill.active');
+        if (remainingActive.length === 0 && todosBtn) {
+          todosBtn.classList.add('active');
+        }
+      }
       applyFilters();
     });
   });
+
+  // AUM Filter Toggle Logic
+  const btnShowActive = document.getElementById('btn-show-active');
+  const btnShowAll = document.getElementById('btn-show-all');
+  if (btnShowActive && btnShowAll) {
+    btnShowActive.addEventListener('click', () => {
+      btnShowActive.classList.add('active');
+      btnShowAll.classList.remove('active');
+      applyFilters();
+      processAllFundsAssets();
+      if (!document.getElementById('view-explorer').classList.contains('hidden')) {
+        renderAssetBrowser();
+      }
+    });
+    btnShowAll.addEventListener('click', () => {
+      btnShowActive.classList.remove('active');
+      btnShowAll.classList.add('active');
+      applyFilters();
+      processAllFundsAssets();
+      if (!document.getElementById('view-explorer').classList.contains('hidden')) {
+        renderAssetBrowser();
+      }
+    });
+  }
 
   // Mobile Filter Toggle Setup
   const filterToggle = document.getElementById('mobile-filter-toggle');
@@ -159,11 +255,14 @@ function setupEventListeners() {
 
 function applyFilters() {
   const search = document.getElementById('search').value.toLowerCase();
+  const showEmptyFunds = document.getElementById('btn-show-all').classList.contains('active');
 
   // Helper to get active value from a group
   const getFilterVal = (id) => {
-    const active = document.querySelector(`#filter-${id} .filter-pill.active`);
-    return active ? active.dataset.value : '';
+    const actives = Array.from(document.querySelectorAll(`#filter-${id} .filter-pill.active`))
+      .map(btn => btn.dataset.value)
+      .filter(v => v !== '');
+    return actives;
   };
 
   const moneda = getFilterVal('moneda');
@@ -180,11 +279,12 @@ function applyFilters() {
 
     return (
       (search === '' || fund.nombre.toLowerCase().includes(search) || (f.nombre && f.nombre.toLowerCase().includes(search))) &&
-      (moneda === '' || (fund.monedaId || f.monedaId) === moneda) &&
-      (horizonte === '' || f.horizonteViejo === horizonte) &&
-      (tipoRenta === '' || String(trId) === String(tipoRenta)) &&
-      (riesgo === '' || r === riesgo) &&
-      (!showSubscribedOnly || isSubscribed)
+      (moneda.length === 0 || moneda.includes(fund.monedaId || f.monedaId)) &&
+      (horizonte.length === 0 || horizonte.includes(f.horizonteViejo)) &&
+      (tipoRenta.length === 0 || tipoRenta.includes(String(trId))) &&
+      (riesgo.length === 0 || riesgo.includes(r)) &&
+      (!showSubscribedOnly || isSubscribed) &&
+      (showEmptyFunds || Number(fund.patrimonio || 0) > 0)
     );
   });
 
@@ -219,10 +319,22 @@ function applyFilters() {
         aV = rMap[getRiskLevel(fA.tipoRentaId).id] || 0;
         bV = rMap[getRiskLevel(fB.tipoRentaId).id] || 0;
         break;
+      case 'horizonte':
+        aV = (fA.horizonteViejo || '').toLowerCase();
+        bV = (fB.horizonteViejo || '').toLowerCase();
+        break;
       case 'moneda':
         const mMap = { 'ARS': 1, 'USD': 2, 'EUR': 3 };
         aV = mMap[getMonedaShort(a.monedaId || fA.monedaId)] || 0;
         bV = mMap[getMonedaShort(b.monedaId || fB.monedaId)] || 0;
+        break;
+      case 'rendimientoDia':
+        aV = Number(a.rendimientoDia || 0);
+        bV = Number(b.rendimientoDia || 0);
+        break;
+      case 'rendimientoMes':
+        aV = Number(a.rendimientoMes || 0);
+        bV = Number(b.rendimientoMes || 0);
         break;
       case 'status':
         aV = Number(fA.estado);
@@ -259,6 +371,14 @@ function renderFunds() {
     const minStr = new Intl.NumberFormat('es-AR', { style: 'currency', currency: validCurrency, maximumFractionDigits: 0 }).format(fund.inversionMinima || 0);
     row.setAttribute('data-compact-info', `${validCurrency} • Min: ${minStr}`);
 
+    const diaVal = fund.rendimientoDia;
+    const mesVal = fund.rendimientoMes;
+
+    const diaColor = diaVal > 0 ? '#10b981' : (diaVal < 0 ? '#ef4444' : 'var(--text-ghost)');
+    const mesColor = mesVal > 0 ? '#10b981' : (mesVal < 0 ? '#ef4444' : 'var(--text-ghost)');
+    const diaDisplay = (diaVal !== null && diaVal !== undefined) ? `${diaVal.toFixed(2)}%` : '-';
+    const mesDisplay = (mesVal !== null && mesVal !== undefined) ? `${mesVal.toFixed(2)}%` : '-';
+
     row.innerHTML = `
       <div class="mono-cell" data-label="ACCIONES" style="display: flex; align-items: center; gap: 0.5rem;">
         <span class="sub-briefcase ${isSubscribed ? 'active' : ''}" onclick="event.stopPropagation(); toggleSubscribed('${fund.id}')" title="Marcar como fondo suscripto (tengo dinero invertido)">💼</span>
@@ -272,9 +392,10 @@ function renderFunds() {
         <span class="risk-dot"></span>
         ${risk.label.toUpperCase()}
       </div>
+      <div class="type-cell" style="font-size: 0.65rem;">${f.horizonteViejo || '-'}</div>
       <div class="mono-cell" data-label="MONEDA">${getMonedaShort(fund.monedaId || fund.fondoPrincipal.monedaId)}</div>
-      <div class="mono-cell" data-label="MÍNIMO">$${Number(fund.inversionMinima).toLocaleString('es-AR')}</div>
-      <div class="mono-cell" data-label="ESTADO">${fund.fondoPrincipal.estado === '1' ? '🟢 ONLINE' : '🔴 OFFLINE'}</div>
+      <div class="mono-cell" data-label="R. DÍA" style="color: ${diaColor};">${diaDisplay}</div>
+      <div class="mono-cell" data-label="R. 30D" style="color: ${mesColor};">${mesDisplay}</div>
     `;
     row.onclick = () => showSidebar(fund);
     list.appendChild(row);
@@ -490,15 +611,31 @@ async function showSidebar(initialFund) {
 
   // HEADER: Name, Risk, and Main Stats
   header.innerHTML = `
-    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
-      <h2 style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em;">${fund.nombre}</h2>
-    </div>
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      <div class="risk-cell risk-${risk.id}" style="font-size: 0.7rem; background: rgba(0,0,0,0.03); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-ultra);">
-        <span class="risk-dot"></span>
-        RIESGO ${risk.label.toUpperCase()}
+    <div style="margin-bottom: 1.5rem;">
+      <h2 style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-main); line-height: 1.1; margin-bottom: 0.75rem;">
+        ${fund.nombre}
+      </h2>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;">
+        <div class="risk-cell risk-${risk.id}" style="font-size: 0.65rem; background: rgba(255,255,255,0.03); padding: 0.25rem 0.75rem; border-radius: 100px; border: 1px solid var(--border-ultra); font-weight: 700;">
+          <span class="risk-dot"></span>
+          RIESGO ${risk.label.toUpperCase()}
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.65rem; opacity: 0.4; letter-spacing: 0.05em;">UID: ${fund.id}</div>
       </div>
-      <div class="mono-cell" style="font-size: 0.7rem; opacity: 0.6;">[UID: ${fund.id}]</div>
+    </div>
+
+    <div style="background: rgba(var(--primary-rgb), 0.03); border: 1px solid var(--border-ultra); border-radius: 12px; padding: 0.75rem 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+        <span style="font-size: 0.6rem; opacity: 0.5; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">📅 Datos Mercado</span>
+        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 800;">${fund.fechaDatos || 'S/D'}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.2rem; border-left: 1px solid var(--border-ultra); padding-left: 1rem;">
+        <span style="font-size: 0.6rem; opacity: 0.5; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">📦 Sincronizado</span>
+        <span style="font-size: 0.75rem; color: var(--text-main); opacity: 0.8; font-weight: 600;">
+          ${fund.lastSync ? new Date(fund.lastSync).toLocaleString('es-AR') : 'S/D'}
+        </span>
+      </div>
     </div>
   `;
 
@@ -522,17 +659,16 @@ async function showSidebar(initialFund) {
     'S/D';
 
   const aumHtml = `
-    <div class="aum-card">
+    <div class="aum-card" style="margin-bottom: 2.5rem;">
       <div class="detail-label">PATRIMONIO ADMINISTRADO (AUM)</div>
-      <div class="aum-value">${formattedAum}</div>
-      <div style="font-size: 0.6rem; opacity: 0.4; margin-top: 0.5rem; font-family: var(--font-sans);">ACTUALIZADO: ${fund.fechaDatos || 'N/A'}</div>
+      <div class="aum-value" style="font-size: 1.5rem; letter-spacing: -0.02em;">${formattedAum}</div>
     </div>
   `;
 
   const objectiveHtml = `
-    <div class="detail-section">
+    <div class="detail-section" style="margin-bottom: 2.5rem;">
       <span class="detail-label">ESTRATEGIA Y OBJETIVO</span>
-      <div class="objective-box" style="font-size: 0.95rem; line-height: 1.5; border-left: 2px solid var(--primary);">
+      <div class="objective-box" style="font-size: 0.95rem; line-height: 1.5; border-left: 3px solid var(--primary); padding: 1.25rem 1.5rem; background: rgba(var(--primary-rgb), 0.02);">
         ${f.objetivo || 'Sin descripción disponible del gestor.'}
       </div>
     </div>
@@ -554,6 +690,7 @@ async function showSidebar(initialFund) {
   `;
 
   // Time Machine Calculator
+  /* 
   const tmHtml = `
     <div class="detail-section" style="background: rgba(var(--primary-rgb), 0.05); border: 1px solid rgba(var(--primary-rgb), 0.2); padding: 1rem; border-radius: 8px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
@@ -581,6 +718,7 @@ async function showSidebar(initialFund) {
       </div>
     </div>
   `;
+  */
 
   // Composition logic
   let compositionHtml = `
@@ -674,9 +812,8 @@ async function showSidebar(initialFund) {
         <div class="tech-id-item"><span class="id-lbl">BBG:</span> ${fund.bloomberg || 'N/A'}</div>
         <div class="tech-id-item" style="font-size: 0.6rem; opacity: 0.6;"><span class="id-lbl">VCP:</span> ${fund.vcp || 'N/A'}</div>
       </div>
-      <div style="margin-top: 1rem; font-size: 0.6rem; color: var(--text-ghost); font-family: var(--font-mono); display: flex; justify-content: space-between;">
-        <span>SYNC: ${new Date(fund.lastSync).toLocaleString()}</span>
-        <span>${f.gerente ? f.gerente.nombre.substring(0, 20) + '...' : ''}</span>
+      <div style="margin-top: 1rem; font-size: 0.65rem; color: var(--text-ghost); font-family: var(--font-sans); text-align: right; opacity: 0.6;">
+        ${f.gerente?.nombre ? f.gerente.nombre : 'Gestora S/D'}
       </div>
     </div>
   `;
@@ -685,7 +822,7 @@ async function showSidebar(initialFund) {
   body.innerHTML = `
     ${aumHtml}
     ${objectiveHtml}
-    ${tmHtml}
+    ${"" /* tmHtml */}
     ${perfHtml}
     ${compositionHtml}
     ${logisticsHtml}
@@ -698,6 +835,7 @@ async function showSidebar(initialFund) {
     </div>
   `;
 
+  /*
   // Time Machine Logic
   const tmAmount = document.getElementById('tm-amount');
   const tmPeriod = document.getElementById('tm-period');
@@ -728,6 +866,7 @@ async function showSidebar(initialFund) {
     tmPeriod.addEventListener('change', calculateTM);
     calculateTM(); // Initial calc
   }
+  */
 }
 
 function closeSidebar() {
@@ -750,12 +889,14 @@ let scatterChart = null;
 window.switchView = function (view) {
   const terminalView = document.getElementById('view-terminal');
   const mgmtView = document.getElementById('view-management');
+  const explorerView = document.getElementById('view-explorer');
   const eduView = document.getElementById('view-education');
   const walletView = document.getElementById('view-wallet');
   const analyticsView = document.getElementById('view-analytics');
 
   const tabTerminal = document.getElementById('tab-terminal');
   const tabMgmt = document.getElementById('tab-management');
+  const tabExplorer = document.getElementById('tab-explorer');
   const tabEdu = document.getElementById('tab-education');
   const tabWallet = document.getElementById('tab-wallet');
   const tabAnalytics = document.getElementById('tab-analytics');
@@ -763,12 +904,14 @@ window.switchView = function (view) {
   // Reset all
   terminalView.classList.add('hidden');
   mgmtView.classList.add('hidden');
+  explorerView.classList.add('hidden');
   eduView.classList.add('hidden');
   if (walletView) walletView.classList.add('hidden');
   if (analyticsView) analyticsView.classList.add('hidden');
 
   tabTerminal.classList.remove('active');
   tabMgmt.classList.remove('active');
+  if (tabExplorer) tabExplorer.classList.remove('active');
   tabEdu.classList.remove('active');
   if (tabWallet) tabWallet.classList.remove('active');
   if (tabAnalytics) tabAnalytics.classList.remove('active');
@@ -777,6 +920,10 @@ window.switchView = function (view) {
     mgmtView.classList.remove('hidden');
     tabMgmt.classList.add('active');
     loadAnalytics();
+  } else if (view === 'explorer') {
+    explorerView.classList.remove('hidden');
+    if (tabExplorer) tabExplorer.classList.add('active');
+    loadExplorer();
   } else if (view === 'education') {
     eduView.classList.remove('hidden');
     tabEdu.classList.add('active');
@@ -784,7 +931,7 @@ window.switchView = function (view) {
     if (walletView) {
       walletView.classList.remove('hidden');
       if (tabWallet) tabWallet.classList.add('active');
-      renderWallet(); // Render wallet when switching to it
+      renderWallet();
     }
   } else if (view === 'analytics') {
     if (analyticsView) {
@@ -796,6 +943,17 @@ window.switchView = function (view) {
     terminalView.classList.remove('hidden');
     tabTerminal.classList.add('active');
   }
+}
+
+async function loadExplorer() {
+  const grid = document.getElementById('asset-browser-grid');
+  if (grid) grid.innerHTML = getSpinnerHTML('INICIALIZANDO EXPLORADOR...');
+
+  // Ensure we have assets processed
+  if (allAssets.length === 0) {
+    processAllFundsAssets();
+  }
+  renderAssetBrowser();
 }
 
 async function renderRiskReturnChart() {
@@ -910,19 +1068,13 @@ async function renderRiskReturnChart() {
 async function loadAnalytics() {
   // Show loaders in mgmt panels
   const rankingList = document.getElementById('asset-ranking-list');
-  const managerList = document.getElementById('manager-list');
-  const leadersList = document.getElementById('market-leaders-list');
   const recommendationGrid = document.getElementById('recommendation-grid');
 
   if (rankingList) rankingList.innerHTML = getSpinnerHTML('CALCULANDO INDEX...');
-  if (managerList) managerList.innerHTML = getSpinnerHTML('BENCHMARKING...');
-  if (leadersList) leadersList.innerHTML = getSpinnerHTML('BUSCANDO LÍDERES...');
   if (recommendationGrid) recommendationGrid.innerHTML = getSpinnerHTML('GENERANDO SELECCIÓN...');
 
   const assetRecGrid = document.getElementById('asset-recommendation-grid');
-  const assetBrowserGrid = document.getElementById('asset-browser-grid');
   if (assetRecGrid) assetRecGrid.innerHTML = getSpinnerHTML('ANALIZANDO SMART MONEY...');
-  if (assetBrowserGrid) assetBrowserGrid.innerHTML = getSpinnerHTML('EXTRAYENDO ACTIVOS...');
 
   try {
     const res = await fetch('/api/analytics');
@@ -938,36 +1090,33 @@ function renderManagement() {
 
   // KPIs
   document.getElementById('mgmt-liquidity').textContent = `${(mgmtData.summary?.marketLiquidity || 0).toFixed(2)}%`;
-  document.getElementById('mgmt-top-asset').textContent = mgmtData.topAssets?.[0]?.name || '---';
-  document.getElementById('mgmt-mgr-count').textContent = mgmtData.summary?.analyzedFunds || 0;
-
-  // Process ALL assets from the full fund list client-side
-  processAllFundsAssets();
-
-
-  // Market Leaders
-  const leaderList = document.getElementById('market-leaders-list');
-  if (leaderList && mgmtData.marketLeaders) {
-    leaderList.innerHTML = mgmtData.marketLeaders.map((l, i) => `
-      <div class="rank-item" onclick="showSidebar(allFunds.find(f => f.id === '${l.id}'))">
-        <span class="rank-index" style="color: var(--accent);">#${i + 1}</span>
-        <div class="rank-name" style="display: flex; flex-direction: column;">
-          <span>${l.name}</span>
-          <span style="font-size: 0.65rem; opacity: 0.6;">${l.manager}</span>
-        </div>
-        <span class="rank-val" style="color: var(--primary); font-family: var(--font-mono); font-size: 0.8rem;">
-          ${new Intl.NumberFormat('es-AR', { style: 'currency', currency: l.currency, maximumFractionDigits: 0, notation: "compact" }).format(l.aum)}
-        </span>
-      </div>
-    `).join('');
-  }
+  document.getElementById('mgmt-most-frequent').textContent = mgmtData.summary?.mostFrequentAsset?.name || '---';
+  document.getElementById('mgmt-top-weight').textContent = mgmtData.summary?.topWeightAsset?.name || '---';
 
   renderAssetRanking();
-  renderManagerBenchmark();
   renderRecommendations();
+  renderSmartPortfolio();
   renderAssetRecommendations();
-  renderInvestmentOpportunities();
-  renderAssetBrowser();
+  renderCategoryLeaders();
+}
+
+function renderCategoryLeaders() {
+  const list = document.getElementById('category-leaders-list');
+  if (!list || !mgmtData.categoryLeaders) return;
+
+  list.innerHTML = mgmtData.categoryLeaders.map(cl => `
+    <div class="rank-item" onclick="showSidebar(allFunds.find(f => f.id === '${cl.id}'))">
+      <div class="rank-name" style="display: flex; flex-direction: column;">
+        <span style="font-size: 0.65rem; color: var(--accent); font-weight: 800; text-transform: uppercase;">${cl.category}</span>
+        <span>${cl.name}</span>
+        <span style="font-size: 0.6rem; opacity: 0.6;">${cl.manager}</span>
+      </div>
+      <div style="text-align: right;">
+        <span class="rank-val" style="color: var(--primary); font-family: var(--font-mono); font-size: 0.9rem;">${cl.perf}</span>
+        <div style="font-size: 0.5rem; opacity: 0.5;">ULT. 30D</div>
+      </div>
+    </div>
+  `).join('');
 }
 
 function renderAssetRecommendations() {
@@ -1227,34 +1376,58 @@ function showDominantAssetDetails() {
   }, 100);
 }
 
-function renderInvestmentOpportunities() {
-  if (!mgmtData) return;
 
-  const grid = document.getElementById('investment-opportunities');
-  const assets = mgmtData.topAssets || [];
-  const top10 = assets.slice(0, 10);
 
-  grid.innerHTML = top10.map((asset, i) => `
-    <div class="opportunity-card" onclick="exploreAsset('${asset.name.replace(/'/g, "\\'")}')">
-      <div class="opp-rank">#${i + 1}</div>
-      <div class="opp-name">${asset.name}</div>
-      <div class="opp-stats">
-        <div class="opp-weight" style="font-size: 0.9rem; color: var(--accent);">${asset.marketInfluence.toFixed(2)}%</div>
-        <div class="opp-count" style="font-size: 0.65rem;">${asset.frequency} FONDOS</div>
+function renderAssetRanking() {
+  renderFrequencyRanking();
+  renderWeightRanking();
+}
+
+function renderFrequencyRanking() {
+  const list = document.getElementById('asset-frequency-list');
+  if (!list || !mgmtData.topAssets) return;
+
+  // Sort by frequency
+  const sorted = [...mgmtData.topAssets].sort((a, b) => b.frequency - a.frequency);
+  const top20 = sorted.slice(0, 20);
+
+  list.innerHTML = top20.map((asset, i) => `
+    <div class="rank-item" onclick="exploreAsset('${asset.name.replace(/'/g, "\\'")}')">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <span class="rank-index" style="color: var(--accent); font-family: var(--font-mono); font-size: 0.75rem; width: 20px;">${String(i + 1).padStart(2, '0')}</span>
+        <div style="display: flex; flex-direction: column;">
+          <span class="rank-name" style="font-weight: 600;">${asset.name}</span>
+          <span style="font-size: 0.6rem; opacity: 0.5;">En ${asset.frequency} fondos</span>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <span class="rank-val" style="color: var(--primary); font-family: var(--font-mono); font-size: 0.85rem;">${asset.marketInfluence.toFixed(2)}%</span>
+        <div style="font-size: 0.5rem; opacity: 0.4;">GEI</div>
       </div>
     </div>
   `).join('');
 }
 
-function renderAssetRanking() {
-  const list = document.getElementById('asset-ranking-list');
-  const data = mgmtData.topAssets || [];
+function renderWeightRanking() {
+  const list = document.getElementById('asset-weight-list');
+  if (!list || !mgmtData.topAssets) return;
 
-  list.innerHTML = data.map((asset, i) => `
+  // mgmtData.topAssets is already sorted by GEI in backend
+  const top20 = mgmtData.topAssets.slice(0, 20);
+
+  list.innerHTML = top20.map((asset, i) => `
     <div class="rank-item" onclick="exploreAsset('${asset.name.replace(/'/g, "\\'")}')">
-      <span class="rank-index">#${String(i + 1).padStart(2, '0')}</span>
-      <span class="rank-name">${asset.name}</span>
-      <span class="rank-val" style="color: var(--accent); font-weight: 800;">${asset.marketInfluence.toFixed(2)}%</span>
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <span class="rank-index" style="color: var(--primary); font-family: var(--font-mono); font-size: 0.75rem; width: 20px;">${String(i + 1).padStart(2, '0')}</span>
+        <div style="display: flex; flex-direction: column;">
+          <span class="rank-name" style="font-weight: 600;">${asset.name}</span>
+          <span style="font-size: 0.6rem; opacity: 0.5;">Capital Máximo</span>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <span class="rank-val" style="color: var(--primary); font-weight: 800; font-family: var(--font-mono); font-size: 0.85rem;">${asset.marketInfluence.toFixed(2)}%</span>
+        <div style="font-size: 0.5rem; opacity: 0.4;">GEI</div>
+      </div>
     </div>
   `).join('');
 }
@@ -1279,26 +1452,35 @@ function renderManagerBenchmark() {
 }
 
 function handleAssetSearch() {
-  const query = document.getElementById('asset-search').value.toLowerCase();
+  const query = document.getElementById('asset-search').value.toLowerCase().trim();
+  const resultsGrid = document.getElementById('asset-explorer-results');
+  const browserGrid = document.getElementById('asset-browser-grid');
+  const browserFilters = document.getElementById('asset-browser-filters');
+
   if (query.length < 2) {
-    document.getElementById('asset-explorer-results').innerHTML = '';
+    if (resultsGrid) resultsGrid.classList.add('hidden');
+    if (browserGrid) browserGrid.classList.remove('hidden');
+    if (browserFilters) browserFilters.classList.remove('hidden');
     return;
   }
 
-  // Create a combined list from the global allAssets (client-side processed)
-  // Fallback to mgmtData if allAssets is empty for some reason
-  const source = allAssets.length > 0 ? allAssets : mgmtData.topAssetsByFrequency;
-  const matches = source.filter(a => a.name.toLowerCase().includes(query));
+  const matches = allAssets.filter(a => a.name.toLowerCase().includes(query));
 
-  if (assetResults) assetResults.innerHTML = getSpinnerHTML('BUSCANDO EN EL MERCADO...');
-
-  renderAssetExplorer(matches);
+  if (browserGrid) browserGrid.classList.add('hidden');
+  if (browserFilters) browserFilters.classList.add('hidden');
+  if (resultsGrid) {
+    resultsGrid.classList.remove('hidden');
+    renderAssetExplorer(matches);
+  }
 }
 
 function exploreAsset(name) {
-  document.getElementById('asset-search').value = name;
-  handleAssetSearch();
-  document.getElementById('asset-search').scrollIntoView({ behavior: 'smooth' });
+  switchView('explorer');
+  const searchInput = document.getElementById('asset-search');
+  if (searchInput) {
+    searchInput.value = name;
+    handleAssetSearch();
+  }
 }
 
 function renderAssetExplorer(matches) {
@@ -1309,39 +1491,37 @@ function renderAssetExplorer(matches) {
     return;
   }
   grid.innerHTML = matches.map(asset => `
-    <div class="explorer-section glass" style="grid-column: 1/-1; margin-bottom: 1rem; padding: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
-        <h4 class="panel-title" style="margin: 0; color: var(--accent); border-color: var(--accent)">📊 ${asset.name}</h4>
-        <div style="display: flex; gap: 2rem; font-family: var(--font-mono); font-size: 0.75rem;">
-          <span style="color: var(--primary);">INFLUENCIA GEI: <strong>${(asset.marketInfluence || 0).toFixed(2)}%</strong></span>
-          <span style="color: var(--text-dim);">FRECUENCIA: <strong>${asset.frequency} fondos</strong></span>
-        </div>
-      </div>
-      <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.75rem; line-height: 1.5;">
-        <strong style="color: var(--accent);">EXPLICACIÓN:</strong> Este activo aparece en <strong>${asset.frequency}</strong> fondos diferentes. 
-        El índice <strong>GEI</strong> (${(asset.marketInfluence || 0).toFixed(2)}%) representa su participación promedio en cada cartera del sistema.
-      </div>
-      <div class="mgr-list">
-        ${asset.funds.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct)).map((f, idx) => `
-          <div class="rank-item" style="background: ${idx === 0 ? 'rgba(16, 185, 129, 0.05)' : 'rgba(255, 255, 255, 0.02)'}; border-color: ${idx === 0 ? 'rgba(16, 185, 129, 0.3)' : 'transparent'};">
-            <span class="rank-index">#${String(idx + 1).padStart(2, '0')}</span>
-            <span class="rank-name">${f.nombre}</span>
-            <span class="rank-val" style="color: ${idx === 0 ? 'var(--primary)' : 'var(--text-main)'}; font-weight: ${idx === 0 ? '800' : '700'};">${f.pct}</span>
-          </div>
-        `).join('')}
+  <div class="explorer-section glass" style="grid-column: 1/-1; margin-bottom: 1rem; padding: 1.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
+      <h4 class="panel-title" style="margin: 0; color: var(--accent); border-color: var(--accent)">📊 ${asset.name}</h4>
+      <div style="display: flex; gap: 2rem; font-family: var(--font-mono); font-size: 0.75rem;">
+        <span style="color: var(--primary);">INFLUENCIA GEI: <strong>${(asset.marketInfluence || 0).toFixed(2)}%</strong></span>
+        <span style="color: var(--text-dim);">FRECUENCIA: <strong>${asset.frequency} fondos</strong></span>
       </div>
     </div>
-  `).join('');
+    <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.75rem; line-height: 1.5;">
+      <strong style="color: var(--accent);">EXPLICACIÓN:</strong> Este activo aparece en <strong>${asset.frequency}</strong> fondos diferentes. 
+      El índice <strong>GEI</strong> (${(asset.marketInfluence || 0).toFixed(2)}%) representa su participación promedio en cada cartera del sistema.
+    </div>
+    <div class="mgr-list">
+      ${asset.funds.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct)).map((f, idx) => `
+        <div class="rank-item" style="background: ${idx === 0 ? 'rgba(16, 185, 129, 0.05)' : 'rgba(255, 255, 255, 0.02)'}; border-color: ${idx === 0 ? 'rgba(16, 185, 129, 0.3)' : 'transparent'};">
+          <span class="rank-index">#${String(idx + 1).padStart(2, '0')}</span>
+          <span class="rank-name">${f.nombre}</span>
+          <span class="rank-val" style="color: ${idx === 0 ? 'var(--primary)' : 'var(--text-main)'}; font-weight: ${idx === 0 ? '800' : '700'};">${f.pct}</span>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+`).join('');
 }
 
 // Asset Browser Functions
 function processAllFundsAssets() {
-  // We now favor the server-calculated data from mgmtData.topAssets
-  if (mgmtData && mgmtData.topAssets) {
-    allAssets = mgmtData.topAssets;
-    filteredAssets = [...allAssets];
-    return;
-  }
+  const showEmptyFunds = document.getElementById('btn-show-all')?.classList.contains('active');
+
+  // If no backend data or we want to force local processing based on filters
+  const sourceFunds = showEmptyFunds ? allFunds : allFunds.filter(f => Number(f.patrimonio || 0) > 0);
 
   const assetsMap = {};
   //... (rest of the function stays for legacy support or combined views)
@@ -1353,7 +1533,7 @@ function processAllFundsAssets() {
     return;
   }
 
-  allFunds.forEach(fund => {
+  sourceFunds.forEach(fund => {
     // Check if fund has composition
     // Depending on API structure, it might be in fund.composicion (if loaded via /api/funds and flattened)
     if (!fund.composicion) return;
@@ -1378,7 +1558,7 @@ function processAllFundsAssets() {
     });
   });
 
-  const validFundsCount = allFunds.filter(f => f.composicion && f.composicion.length > 0).length || 1;
+  const validFundsCount = sourceFunds.filter(f => f.composicion && f.composicion.length > 0).length || 1;
 
   // Convert to array and sort by market influence (GEI)
   allAssets = Object.values(assetsMap).map(a => ({
@@ -1543,8 +1723,19 @@ function updateThemeIcon(theme) {
 
 // Helpers
 function getTipoRenta(id) {
-  const t = { '2': 'EQUITY', '3': 'FIXED_INC', '4': 'MONEY_MKT', '5': 'MIXED' };
-  return t[id] || 'N/A';
+  const t = {
+    '2': 'EQUITY',
+    '3': 'FIXED_INC',
+    '4': 'MONEY_MKT',
+    '5': 'MIXED',
+    '6': 'PYMES',
+    '7': 'TOTAL_RET',
+    '8': 'INFRAEST',
+    '9': 'CERRADO',
+    '10': 'ASG',
+    '11': 'RG900'
+  };
+  return t[id] || 'OTHER';
 }
 
 function getRiskLevel(id) {

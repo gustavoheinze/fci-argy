@@ -296,6 +296,28 @@ header p {
   opacity: 0.7;
 }
 
+/* System Status Indicator */
+.system-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.loader-mini {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-left-color: var(--primary);
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  animation: spin 1s linear infinite;
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
   background: var(--glass-effect);
@@ -347,7 +369,8 @@ body.theme-light .theme-toggle:hover {
   margin-bottom: 2rem;
 }
 
-#search {
+.search-section input,
+.search-input {
   width: 100%;
   background: var(--glass-effect);
   border: 1px solid var(--border-ultra);
@@ -356,9 +379,11 @@ body.theme-light .theme-toggle:hover {
   color: #fff;
   font-size: 1.1rem;
   transition: all 0.3s ease;
+  font-family: var(--font-sans);
 }
 
-#search:focus {
+.search-section input:focus,
+.search-input:focus {
   outline: none;
   border-color: var(--primary);
   background: rgba(255, 255, 255, 0.05);
@@ -403,13 +428,10 @@ body.theme-light .theme-toggle:hover {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
-.filter-group.scrollable {
-  overflow-x: auto;
-  padding-bottom: 0.2rem;
-  /* Space for scrollbar if any */
-}
+/* Filter Pills */
 
 .filter-pill {
   background: transparent;
@@ -488,11 +510,13 @@ body.theme-light .theme-toggle:hover {
 }
 
 /* Custom Tooltip System */
-.perf-item {
+.perf-item,
+[data-tooltip] {
   position: relative;
 }
 
-.perf-item::after {
+.perf-item::after,
+[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
   bottom: 125%;
@@ -513,7 +537,8 @@ body.theme-light .theme-toggle:hover {
   pointer-events: none;
 }
 
-.perf-item:hover::after {
+.perf-item:hover::after,
+[data-tooltip]:hover::after {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
@@ -524,8 +549,8 @@ body.theme-light .theme-toggle:hover {
 .grid-header,
 .grid-row {
   display: grid;
-  /* Fixed widths for absolute matching - Increase first col for VS btn */
-  grid-template-columns: 120px 320px 140px 100px 120px 80px 120px 100px;
+  /* Fixed widths for absolute matching - 9 columns total */
+  grid-template-columns: 120px 1fr 140px 80px 100px 140px 70px 100px 100px;
   gap: 0.5rem;
   align-items: center;
 }
@@ -718,11 +743,13 @@ body.theme-light .sidebar-close:hover {
 
 .detail-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--text-ghost);
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
   display: block;
+  letter-spacing: 0.05em;
 }
 
 .detail-value {
@@ -1013,6 +1040,11 @@ body.theme-light .comp-bar-bg {
   box-shadow: 0 10px 30px rgba(245, 158, 11, 0.1);
 }
 
+.stat-card.glow-blue {
+  border-bottom: 2px solid var(--secondary);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+}
+
 .stat-card .label {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1036,8 +1068,61 @@ body.theme-light .comp-bar-bg {
 
 .main-mgmt-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+}
+
+.opportunities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.explorer-layout {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-ultra);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.explorer-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mgmt-panel.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Asset Item in Lists */
+.asset-item-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-ultra);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.asset-item-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--secondary);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.asset-item-card .name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.asset-item-card .pct {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--primary);
 }
 
 .panel-title {

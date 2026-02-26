@@ -31,12 +31,14 @@
           <div>
             <h1>FCI-ARGY</h1>
             <p>La plataforma de fondos comunes de inversión más picante de Argentina.</p>
+            <div id="system-status" class="system-status">● VERIFICANDO SISTEMA...</div>
           </div>
           <div style="display: flex; gap: 1.5rem; align-items: center;">
             <div class="nav-tabs">
               <button id="tab-terminal" class="nav-tab active" onclick="switchView('terminal')">Explorar</button>
-              <button id="tab-management" class="nav-tab" onclick="switchView('management')">Gerencia</button>
-              <button id="tab-wallet" class="nav-tab" onclick="switchView('wallet')">Mi Cartera</button>
+              <button id="tab-management" class="nav-tab" onclick="switchView('management')">Activos</button>
+              <button id="tab-explorer" class="nav-tab" onclick="switchView('explorer')">Buscador</button>
+              <button id="tab-wallet" class="nav-tab" onclick="switchView('wallet')">Cartera</button>
               <button id="tab-analytics" class="nav-tab" onclick="switchView('analytics')">Analíticas</button>
               <button id="tab-education" class="nav-tab" onclick="switchView('education')">Educación</button>
             </div>
@@ -70,40 +72,94 @@
           <div class="filter-row">
             <span class="filter-label">MONEDA:</span>
             <div class="filter-group" id="filter-moneda" data-group="moneda">
-              <button class="filter-pill active" data-value="">🌐 TODOS</button>
-              <button class="filter-pill" data-value="1">🇦🇷 ARS</button>
-              <button class="filter-pill" data-value="2">🇺🇸 USD</button>
+              <button class="filter-pill active" data-value="" data-tooltip="Muestra fondos en cualquier moneda">🌐
+                TODOS</button>
+              <button class="filter-pill" data-value="1" data-tooltip="Fondos denominados en Pesos Argentinos">🇦🇷
+                ARS</button>
+              <button class="filter-pill" data-value="2"
+                data-tooltip="Fondos denominados en Dólares Estadounidenses">🇺🇸
+                USD</button>
             </div>
           </div>
 
           <div class="filter-row">
             <span class="filter-label">RIESGO:</span>
             <div class="filter-group" id="filter-riesgo" data-group="riesgo">
-              <button class="filter-pill active" data-value="">⚖️ CUALQUIERA</button>
-              <button class="filter-pill" data-value="bajo">🟢 BAJO</button>
-              <button class="filter-pill" data-value="medio">🟡 MEDIO</button>
-              <button class="filter-pill" data-value="alto">🔴 ALTO</button>
+              <button class="filter-pill active" data-value=""
+                data-tooltip="Muestra fondos con cualquier nivel de riesgo">⚖️
+                CUALQUIERA</button>
+              <button class="filter-pill" data-value="bajo"
+                data-tooltip="Baja volatilidad. Ideal para preservar capital.">🟢
+                BAJO</button>
+              <button class="filter-pill" data-value="medio" data-tooltip="Volatilidad moderada. Busca equilibrio.">🟡
+                MEDIO</button>
+              <button class="filter-pill" data-value="alto"
+                data-tooltip="Alta volatilidad. Apunta a mayores ganancias aceptando posibles bajas.">🔴 ALTO</button>
             </div>
           </div>
 
           <div class="filter-row">
             <span class="filter-label">HORIZONTE:</span>
             <div class="filter-group" id="filter-horizonte" data-group="horizonte">
-              <button class="filter-pill active" data-value="">⏱️ CUALQUIERA</button>
-              <button class="filter-pill" data-value="Corto Plazo">🐇 CORTO</button>
-              <button class="filter-pill" data-value="Mediano Plazo">🚶 MEDIO</button>
-              <button class="filter-pill" data-value="Largo Plazo">🐢 LARGO</button>
+              <button class="filter-pill active" data-value="" data-tooltip="Cualquier horizonte de inversión">⏱️
+                CUALQUIERA</button>
+              <button class="filter-pill" data-value="Corto Plazo"
+                data-tooltip="Dinero que podrías necesitar en menos de un mes.">🐇 CORTO</button>
+              <button class="filter-pill" data-value="Mediano Plazo"
+                data-tooltip="Para inversiones de 3 meses a un año.">🚶
+                MEDIO</button>
+              <button class="filter-pill" data-value="Largo Plazo"
+                data-tooltip="Para capital que no necesitás por más de un año.">🐢 LARGO</button>
             </div>
           </div>
 
           <div class="filter-row full-width">
             <span class="filter-label">TIPO:</span>
             <div class="filter-group scrollable" id="filter-tipoRenta" data-group="tipoRenta">
-              <button class="filter-pill active" data-value="">📂 TODOS</button>
-              <button class="filter-pill" data-value="4">💸 MONEY MARKET</button>
-              <button class="filter-pill" data-value="3">🏛️ RENTA FIJA</button>
-              <button class="filter-pill" data-value="2">📈 RENTA VARIABLE</button>
-              <button class="filter-pill" data-value="5">🔄 RENTA MIXTA</button>
+              <button class="filter-pill active" data-value=""
+                data-tooltip="Muestra todos los fondos sin filtrar por tipo">📂
+                TODOS</button>
+              <button class="filter-pill" data-value="4"
+                data-tooltip="Liquidez inmediata (T+0). Ideal para rescatar en el día. Riesgo muy bajo.">💸 MONEY
+                MARKET</button>
+              <button class="filter-pill" data-value="3"
+                data-tooltip="Invierten en bonos y letras de deuda. Rendimiento predecible. Plazos T+1 o T+2.">🏛️ RENTA
+                FIJA</button>
+              <button class="filter-pill" data-value="2"
+                data-tooltip="Invierten en acciones de empresas. Mayor volatilidad y riesgo, pero mayor potencial de retorno.">📈
+                RENTA VARIABLE</button>
+              <button class="filter-pill" data-value="5"
+                data-tooltip="Combinación de bonos y acciones. Busca equilibrio entre estabilidad y crecimiento.">🔄
+                RENTA
+                MIXTA</button>
+              <button class="filter-pill" data-value="6"
+                data-tooltip="Financian a pequeñas y medianas empresas argentinas (Cheques, Pagarés, ONs).">🏭
+                PYMES</button>
+              <button class="filter-pill" data-value="7"
+                data-tooltip="Gestión activa que busca maximizar el retorno total sin seguir un índice fijo.">🎯 RET.
+                TOTAL</button>
+              <button class="filter-pill" data-value="8"
+                data-tooltip="Proyectos de economía real, energía o construcción. Inversiones a largo plazo.">🏗️
+                INFRAEST.</button>
+              <button class="filter-pill" data-value="9"
+                data-tooltip="Cantidad fija de cuotas que cotizan en bolsa. No se rescatan directo en la gestora.">🔒
+                CERRADOS</button>
+              <button class="filter-pill" data-value="10"
+                data-tooltip="Criterios Ambientales, Sociales y de Gobernanza (Sustentables/Responsables).">🌱
+                ASG</button>
+              <button class="filter-pill" data-value="11"
+                data-tooltip="Fondos diseñados para cumplir con normativas de repatriación de capitales.">📜
+                RG900</button>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <span class="filter-label">FONDOS:</span>
+            <div class="filter-group" id="filter-aum">
+              <button class="filter-pill active" id="btn-show-active"
+                data-tooltip="Mostrar solo fondos con patrimonio informado (AUM > 0)">🛡️ ACTIVOS</button>
+              <button class="filter-pill" id="btn-show-all" data-tooltip="Mostrar todos los registros de CAFCI">🌐
+                TODOS</button>
             </div>
           </div>
 
@@ -124,9 +180,10 @@
           <div class="sortable-header" data-sort="tipo">Tipo <span class="sort-indicator"></span></div>
           <div class="sortable-header" data-sort="fid">FID <span class="sort-indicator"></span></div>
           <div class="sortable-header" data-sort="riesgo">Riesgo <span class="sort-indicator"></span></div>
+          <div class="sortable-header" data-sort="horizonte">Horizonte <span class="sort-indicator"></span></div>
           <div class="sortable-header" data-sort="moneda">Moneda <span class="sort-indicator"></span></div>
-          <div class="sortable-header" data-sort="minimo">Min. Inv. <span class="sort-indicator"></span></div>
-          <div class="sortable-header" data-sort="status">Estado <span class="sort-indicator"></span></div>
+          <div class="sortable-header" data-sort="rendimientoDia">R. Día <span class="sort-indicator"></span></div>
+          <div class="sortable-header" data-sort="rendimientoMes">R. Mes <span class="sort-indicator"></span></div>
         </div>
 
         <div id="funds-list">
@@ -146,113 +203,154 @@
       <!-- NEW MANAGEMENT VIEW -->
       <div id="view-management" class="hidden">
         <div class="mgmt-grid">
-          <div class="kpi-row">
+          <div class="kpi-row" style="margin-bottom: 2rem;">
             <div class="stat-card glass glow-emerald">
               <span class="label">Liquidez Promedio</span>
               <span class="value" id="mgmt-liquidity">0%</span>
+              <p style="font-size: 0.65rem; opacity: 0.6; margin-top: 0.5rem; line-height: 1.3;">
+                Reserva de efectivo y cauciones inmediatas que los fondos mantienen para responder a rescates.
+              </p>
             </div>
             <div class="stat-card glass glow-gold" style="position: relative; cursor: pointer;"
-              title="Activo individual con mayor peso total agregado entre todos los fondos del país. Click para ver todos los fondos que lo contienen."
-              onclick="showDominantAssetDetails()">
-              <span class="label">Activo Dominante</span>
-              <span class="value" id="mgmt-top-asset">---</span>
-              <div style="position: absolute; top: 1rem; right: 1rem; font-size: 0.7rem; opacity: 0.5;">🔍</div>
+              onclick="switchView('explorer')">
+              <span class="label">Activo Más Frecuente</span>
+              <span class="value" id="mgmt-most-frequent" style="font-size: 1.4rem;">---</span>
+              <p style="font-size: 0.65rem; opacity: 0.6; margin-top: 0.5rem; line-height: 1.3;">
+                Instrumento con mayor presencia en diferentes carteras del mercado.
+              </p>
             </div>
-            <div class="stat-card glass">
-              <span class="label">Fondos Analizados</span>
-              <span class="value" id="mgmt-mgr-count">0</span>
+            <div class="stat-card glass glow-blue" style="position: relative; cursor: pointer;"
+              onclick="switchView('explorer')">
+              <span class="label">Mayor Peso Agregado (GEI)</span>
+              <span class="value" id="mgmt-top-weight" style="font-size: 1.4rem;">---</span>
+              <p style="font-size: 0.65rem; opacity: 0.6; margin-top: 0.5rem; line-height: 1.3;">
+                Activo que concentra el mayor volumen total de capital invertido.
+              </p>
             </div>
           </div>
 
           <div class="main-mgmt-content">
             <div class="mgmt-panel glass">
-              <h3 class="panel-title">
-                Ranking de Activos
-                <span class="info-tooltip"
-                  data-tooltip="Global Exposure Index (GEI): Representa la participación promedio de este activo en la cartera de cada fondo del mercado. (Suma de % / Total Fondos)">ⓘ</span>
-              </h3>
-              <div id="asset-ranking-list" class="ranking-list"></div>
+              <h3 class="panel-title">Top 20 por Frecuencia</h3>
+              <div class="disclaimer-box" style="margin-bottom: 1rem;">
+                <span class="disclaimer-icon">📊</span>
+                <p class="disclaimer-text">Activos ordenados por cantidad de fondos que los poseen en cartera.</p>
+              </div>
+              <div id="asset-frequency-list" class="ranking-list"></div>
             </div>
+
             <div class="mgmt-panel glass">
-              <h3 class="panel-title">Benchmark Gestoras</h3>
-              <div id="manager-list" class="mgr-list"></div>
-            </div>
-            <div class="mgmt-panel glass">
-              <h3 class="panel-title">Líderes del Mercado 🏆</h3>
-              <div id="market-leaders-list" class="ranking-list"></div>
+              <h3 class="panel-title">Top 20 por Peso (GEI)</h3>
+              <div class="disclaimer-box" style="margin-bottom: 1rem;">
+                <span class="disclaimer-icon">💹</span>
+                <p class="disclaimer-text">
+                  <strong>GEI:</strong> (Suma de % / Total Fondos). Importancia relativa por capital invertido.
+                </p>
+              </div>
+              <div id="asset-weight-list" class="ranking-list"></div>
             </div>
 
             <!-- Algo Recommendations Section -->
             <div class="mgmt-panel glass full-width"
               style="background: rgba(245, 158, 11, 0.03); border-color: rgba(245, 158, 11, 0.2);">
-              <h3 class="panel-title" style="color: var(--accent);">🤖 Recomendaciones Algorítmicas (BETA)</h3>
+              <h3 class="panel-title" style="color: var(--accent);">🤖 Algoritmo de Consistencia (BETA)</h3>
+              <div class="disclaimer-title"
+                style="margin-left: 1rem; margin-bottom: 0.5rem; font-size: 0.75rem; color: var(--accent); font-weight: 800;">
+                ¿CÓMO FUNCIONA?</div>
               <div class="disclaimer-box"
-                style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.2);">
-                <span class="disclaimer-icon">💡</span>
-                <p class="disclaimer-text">
-                  <strong>HIPÓTESIS DE INVERSIÓN:</strong> Selección algorítmica de 5 fondos basada en rendimiento
-                  (YTD/30d), consistencia y composición de activos.
-                </p>
+                style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.2); display: block; padding: 1rem;">
+                <div
+                  style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.75rem; line-height: 1.4;">
+                  <div>
+                    <strong style="color: var(--text-main);">1. Yield King:</strong> Selecciona el fondo de renta
+                    variable con mayor retorno anual acumulado (YTD).
+                  </div>
+                  <div>
+                    <strong style="color: var(--text-main);">2. Safe Bet:</strong> Elige el fondo de Money Market con
+                    mejor tasa mensual (MTD) y riesgo mínimo.
+                  </div>
+                  <div>
+                    <strong style="color: var(--text-main);">3. Strategist:</strong> Identifica al mejor gestor de bonos
+                    según su performance contra la inflación.
+                  </div>
+                  <div>
+                    <strong style="color: var(--text-main);">4. Trend Rider:</strong> Encuentra el fondo con máxima
+                    exposición al activo dominante (#1) del mercado.
+                  </div>
+                  <div
+                    style="grid-column: 1/-1; border-top: 1px dashed rgba(245, 158, 11, 0.2); padding-top: 0.5rem; margin-top: 0.5rem;">
+                    <strong style="color: var(--text-main);">5. Balanced Choice:</strong> Filtra fondos de bajo riesgo
+                    con retornos positivos constantes en mes y año.
+                  </div>
+                </div>
               </div>
               <div id="recommendation-grid" class="opportunities-grid"
                 style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"></div>
             </div>
 
+            <!-- Smart Portfolio Recommendation Section -->
+            <div class="mgmt-panel glass full-width"
+              style="background: rgba(30, 64, 175, 0.03); border-color: rgba(30, 64, 175, 0.2);">
+              <h3 class="panel-title" style="color: #3b82f6;">🏦 Crea tu propio FCI (Smart Portfolio)</h3>
+              <div class="disclaimer-title"
+                style="margin-left: 1rem; margin-bottom: 0.5rem; font-size: 0.75rem; color: #3b82f6; font-weight: 800;">
+                ESTRATEGIA INSTITUCIONAL</div>
+              <div class="disclaimer-box"
+                style="background: rgba(30, 64, 175, 0.05); border-color: rgba(30, 64, 175, 0.2); display: block; padding: 1rem;">
+                <p class="disclaimer-text" style="font-size: 0.75rem; line-height: 1.5;">
+                  <strong>CONSTRUCCIÓN TÁCTICA:</strong> Cartera optimizada que replica la exposición de los grandes
+                  fondos. Utiliza el <b>Top 10 de activos por GEI</b> (Peso en el Mercado) ajustados al 90%,
+                  sumando un 10% de liquidez táctica.
+                </p>
+              </div>
+              <div id="smart-portfolio-container" style="margin-top: 1.5rem;"></div>
+            </div>
+
             <!-- Algo Asset Recommendations Section -->
             <div class="mgmt-panel glass full-width"
               style="background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.2);">
-              <h3 class="panel-title" style="color: #10b981;">💎 Selección Inteligente</h3>
+              <h3 class="panel-title" style="color: #10b981;">🧠 Selección Inteligente (Smart Money)</h3>
+              <div class="disclaimer-title"
+                style="margin-left: 1rem; margin-bottom: 0.5rem; font-size: 0.75rem; color: #10b981; font-weight: 800;">
+                CONSENSO PROFESIONAL</div>
               <div class="disclaimer-box"
-                style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
-                <span class="disclaimer-icon">🧠</span>
-                <p class="disclaimer-text">
-                  <strong>INTELIGENCIA DE MERCADO:</strong> Activos con mayor consenso institucional ("Smart Money"). Lo
-                  que los gestores profesionales están comprando.
+                style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2); display: block; padding: 1rem;">
+                <p class="disclaimer-text" style="font-size: 0.75rem; line-height: 1.5;">
+                  Este motor analiza las <strong>4.359 carteras</strong> del sistema para detectar en qué activos
+                  específicos
+                  los gestores institucionales están concentrando el capital. Si muchos profesionales compran el mismo
+                  activo,
+                  el sistema lo marca como <b>Smart Money</b>. Representa la "dirección" que el mercado institucional
+                  está tomando.
                 </p>
               </div>
               <div id="asset-recommendation-grid" class="opportunities-grid"
                 style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"></div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <!-- Asset Browser Section -->
-            <div class="mgmt-panel glass full-width"
-              style="background: rgba(99, 102, 241, 0.03); border-color: rgba(99, 102, 241, 0.2);">
-              <h3 class="panel-title" style="color: var(--secondary);">🔍 Explorador de Activos</h3>
-              <div class="disclaimer-box"
-                style="background: rgba(99, 102, 241, 0.05); border-color: rgba(99, 102, 241, 0.2);">
-                <span class="disclaimer-icon">💡</span>
-                <p class="disclaimer-text">
-                  <strong>EXPLORADOR DE ACTIVOS:</strong> Todos los activos únicos que aparecen en los fondos del país.
-                  Click en cualquier activo para ver qué fondos lo contienen y su porcentaje de participación.
-                </p>
-              </div>
-              <div id="asset-browser-filters"></div>
+      <!-- ASSET EXPLORER VIEW -->
+      <div id="view-explorer" class="hidden">
+        <div class="explorer-container">
+          <div class="explorer-header" style="margin-bottom: 2rem;">
+            <h2 class="section-title">🔍 EXPLORADOR DE ACTIVOS</h2>
+            <p class="section-subtitle">Buscador profundo de todos los activos únicos en el mercado argentino.</p>
+
+            <div class="search-section" style="margin-top: 1.5rem; max-width: 600px;">
+              <span class="search-icon">🔎</span>
+              <input type="text" id="asset-search" placeholder="Escribí el nombre de un bono, acción, ON o Cedear..."
+                oninput="handleAssetSearch()">
+            </div>
+          </div>
+
+          <div class="explorer-layout">
+            <div class="explorer-main">
+              <div id="asset-browser-filters" style="margin-bottom: 1.5rem;"></div>
               <div id="asset-browser-grid" class="opportunities-grid"></div>
-            </div>
 
-            <!-- Investment Opportunities Section -->
-            <div class="mgmt-panel glass full-width"
-              style="background: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.2);">
-              <h3 class="panel-title" style="color: var(--primary);">🎯 Top 10 Oportunidades</h3>
-              <div class="disclaimer-box">
-                <span class="disclaimer-icon">⚠️</span>
-                <p class="disclaimer-text">
-                  <strong>DISCLAIMER:</strong> Esta lista NO es una recomendación de compra.
-                  Refleja únicamente los activos con mayor concentración de capital agregado entre todos los fondos del
-                  país.
-                  Es un indicador de "consenso de mercado" entre gestores profesionales.
-                </p>
-              </div>
-              <div id="investment-opportunities" class="opportunities-grid"></div>
-            </div>
-
-            <div class="mgmt-panel glass full-width">
-              <h3 class="panel-title">Buscador de Activos</h3>
-              <div class="explorer-search">
-                <input type="text" id="asset-search" placeholder="Buscar cualquier activo en el mercado..."
-                  oninput="handleAssetSearch()">
-              </div>
-              <div id="asset-explorer-results" class="explorer-grid"></div>
+              <div id="asset-explorer-results" class="explorer-grid hidden"></div>
             </div>
           </div>
         </div>
@@ -385,7 +483,7 @@
             <!-- Left: Funds List -->
             <div class="wallet-funds">
               <div class="mgmt-panel glass full-width">
-                <h3 class="panel-title">Mis Activos</h3>
+                <h3 class="panel-title">Activos en Cartera</h3>
 
                 <div class="wallet-add-box"
                   style="margin-bottom: 1.5rem; display: flex; gap: 1rem; position: relative;">
@@ -393,8 +491,7 @@
                     <span
                       style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); opacity: 0.5;">🔍</span>
                     <input type="text" id="wallet-add-search" placeholder="Buscar fondo para agregar..."
-                      style="width: 100%; padding: 0.8rem 0.8rem 0.8rem 2.5rem; background: rgba(0,0,0,0.2); border: 1px solid var(--border-ultra); color: #fff; border-radius: 8px;"
-                      list="funds-datalist">
+                      class="search-input" list="funds-datalist">
                   </div>
                   <datalist id="funds-datalist"></datalist>
                   <button class="nav-btn" onclick="addFundToWalletFromSearch()">AGREGAR</button>

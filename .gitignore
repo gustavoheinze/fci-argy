@@ -137,11 +137,13 @@ dist
 .DS_Store
 
 # Windows
+nul
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
 # Local databases and data dumps
+cafci_master_full.json
 *.json
 !package.json
 !package-lock.json

@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DB_PATH = 'database.sqlite';
-const DELAY_MS = 3000; // INCREASED TO 3000ms TO REDUCE RATE LIMITS
+const DELAY_MS = 1000; // Reducido a 1s para ir más rápido
 const HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     'Referer': 'https://www.cafci.org.ar/',
@@ -15,7 +15,7 @@ const HEADERS = {
 
 function fetchUrl(url) {
     return new Promise((resolve, reject) => {
-        const timeout = setTimeout(() => { req.destroy(); reject(new Error(`Timeout: ${url}`)); }, 15000);
+        const timeout = setTimeout(() => { req.destroy(); reject(new Error(`Timeout: ${url}`)); }, 10000);
         const req = https.get(url, { headers: HEADERS }, (res) => {
             clearTimeout(timeout);
             if (res.statusCode === 429) return reject(new Error('Rate limit'));
@@ -42,26 +42,8 @@ function toNum(val) {
     return isNaN(n) ? null : n;
 }
 
-async function updateProgressFile(db) {
-    try {
-        const stats = db.prepare(`
-            SELECT 
-                (SELECT COUNT(*) FROM funds) as total,
-                (SELECT COUNT(DISTINCT fund_id) FROM composition) as enriched
-        `).get();
-
-        const status = {
-            totalFunds: stats.total,
-            enrichedFunds: stats.enriched,
-            progressPct: stats.total > 0 ? (stats.enriched / stats.total) * 100 : 0,
-            lastUpdate: new Date().toISOString()
-        };
-
-        const filePath = path.join(__dirname, '..', 'public', 'sync_status.json');
-        fs.writeFileSync(filePath, JSON.stringify(status, null, 2));
-    } catch (e) {
-        console.error('Error updating progress file:', e.message);
-    }
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function main() {
@@ -69,63 +51,52 @@ async function main() {
     const db = new Database(DB_PATH);
     db.pragma('journal_mode = WAL');
 
-    console.log('Preparing statements...');
-    let updateFund, insertComp, clearComps;
-    try {
-        updateFund = db.prepare(`
-            UPDATE funds SET
-                isin = COALESCE(@isin, isin),
-                bloomberg = COALESCE(@bloomberg, bloomberg),
-                figi = COALESCE(@figi, figi),
-                created_at = COALESCE(@created_at, created_at),
-                updated_at = COALESCE(@updated_at, updated_at),
-                min_investment = COALESCE(@min_investment, min_investment),
-                fee_entry = COALESCE(@fee_entry, fee_entry),
-                fee_exit = COALESCE(@fee_exit, fee_exit),
-                fee_transfer = COALESCE(@fee_transfer, fee_transfer),
-                fee_mgmt_gerente = COALESCE(@fee_mgmt_gerente, fee_mgmt_gerente),
-                fee_mgmt_depo = COALESCE(@fee_mgmt_depo, fee_mgmt_depo),
-                fee_expenses = COALESCE(@fee_expenses, fee_expenses),
-                fee_success_flag = COALESCE(@fee_success_flag, fee_success_flag),
-                aum = @aum,
-                vcp = @vcp,
-                return_day = @return_day,
-                return_month = @return_month,
-                return_1y = @return_1y,
-                return_3y = @return_3y,
-                return_5y = @return_5y,
-                return_year = @return_year,
-                return_ytd = @return_ytd,
-                return_y2 = @return_y2,
-                return_y3 = @return_y3,
-                return_y4 = @return_y4,
-                return_monthyear = @return_monthyear,
-                tna_day = @tna_day,
-                tna_month = @tna_month,
-                tna_ytd = @tna_ytd,
-                date_data = @date_data,
-                date_ref = @date_ref,
-                last_sync = @last_sync,
-                full_json_ficha = @full_json_ficha
-            WHERE id = @id
-        `);
+    const updateFund = db.prepare(`
+        UPDATE funds SET
+            isin = COALESCE(@isin, isin),
+            bloomberg = COALESCE(@bloomberg, bloomberg),
+            figi = COALESCE(@figi, figi),
+            created_at = COALESCE(@created_at, created_at),
+            updated_at = COALESCE(@updated_at, updated_at),
+            min_investment = COALESCE(@min_investment, min_investment),
+            fee_entry = COALESCE(@fee_entry, fee_entry),
+            fee_exit = COALESCE(@fee_exit, fee_exit),
+            fee_transfer = COALESCE(@fee_transfer, fee_transfer),
+            fee_mgmt_gerente = COALESCE(@fee_mgmt_gerente, fee_mgmt_gerente),
+            fee_mgmt_depo = COALESCE(@fee_mgmt_depo, fee_mgmt_depo),
+            fee_expenses = COALESCE(@fee_expenses, fee_expenses),
+            fee_success_flag = COALESCE(@fee_success_flag, fee_success_flag),
+            aum = COALESCE(@aum, aum),
+            vcp = COALESCE(@vcp, vcp),
+            return_day = COALESCE(@return_day, return_day),
+            return_month = COALESCE(@return_month, return_month),
+            return_1y = COALESCE(@return_1y, return_1y),
+            return_3y = COALESCE(@return_3y, return_3y),
+            return_5y = COALESCE(@return_5y, return_5y),
+            return_year = COALESCE(@return_year, return_year),
+            return_ytd = COALESCE(@return_ytd, return_ytd),
+            return_y2 = COALESCE(@return_y2, return_y2),
+            return_y3 = COALESCE(@return_y3, return_y3),
+            return_y4 = COALESCE(@return_y4, return_y4),
+            return_monthyear = COALESCE(@return_monthyear, return_monthyear),
+            tna_day = COALESCE(@tna_day, tna_day),
+            tna_month = COALESCE(@tna_month, tna_month),
+            tna_ytd = COALESCE(@tna_ytd, tna_ytd),
+            date_data = COALESCE(@date_data, date_data),
+            date_ref = COALESCE(@date_ref, date_ref),
+            last_sync = @last_sync,
+            full_json_ficha = @full_json_ficha
+        WHERE id = @id
+    `);
 
-        insertComp = db.prepare(`
-            INSERT INTO composition (
-                fund_id, asset_name, percentage, type, region, cantidad, monto, vcp_unitario, especie_id, moneda_id, full_json
-            ) VALUES (
-                @fund_id, @asset_name, @percentage, @type, @region, @cantidad, @monto, @vcp_unitario, @especie_id, @moneda_id, @full_json
-            )
-        `);
-
-        clearComps = db.prepare('DELETE FROM composition WHERE fund_id = ?');
-    } catch (e) {
-        console.error('Failed to prepare statements:', e.message);
-        process.exit(1);
-    }
+    const insertComp = db.prepare('INSERT OR IGNORE INTO composition (fund_id, asset_name, percentage, type, region, cantidad, monto, vcp_unitario, especie_id, moneda_id, full_json) VALUES (@fund_id, @asset_name, @percentage, @type, @region, @cantidad, @monto, @vcp_unitario, @especie_id, @moneda_id, @full_json)');
+    const clearComps = db.prepare('DELETE FROM composition WHERE fund_id = ?');
 
     const targets = db.prepare('SELECT id, fund_id, name FROM funds WHERE full_json_ficha IS NULL').all();
-    console.log(`Starting enrichment for ${targets.length} funds...`);
+    console.log(`Funds remaining: ${targets.length}`);
+
+    const startTime = Date.now();
+    let errors = 0;
 
     for (let i = 0; i < targets.length; i++) {
         const t = targets[i];
@@ -188,44 +159,52 @@ async function main() {
 
                 db.transaction(() => {
                     updateFund.run(fundData);
-                    if (weekly.carteras && Array.isArray(weekly.carteras)) {
-                        clearComps.run(t.id);
-                        for (const c of weekly.carteras) {
+
+                    clearComps.run(t.id);
+                    if (weekly.carteras) {
+                        weekly.carteras.forEach(c => {
                             insertComp.run({
                                 fund_id: t.id,
-                                asset_name: toVal(c.nombreActivo),
-                                percentage: toNum(c.share),
-                                type: toVal(c.tipoActivoPadre || (c.tipoActivo ? c.tipoActivo.nombre : null)),
-                                region: toVal(c.region ? c.region.nombre : null),
-                                cantidad: toNum(c.cantidad),
-                                monto: toNum(c.monto),
-                                vcp_unitario: toNum(c.vcpUnitario),
-                                especie_id: toVal(c.especieId),
-                                moneda_id: toVal(c.monedaId),
+                                asset_name: c.nombreActivo || '',
+                                percentage: parseFloat(c.share) || 0,
+                                type: null,
+                                region: null,
+                                cantidad: null,
+                                monto: null,
+                                vcp_unitario: null,
+                                especie_id: null,
+                                moneda_id: null,
                                 full_json: JSON.stringify(c)
                             });
-                        }
+                        });
                     }
                 })();
-                console.log(`   [OK] ${weekly.carteras ? weekly.carteras.length : 0} assets.`);
+
+                console.log(`   [OK] ${(weekly.carteras || []).length} assets.`);
             } else {
-                console.log(`   [WARN] Missing or empty data.`);
-                db.prepare("UPDATE funds SET full_json_ficha = '{}', last_sync = ? WHERE id = ?").run(new Date().toISOString(), t.id);
+                console.log(`   [SKIP] No data from API`);
             }
         } catch (err) {
-            console.error(`   [ERROR] ${err.message}`);
+            errors++;
+            console.log(`   [ERROR] ${err.message}`);
             if (err.message.includes('Rate limit')) {
-                console.log('   Cooling down for 30s...');
-                await new Promise(r => setTimeout(r, 30000));
+                console.log('Rate limit detected, waiting 10s...');
+                await sleep(10000);
+                i--; // Retry
             }
         }
 
-        // Update file every 5 funds (conservative)
-        if (i % 5 === 0) await updateProgressFile(db);
-        await new Promise(r => setTimeout(r, DELAY_MS));
+        await sleep(DELAY_MS);
+
+        if ((i + 1) % 100 === 0) {
+            const elapsed = (Date.now() - startTime) / 1000;
+            const remaining = ((targets.length - i - 1) * (elapsed / (i + 1))) / 60;
+            console.log(`\n--- Progress: ${Math.round(((i + 1) / targets.length) * 100)}% | Errors: ${errors} | ETA: ${Math.round(remaining)} min ---\n`);
+        }
     }
-    await updateProgressFile(db);
-    console.log('Enrichment complete!');
+
+    db.close();
+    console.log(`\n✅ Done! Total errors: ${errors}`);
 }
 
 main().catch(console.error);

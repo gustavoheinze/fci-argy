@@ -18,9 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // API endpoint to get funds data
 app.get('/api/funds', async (req, res) => {
   try {
-    console.log('📊 [API] Fetching funds...');
-    const funds = await getFondos();
-    console.log(`✅ [API] Got ${funds ? funds.length : 0} funds`);
+    let funds = await getFondos();
+    console.log(`✅ [API] Got ${funds ? funds.length : 0} funds loaded`);
 
     const mapped = funds.map(f => ({
       id: f.id,
@@ -29,7 +28,10 @@ app.get('/api/funds', async (req, res) => {
       inversionMinima: f.inversionMinima,
       monedaId: f.monedaId,
       tipoRentaId: f.fondoPrincipal ? f.fondoPrincipal.tipoRentaId : null,
-      fondoPrincipal: f.fondoPrincipal // Include for filters
+      fondoPrincipal: f.fondoPrincipal, // Include for filters
+      rendimientoDia: f.rendimientoDia,
+      rendimientoMes: f.rendimientoMes,
+      patrimonio: f.patrimonio
     }));
     console.log(`✅ [API] Mapped ${mapped.length} funds, sending response`);
     res.json(mapped);
@@ -56,8 +58,8 @@ app.get('/api/funds/:id', async (req, res) => {
 // Management Analytics Endpoint
 app.get('/api/analytics', async (req, res) => {
   try {
-    // Get all funds from SQLite (reconstructed as flattened objects)
-    const funds = await getAllFondos();
+    const allFunds = await getAllFondos();
+    const funds = allFunds.filter(f => f.patrimonio > 0);
 
     const assetStats = {};
     const managerStats = {};
@@ -80,6 +82,12 @@ app.get('/api/analytics', async (req, res) => {
         if (!c.activo) return;
         const name = String(c.activo).trim();
         const pct = parseFloat(c.porcentaje) || 0;
+
+        // Safety filter: Ignore assets with absolute weight > 100% in global stats.
+        // These are usually offsetting futures positions with high notional values
+        // that distort aggregate market metrics like GEI.
+        if (Math.abs(pct) > 100) return;
+
         const cat = classifyAsset(name);
 
         if (!assetStats[name]) {
@@ -98,6 +106,37 @@ app.get('/api/analytics', async (req, res) => {
       ...a,
       marketInfluence: validFundsCount > 0 ? a.totalWeight / validFundsCount : 0
     })).sort((a, b) => b.marketInfluence - a.marketInfluence).slice(0, 1000);
+
+    const mostFrequentAsset = [...Object.values(assetStats)].sort((a, b) => b.frequency - a.frequency)[0] || null;
+    const topWeightAsset = [...Object.values(assetStats)].sort((a, b) => b.totalWeight - a.totalWeight)[0] || null;
+
+    // Category Leaders (Best 30d return)
+    const catLeaders = {};
+    const categories = {
+      '4': 'Money Market',
+      '3': 'Renta Fija',
+      '5': 'Mixto',
+      '2': 'Renta Variable'
+    };
+
+    funds.forEach(f => {
+      const trId = (f.fondoPrincipal?.tipoRentaId || f.tipoRentaId || '').toString();
+      if (!categories[trId]) return;
+
+      const perf30 = f.rendimientos?.find(r => r.periodo === '30d')?.rendimiento;
+      const perfVal = perf30 ? parseFloat(perf30.replace('%', '')) : -999;
+
+      if (!catLeaders[trId] || perfVal > catLeaders[trId].perfVal) {
+        catLeaders[trId] = {
+          id: f.id,
+          name: f.nombre,
+          category: categories[trId],
+          perf: perf30 || '0%',
+          perfVal: perfVal,
+          manager: f.fondoPrincipal?.gerente?.nombre || 'S/D'
+        };
+      }
+    });
 
     const totalMarketPct = Object.values(marketMix).reduce((a, b) => a + b, 0);
     const normalizedMix = {};
@@ -126,12 +165,34 @@ app.get('/api/analytics', async (req, res) => {
       summary: {
         totalFunds: funds.length,
         analyzedFunds: validFundsCount,
-        marketLiquidity: normalizedMix['LIQUIDEZ']
+        marketLiquidity: normalizedMix['LIQUIDEZ'],
+        mostFrequentAsset,
+        topWeightAsset
       },
       topAssets,
       marketMix: normalizedMix,
       managerRanking: managerRanking,
-      marketLeaders: marketLeaders
+      marketLeaders: marketLeaders,
+      categoryLeaders: Object.values(catLeaders),
+      // --- SMART PORTFOLIO (Creá tu propio FCI) ---
+      // Criterio: Top 10 activos por influencia (GEI), ajustados al 90% de la cartera + 10% liquidez.
+      smartPortfolio: (function () {
+        const top10GEI = topAssets.slice(0, 10);
+        const totalGEIWeight = top10GEI.reduce((sum, a) => sum + a.marketInfluence, 0);
+
+        const recommendation = top10GEI.map(a => ({
+          activo: a.name,
+          porcentaje: totalGEIWeight > 0 ? (a.marketInfluence / totalGEIWeight) * 90 : 0
+        }));
+
+        // Añadir el colchón de liquidez del 10%
+        recommendation.push({
+          activo: "FONDO DE LIQUIDEZ (Money Market / Cash)",
+          porcentaje: 10.00
+        });
+
+        return recommendation;
+      })()
     });
   } catch (e) {
     console.error('ANALYTICS_ERROR:', e);
